@@ -2,27 +2,39 @@
   "lessons": [
     {
       "id": 1,
-      "title": "Saludos y Sustantivos Absolutos",
+      "title": "Introducción",
       "order_index": 1,
       "is_unlocked": true
     },
     {
       "id": 2,
-      "title": "Prefijos Sujeto y Verbos Intransitivos",
+      "title": "Ortografía y pronunciación",
       "order_index": 2,
+      "is_unlocked": false
+    },
+    {
+      "id": 3,
+      "title": "Sustantivo",
+      "order_index": 3,
+      "is_unlocked": false
+    },
+    {
+      "id": 4,
+      "title": "Los reverenciales o diminutivos.",
+      "order_index": 4,
       "is_unlocked": false
     }
   ],
   "grammar_rules": [
     {
       "id": 1,
-      "lesson_id": 1,
-      "explanation_text": "En Náhuatl Clásico, los sustantivos en estado absoluto emplean el sufijo absolutivo (-tl, -tli, -li, -in). Por ejemplo: atl (agua), calli (casa), tlacatl (persona)."
+      "lesson_id": 2,
+      "explanation_text": "la transcripción de la lengua mexicana o nahuatl por medio del alfabeto latino data de principios del siglo XVI."
     },
     {
       "id": 2,
-      "lesson_id": 1,
-      "explanation_text": "El saludo clásico 'Niltze' o 'Cualli tonalli' se utiliza para desear un buen día."
+      "lesson_id": 3,
+      "explanation_text": "Puede tener una de las siguientes terminaciones: -tl, -tli, -li, -in."
     }
   ],
   "dictionary": [
@@ -268,34 +280,146 @@
   "phrases": [
     {
       "id": 1,
-      "lesson_id": 1,
-      "grammar_rule_id": 2,
-      "nahuatl_sentence": "Cualli tonalli",
-      "spanish_translation": "Buen día",
-      "audio_path": "assets/audio/cualli_tonalli.mp3"
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa átl",
+      "spanish_translation": "¿Dónde está el agua?",
+      "audio_path": null
     },
     {
       "id": 2,
-      "lesson_id": 1,
-      "grammar_rule_id": 1,
-      "nahuatl_sentence": "In cihuatl choca",
-      "spanish_translation": "La mujer llora",
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa ca átl",
+      "spanish_translation": "¿Dónde está el agua?",
       "audio_path": null
     },
     {
       "id": 3,
-      "lesson_id": 1,
-      "grammar_rule_id": 1,
-      "nahuatl_sentence": "In tlacatl cochi",
-      "spanish_translation": "La persona duerme",
-      "audio_path": "assets/audio/in_tlacatl_cochi.mp3"
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa in átl",
+      "spanish_translation": "¿Dónde está el agua?",
+      "audio_path": null
     },
     {
       "id": 4,
-      "lesson_id": 1,
-      "grammar_rule_id": 1,
-      "nahuatl_sentence": "Nehhuatl nitlacua",
-      "spanish_translation": "Yo como",
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Átl nican ca",
+      "spanish_translation": "¿El agua está aquí?",
+      "audio_path": null
+    },
+    {
+      "id": 5,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In átl nican",
+      "spanish_translation": "El agua está aquí",
+      "audio_path": null
+    },
+    {
+      "id": 6,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Nícan cateh ome cálli",
+      "spanish_translation": "Aquí están dos casas",
+      "audio_path": null
+    },
+    {
+      "id": 7,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Ome cálli nícan",
+      "spanish_translation": "Aquí están dos casas",
+      "audio_path": null
+    },
+    {
+      "id": 8,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa ca in pílli",
+      "spanish_translation": "¿Dónde está el niño?",
+      "audio_path": null
+    },
+    {
+      "id": 9,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In tlácatl ític teopantli",
+      "spanish_translation": "¿El hombre está dentro de la iglesia?",
+      "audio_path": null
+    },
+    {
+      "id": 10,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Quéma, tlácatl itic teopantli",
+      "spanish_translation": "Si, el hombre está dentro de la iglesia",
+      "audio_path": null
+    },
+    {
+      "id": 11,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Amo, in ocuíllin ámo ípan xálli",
+      "spanish_translation": "No, el gusano no está sobre la arena",
+      "audio_path": null
+    },
+    {
+      "id": 12,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Ome tétl ípan pétlatl",
+      "spanish_translation": "Están dos piedras sobre el petate",
+      "audio_path": null
+    },
+    {
+      "id": 13,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In cálli ámo ípan xálli",
+      "spanish_translation": "La casa no está sobre la arena",
+      "audio_path": null
+    },
+    {
+      "id": 14,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Náhui mécatl ípan tlálli",
+      "spanish_translation": "Están cuatro cordones en la tierra",
+      "audio_path": null
+    },
+    {
+      "id": 15,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Ce nántli ípan tianquíztli",
+      "spanish_translation": "Una madre está en el mercado",
+      "audio_path": null
+    },
+    {
+      "id": 16,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In mázatl ámo ípan tlálli",
+      "spanish_translation": "El venado no está en la tierra",
+      "audio_path": null
+    },
+    {
+      "id": 17,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa ca in técolotl",
+      "spanish_translation": "¿Dónde está el búho?",
+      "audio_path": null
+    },
+    {
+      "id": 18,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In tecolotl ompa ca",
+      "spanish_translation": "El búho está allá",
       "audio_path": null
     }
   ]

@@ -1,12 +1,12 @@
 [
   {
     "id": 1,
-    "lesson_id": 1,
-    "explanation_text": "En Náhuatl Clásico, los sustantivos en estado absoluto emplean el sufijo absolutivo (-tl, -tli, -li, -in). Por ejemplo: atl (agua), calli (casa), tlacatl (persona)."
+    "lesson_id": 2,
+    "explanation_text": "la transcripción de la lengua mexicana o nahuatl por medio del alfabeto latino data de principios del siglo XVI."
   },
   {
     "id": 2,
-    "lesson_id": 1,
-    "explanation_text": "El saludo clásico 'Niltze' o 'Cualli tonalli' se utiliza para desear un buen día."
+    "lesson_id": 3,
+    "explanation_text": "Puede tener una de las siguientes terminaciones: -tl, -tli, -li, -in."
   }
 ]

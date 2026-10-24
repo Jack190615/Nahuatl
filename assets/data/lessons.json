@@ -1,14 +1,26 @@
 [
   {
     "id": 1,
-    "title": "Saludos y Sustantivos Absolutos",
+    "title": "Introducción",
     "order_index": 1,
     "is_unlocked": true
   },
   {
     "id": 2,
-    "title": "Prefijos Sujeto y Verbos Intransitivos",
+    "title": "Ortografía y pronunciación",
     "order_index": 2,
+    "is_unlocked": false
+  },
+  {
+    "id": 3,
+    "title": "Sustantivo",
+    "order_index": 3,
+    "is_unlocked": false
+  },
+  {
+    "id": 4,
+    "title": "Los reverenciales o diminutivos.",
+    "order_index": 4,
     "is_unlocked": false
   }
 ]
