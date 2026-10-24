@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    BlogRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BlogView(),
+      );
+    },
     DictionarySearchRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -55,6 +61,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    MainShellRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MainShellView(),
+      );
+    },
     WelcomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -62,6 +74,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [BlogView]
+class BlogRoute extends PageRouteInfo<void> {
+  const BlogRoute({List<PageRouteInfo>? children})
+      : super(
+          BlogRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BlogRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -178,6 +204,20 @@ class LessonTheoryRouteArgs {
   String toString() {
     return 'LessonTheoryRouteArgs{key: $key, lessonId: $lessonId, lessonTitle: $lessonTitle}';
   }
+}
+
+/// generated route for
+/// [MainShellView]
+class MainShellRoute extends PageRouteInfo<void> {
+  const MainShellRoute({List<PageRouteInfo>? children})
+      : super(
+          MainShellRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MainShellRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

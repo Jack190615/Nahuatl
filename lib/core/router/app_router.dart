@@ -2,10 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../presentation/views/blog/blog_view.dart';
 import '../../presentation/views/dictionary/dictionary_search_view.dart';
 import '../../presentation/views/exercise/exercise_session_view.dart';
 import '../../presentation/views/lessons/lesson_map_view.dart';
 import '../../presentation/views/lessons/lesson_theory_view.dart';
+import '../../presentation/views/shell/main_shell_view.dart';
 import '../../presentation/views/welcome/welcome_view.dart';
 
 part 'app_router.gr.dart';
@@ -22,31 +24,44 @@ class AppRouter extends _$AppRouter {
 
   @override
   List<AutoRoute> get routes => [
-        // Pantalla inicial de bienvenida (sin login)
+        // Contenedor principal con BottomNavigationBar para navegación unificada
         AutoRoute(
-          page: WelcomeRoute.page,
+          page: MainShellRoute.page,
           path: '/',
           initial: true,
+          children: [
+            // Pantalla inicial de bienvenida (sin login)
+            AutoRoute(
+              page: WelcomeRoute.page,
+              path: '',
+              initial: true,
+            ),
+            // Mapa interactivo de lecciones
+            AutoRoute(
+              page: LessonMapRoute.page,
+              path: 'lessons',
+            ),
+            // Buscador Full-Text Search (FTS5) en SQLite
+            AutoRoute(
+              page: DictionarySearchRoute.page,
+              path: 'dictionary',
+            ),
+            // Espacio divulgativo, análisis de mitos y cosmovisión
+            AutoRoute(
+              page: BlogRoute.page,
+              path: 'blog',
+            ),
+          ],
         ),
-        // Mapa principal de lecciones
-        AutoRoute(
-          page: LessonMapRoute.page,
-          path: '/lessons',
-        ),
-        // Bucle interactivo de 10 ejercicios de una lección
+        // Bucle interactivo de 10 ejercicios de una lección (apilado sobre el shell)
         AutoRoute(
           page: ExerciseSessionRoute.page,
-          path: '/lessons/:lessonId/practice',
+          path: '/practice/:lessonId',
         ),
-        // Estudio de lección teórica, fonética o introductoria
+        // Estudio de lección teórica, fonética o introductoria (apilado sobre el shell)
         AutoRoute(
           page: LessonTheoryRoute.page,
-          path: '/lessons/:lessonId/theory',
-        ),
-        // Buscador Full-Text Search (FTS5)
-        AutoRoute(
-          page: DictionarySearchRoute.page,
-          path: '/dictionary',
+          path: '/theory/:lessonId',
         ),
       ];
 }

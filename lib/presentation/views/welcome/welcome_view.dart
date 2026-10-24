@@ -11,7 +11,7 @@ import '../../widgets/common/app_action_button.dart';
 import '../../widgets/common/responsive_scaffold.dart';
 
 /// Pantalla Inicial de Bienvenida (sin login).
-/// Diseño limpio y minimalista: Emblema, Título, Subtítulo, Botones de acción y marca.
+/// Diseño limpio y enfocado: Logo de Huehuetéotl, Título, Subtítulo, Botón de inicio y marca.
 @RoutePage()
 class WelcomeView extends ConsumerWidget {
   const WelcomeView({super.key});
@@ -27,7 +27,7 @@ class WelcomeView extends ConsumerWidget {
             physics: MobilePlatformConfig.adaptiveScrollPhysics,
             padding: EdgeInsets.symmetric(
               vertical: info.verticalSpacing * 2,
-              horizontal: info.isTablet ? 32 : 8,
+              horizontal: info.isTablet ? 32 : 12,
             ),
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 460),
@@ -36,7 +36,7 @@ class WelcomeView extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _HeroBrandSection(info: info),
-                  SizedBox(height: info.verticalSpacing * 2.5),
+                  SizedBox(height: info.verticalSpacing * 2.2),
                   _WelcomeActionSection(
                     info: info,
                     bootstrapAsync: bootstrapAsync,
@@ -59,30 +59,39 @@ class _HeroBrandSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final emblemSize =
-        info.isTablet ? 144.0 : (info.isCompactPhone ? 104.0 : 124.0);
+        info.isTablet ? 152.0 : (info.isCompactPhone ? 112.0 : 132.0);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        // Logotipo oficial con la imagen de Huehuetéotl (assets/huehueteotl.jpg)
         Container(
           width: emblemSize,
           height: emblemSize,
           decoration: BoxDecoration(
             color: AppColors.jadeLight,
             shape: BoxShape.circle,
-            border: Border.all(color: AppColors.jadePrimary, width: 3),
+            border: Border.all(color: AppColors.jadePrimary, width: 3.5),
             boxShadow: [
               BoxShadow(
-                color: AppColors.jadePrimary.withValues(alpha: 0.12),
-                blurRadius: 20,
-                offset: const Offset(0, 8),
+                color: AppColors.jadePrimary.withValues(alpha: 0.18),
+                blurRadius: 24,
+                offset: const Offset(0, 10),
               ),
             ],
           ),
-          child: Icon(
-            Icons.auto_stories_rounded,
-            size: emblemSize * 0.48,
-            color: AppColors.jadePrimary,
+          child: ClipOval(
+            child: Image.asset(
+              'assets/huehueteotl.jpg',
+              width: emblemSize,
+              height: emblemSize,
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) => Icon(
+                Icons.auto_stories_rounded,
+                size: emblemSize * 0.48,
+                color: AppColors.jadePrimary,
+              ),
+            ),
           ),
         ),
         SizedBox(height: info.verticalSpacing * 1.25),
@@ -108,10 +117,10 @@ class _HeroBrandSection extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          'Aprende la lengua de los antiguos mexicanos mediante lecciones interactivas, gramática estructurada y diccionario offline con búsqueda instantánea.',
+          'Aprende la lengua de los antiguos mexicanos mediante lecciones interactivas, gramática estructurada, diccionario offline y análisis de mitos.',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: info.scaleFont(15.5),
+            fontSize: info.scaleFont(15),
             color: AppColors.slateMuted,
             height: 1.45,
           ),
@@ -136,25 +145,19 @@ class _WelcomeActionSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         bootstrapAsync.when(
-          data: (_) => Column(
-            children: [
-              AppActionButton(
-                label: 'Comenzar a aprender',
-                icon: Icons.arrow_forward_rounded,
-                onPressed: () {
-                  context.router.replace(const LessonMapRoute());
-                },
-              ),
-              const SizedBox(height: 12),
-              AppActionButton(
-                label: 'Explorar Diccionario Náhuatl',
-                icon: Icons.book_outlined,
-                variant: AppButtonVariant.secondary,
-                onPressed: () {
-                  context.router.push(const DictionarySearchRoute());
-                },
-              ),
-            ],
+          data: (_) => AppActionButton(
+            label: 'Comenzar a aprender',
+            icon: Icons.arrow_forward_rounded,
+            onPressed: () {
+              try {
+                // Si está dentro del Shell con BottomNavigationBar, cambia suavemente a la pestaña de Lecciones
+                final tabsRouter = AutoTabsRouter.of(context, watch: false);
+                tabsRouter.setActiveIndex(1);
+              } catch (_) {
+                // Fallback si la vista se prueba de manera aislada
+                context.router.push(const LessonMapRoute());
+              }
+            },
           ),
           loading: () => const AppActionButton(
             label: 'Preparando base de datos local...',
@@ -170,8 +173,15 @@ class _WelcomeActionSection extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               AppActionButton(
-                label: 'Continuar al mapa de lecciones',
-                onPressed: () => context.router.replace(const LessonMapRoute()),
+                label: 'Continuar a las lecciones',
+                onPressed: () {
+                  try {
+                    final tabsRouter = AutoTabsRouter.of(context, watch: false);
+                    tabsRouter.setActiveIndex(1);
+                  } catch (_) {
+                    context.router.push(const LessonMapRoute());
+                  }
+                },
               ),
             ],
           ),

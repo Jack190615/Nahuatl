@@ -27,6 +27,22 @@ class LessonMapView extends ConsumerWidget {
 
     return ResponsiveScaffold(
       appBar: AppBar(
+        leading: IconButton(
+          tooltip: 'Volver a Inicio',
+          icon: const Icon(Icons.arrow_back_rounded),
+          onPressed: () {
+            if (context.router.canPop()) {
+              context.router.maybePop();
+            } else {
+              try {
+                final tabsRouter = AutoTabsRouter.of(context, watch: false);
+                tabsRouter.setActiveIndex(0);
+              } catch (_) {
+                context.router.maybePop();
+              }
+            }
+          },
+        ),
         title: const Text(
           'Ruta de Aprendizaje',
           style: TextStyle(fontWeight: FontWeight.w800),
@@ -36,7 +52,12 @@ class LessonMapView extends ConsumerWidget {
             tooltip: 'Diccionario FTS5',
             icon: const Icon(Icons.translate_rounded),
             onPressed: () {
-              context.router.push(const DictionarySearchRoute());
+              try {
+                final tabsRouter = AutoTabsRouter.of(context, watch: false);
+                tabsRouter.setActiveIndex(2);
+              } catch (_) {
+                context.router.push(const DictionarySearchRoute());
+              }
             },
           ),
         ],

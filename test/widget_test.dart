@@ -16,6 +16,7 @@ import 'package:nahuatl_clasico_app/domain/repositories/i_nahuatl_repository.dar
 import 'package:nahuatl_clasico_app/domain/usecases/generate_lesson_exercises_usecase.dart';
 import 'package:nahuatl_clasico_app/presentation/controllers/exercise_engine_controller.dart';
 import 'package:nahuatl_clasico_app/presentation/providers/app_providers.dart';
+import 'package:nahuatl_clasico_app/presentation/views/blog/blog_view.dart';
 import 'package:nahuatl_clasico_app/presentation/views/exercise/exercise_session_view.dart';
 import 'package:nahuatl_clasico_app/presentation/views/lessons/lesson_theory_view.dart';
 import 'package:nahuatl_clasico_app/presentation/views/welcome/welcome_view.dart';
@@ -449,6 +450,42 @@ void main() {
       // Verificar que la lección 2 fue desbloqueada
       final lesson2 = await fakeRepo.getLessonById(2);
       expect(lesson2?.isUnlocked, isTrue);
+    });
+  });
+
+  group('8. Módulo Blog y Divulgación Cultural (BlogView)', () {
+    testWidgets('Renderiza el módulo de Blog con temas de cosmovisión y mitología', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: BlogView(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Blog y Cosmovisión'), findsOneWidget);
+      expect(find.text('Próximas Publicaciones'), findsOneWidget);
+      expect(
+        find.text('El mito del Quinto Sol (Nāhui Ollin) y la creación humana'),
+        findsOneWidget,
+      );
+      expect(
+        find.text('Los difrasismos: La poesía conceptual del náhuatl'),
+        findsOneWidget,
+      );
+      expect(
+        find.text('Teōtl y la naturaleza del cosmos en los tlamatinimeh'),
+        findsOneWidget,
+      );
+    });
+  });
+
+  group('9. Nombre del icono de la App en el Launcher (Náhuatl Clásico)', () {
+    test('AndroidManifest.xml define android:label="Náhuatl Clásico"', () {
+      final manifestFile = File('android/app/src/main/AndroidManifest.xml');
+      expect(manifestFile.existsSync(), isTrue);
+
+      final content = manifestFile.readAsStringSync();
+      expect(content, contains('android:label="Náhuatl Clásico"'));
     });
   });
 }
