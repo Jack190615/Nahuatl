@@ -11,6 +11,7 @@ import 'package:nahuatl_clasico_app/domain/entities/exercise.dart';
 import 'package:nahuatl_clasico_app/domain/entities/grammar_rule.dart';
 import 'package:nahuatl_clasico_app/domain/entities/lesson.dart';
 import 'package:nahuatl_clasico_app/domain/entities/phrase.dart';
+import 'package:nahuatl_clasico_app/domain/entities/sublesson.dart';
 import 'package:nahuatl_clasico_app/domain/evaluators/exercise_evaluators.dart';
 import 'package:nahuatl_clasico_app/domain/repositories/i_nahuatl_repository.dart';
 import 'package:nahuatl_clasico_app/domain/usecases/generate_lesson_exercises_usecase.dart';
@@ -21,6 +22,7 @@ import 'package:nahuatl_clasico_app/presentation/views/exercise/exercise_session
 import 'package:nahuatl_clasico_app/presentation/views/lessons/lesson_theory_view.dart';
 import 'package:nahuatl_clasico_app/presentation/views/welcome/welcome_view.dart';
 import 'package:nahuatl_clasico_app/presentation/widgets/common/defensive_audio_button.dart';
+import 'package:nahuatl_clasico_app/presentation/widgets/lesson/lesson_card_widget.dart';
 
 /// Repositorio en memoria (Fake) que implementa [INahuatlRepository] para pruebas unitarias deterministas
 /// siguiendo el Principio de Inversión de Dependencias (DIP - SOLID).
@@ -104,6 +106,24 @@ class FakeNahuatlRepository implements INahuatlRepository {
       _lessons[index] = _lessons[index].copyWith(isUnlocked: true);
     }
   }
+
+  @override
+  Future<List<SublessonEntity>> getSublessonsByLesson(int lessonId) async =>
+      const [];
+
+  @override
+  Future<SublessonEntity?> getSublessonById(int sublessonId) async => null;
+
+  @override
+  Future<void> unlockSublesson(int sublessonId) async {}
+
+  @override
+  Future<List<DictionaryEntryEntity>> getVocabularyBySublesson(int sublessonId) async =>
+      const [];
+
+  @override
+  Future<List<PhraseEntity>> getPhrasesBySublesson(int sublessonId) async =>
+      const [];
 
   @override
   Future<List<GrammarRuleEntity>> getGrammarRulesByLesson(int lessonId) async =>
@@ -486,6 +506,61 @@ void main() {
 
       final content = manifestFile.readAsStringSync();
       expect(content, contains('android:label="Náhuatl Clásico"'));
+    });
+  });
+
+  group('10. Soporte de Sublecciones y Puntos del Libro (LessonCardWidget)', () {
+    testWidgets('Muestra subpuntos numerados y chip de subtemas en la tarjeta de lección', (tester) async {
+      const lesson = LessonEntity(
+        id: 2,
+        romanNumber: 'II',
+        title: 'El Sustantivo y la Oración Básica',
+        orderIndex: 2,
+        isUnlocked: true,
+      );
+
+      const sublessons = [
+        SublessonEntity(
+          id: 1,
+          lessonId: 2,
+          pointNumber: '4',
+          title: 'Sustantivos absolutivos',
+          type: SublessonType.vocabulary,
+          orderIndex: 1,
+          isUnlocked: true,
+        ),
+        SublessonEntity(
+          id: 2,
+          lessonId: 2,
+          pointNumber: '6',
+          title: 'La oración nominal',
+          type: SublessonType.theory,
+          orderIndex: 2,
+          isUnlocked: true,
+        ),
+      ];
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LessonCardWidget(
+              lesson: lesson,
+              sublessons: sublessons,
+              grammarRules: const [],
+              lessonType: LessonType.practice,
+              onStartLesson: () {},
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Lección II'), findsOneWidget);
+      expect(find.text('2 subpuntos'), findsOneWidget);
+      expect(find.text('Punto 4: Sustantivos absolutivos'), findsOneWidget);
+      expect(find.text('Punto 6: La oración nominal'), findsOneWidget);
+      expect(find.text('Vocabulario'), findsOneWidget);
+      expect(find.text('Teoría'), findsOneWidget);
     });
   });
 }

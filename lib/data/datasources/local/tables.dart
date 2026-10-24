@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 
 /// Tabla de Lecciones (`lessons`).
+/// Representa los grandes capítulos del curso (ej. Lección I, Lección II, Lección III).
 @DataClassName('LessonRow')
 class Lessons extends Table {
   @override
@@ -8,7 +9,44 @@ class Lessons extends Table {
 
   IntColumn get id => integer().autoIncrement()();
 
+  TextColumn get romanNumber =>
+      text().named('roman_number').nullable()();
+
   TextColumn get title => text().withLength(min: 1, max: 160)();
+
+  TextColumn get description =>
+      text().named('description').nullable()();
+
+  IntColumn get orderIndex => integer().named('order_index')();
+
+  BoolColumn get isUnlocked =>
+      boolean().named('is_unlocked').withDefault(const Constant(false))();
+}
+
+/// Tabla de Sublecciones / Puntos del Libro (`sublessons`).
+/// Representa cada punto o subdivisión pedagógica (ej. Punto 4, Punto 5, Punto 6, Puntos 7-9...).
+@DataClassName('SublessonRow')
+class Sublessons extends Table {
+  @override
+  String get tableName => 'sublessons';
+
+  IntColumn get id => integer().autoIncrement()();
+
+  IntColumn get lessonId => integer()
+      .named('lesson_id')
+      .references(Lessons, #id, onDelete: KeyAction.cascade)();
+
+  /// Número o rango de punto en el libro (ej. "4", "5", "6", "7-9", "10", "11").
+  TextColumn get pointNumber => text().named('point_number')();
+
+  TextColumn get title => text().withLength(min: 1, max: 180)();
+
+  /// Tipo de contenido: 'teoria', 'vocabulario', 'frases'.
+  TextColumn get type => text().withLength(min: 1, max: 40)();
+
+  /// Contenido explicativo en caso de ser punto teórico.
+  TextColumn get theoryContent =>
+      text().named('theory_content').nullable()();
 
   IntColumn get orderIndex => integer().named('order_index')();
 
@@ -41,6 +79,12 @@ class Dictionary extends Table {
 
   IntColumn get id => integer().autoIncrement()();
 
+  /// Referencia opcional a la sublección donde se introduce por primera vez este vocablo.
+  IntColumn get sublessonId => integer()
+      .named('sublesson_id')
+      .nullable()
+      .references(Sublessons, #id, onDelete: KeyAction.setNull)();
+
   TextColumn get nahuatlWord => text().named('nahuatl_word')();
 
   TextColumn get spanishTranslation => text().named('spanish_translation')();
@@ -62,7 +106,14 @@ class Phrases extends Table {
 
   IntColumn get lessonId => integer()
       .named('lesson_id')
+      .nullable()
       .references(Lessons, #id, onDelete: KeyAction.cascade)();
+
+  /// Referencia opcional a la sublección (punto de ejercicios) correspondiente.
+  IntColumn get sublessonId => integer()
+      .named('sublesson_id')
+      .nullable()
+      .references(Sublessons, #id, onDelete: KeyAction.cascade)();
 
   IntColumn get grammarRuleId => integer()
       .named('grammar_rule_id')

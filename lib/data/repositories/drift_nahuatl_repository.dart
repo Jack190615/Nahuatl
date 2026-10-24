@@ -6,6 +6,7 @@ import '../../domain/entities/dictionary_entry.dart';
 import '../../domain/entities/grammar_rule.dart';
 import '../../domain/entities/lesson.dart';
 import '../../domain/entities/phrase.dart';
+import '../../domain/entities/sublesson.dart';
 import '../../domain/repositories/i_nahuatl_repository.dart';
 import '../datasources/local/app_database.dart';
 
@@ -21,7 +22,7 @@ class DriftNahuatlRepository implements INahuatlRepository {
         _random = random ?? Random();
 
   // ---------------------------------------------------------------------------
-  // LECCIONES Y REGLAS GRAMATICALES
+  // LECCIONES (CAPÍTULOS)
   // ---------------------------------------------------------------------------
 
   @override
@@ -44,6 +45,49 @@ class DriftNahuatlRepository implements INahuatlRepository {
     await (_db.update(_db.lessons)..where((t) => t.id.equals(lessonId))).write(
       const LessonsCompanion(isUnlocked: Value(true)),
     );
+  }
+
+  // ---------------------------------------------------------------------------
+  // SUBLECCIONES / PUNTOS DEL LIBRO
+  // ---------------------------------------------------------------------------
+
+  @override
+  Future<List<SublessonEntity>> getSublessonsByLesson(int lessonId) async {
+    final query = _db.select(_db.sublessons)
+      ..where((t) => t.lessonId.equals(lessonId))
+      ..orderBy([(t) => OrderingTerm.asc(t.orderIndex)]);
+    final rows = await query.get();
+    return rows.map(_mapSublessonRowToEntity).toList(growable: false);
+  }
+
+  @override
+  Future<SublessonEntity?> getSublessonById(int sublessonId) async {
+    final query = _db.select(_db.sublessons)..where((t) => t.id.equals(sublessonId));
+    final row = await query.getSingleOrNull();
+    return row != null ? _mapSublessonRowToEntity(row) : null;
+  }
+
+  @override
+  Future<void> unlockSublesson(int sublessonId) async {
+    await (_db.update(_db.sublessons)..where((t) => t.id.equals(sublessonId))).write(
+      const SublessonsCompanion(isUnlocked: Value(true)),
+    );
+  }
+
+  @override
+  Future<List<DictionaryEntryEntity>> getVocabularyBySublesson(int sublessonId) async {
+    final query = _db.select(_db.dictionary)
+      ..where((t) => t.sublessonId.equals(sublessonId));
+    final rows = await query.get();
+    return rows.map(_mapDictionaryRowToEntity).toList(growable: false);
+  }
+
+  @override
+  Future<List<PhraseEntity>> getPhrasesBySublesson(int sublessonId) async {
+    final query = _db.select(_db.phrases)
+      ..where((t) => t.sublessonId.equals(sublessonId));
+    final rows = await query.get();
+    return rows.map(_mapPhraseRowToEntity).toList(growable: false);
   }
 
   @override
@@ -155,7 +199,22 @@ class DriftNahuatlRepository implements INahuatlRepository {
   LessonEntity _mapLessonRowToEntity(LessonRow row) {
     return LessonEntity(
       id: row.id,
+      romanNumber: row.romanNumber,
       title: row.title,
+      description: row.description,
+      orderIndex: row.orderIndex,
+      isUnlocked: row.isUnlocked,
+    );
+  }
+
+  SublessonEntity _mapSublessonRowToEntity(SublessonRow row) {
+    return SublessonEntity(
+      id: row.id,
+      lessonId: row.lessonId,
+      pointNumber: row.pointNumber,
+      title: row.title,
+      type: SublessonType.fromString(row.type),
+      theoryContent: row.theoryContent,
       orderIndex: row.orderIndex,
       isUnlocked: row.isUnlocked,
     );
@@ -164,6 +223,7 @@ class DriftNahuatlRepository implements INahuatlRepository {
   DictionaryEntryEntity _mapDictionaryRowToEntity(DictionaryRow row) {
     return DictionaryEntryEntity(
       id: row.id,
+      sublessonId: row.sublessonId,
       nahuatlWord: row.nahuatlWord,
       spanishTranslation: row.spanishTranslation,
       wordType: WordType.fromString(row.wordType),
@@ -174,7 +234,8 @@ class DriftNahuatlRepository implements INahuatlRepository {
   PhraseEntity _mapPhraseRowToEntity(PhraseRow row) {
     return PhraseEntity(
       id: row.id,
-      lessonId: row.lessonId,
+      lessonId: row.lessonId ?? 1,
+      sublessonId: row.sublessonId,
       grammarRuleId: row.grammarRuleId,
       nahuatlSentence: row.nahuatlSentence,
       spanishTranslation: row.spanishTranslation,

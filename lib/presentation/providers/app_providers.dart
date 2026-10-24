@@ -52,6 +52,10 @@ final lessonRepositoryProvider = Provider<ILessonRepository>((ref) {
   return ref.watch(nahuatlRepositoryProvider);
 });
 
+final sublessonRepositoryProvider = Provider<ISublessonRepository>((ref) {
+  return ref.watch(nahuatlRepositoryProvider);
+});
+
 final grammarRepositoryProvider = Provider<IGrammarRepository>((ref) {
   return ref.watch(nahuatlRepositoryProvider);
 });
@@ -84,6 +88,7 @@ final lessonMapControllerProvider =
     StateNotifierProvider<LessonMapController, LessonMapState>((ref) {
   return LessonMapController(
     lessonRepository: ref.watch(lessonRepositoryProvider),
+    sublessonRepository: ref.watch(sublessonRepositoryProvider),
     grammarRepository: ref.watch(grammarRepositoryProvider),
     phraseRepository: ref.watch(phraseRepositoryProvider),
   );

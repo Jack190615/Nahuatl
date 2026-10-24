@@ -8,6 +8,7 @@ import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../domain/entities/grammar_rule.dart';
 import '../../../domain/entities/lesson.dart';
+import '../../../domain/entities/sublesson.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/common/responsive_scaffold.dart';
 import '../../widgets/lesson/lesson_card_widget.dart';
@@ -104,8 +105,11 @@ class LessonMapView extends ConsumerWidget {
                       rules: rules,
                     );
 
+                    final sublessons = state.sublessonsByLesson[lesson.id] ?? const [];
+
                     return LessonCardWidget(
                       lesson: lesson,
+                      sublessons: sublessons,
                       grammarRules: rules,
                       lessonType: type,
                       onStartLesson: () => _handleLessonNavigation(
@@ -113,6 +117,12 @@ class LessonMapView extends ConsumerWidget {
                         ref: ref,
                         lesson: lesson,
                         lessonType: type,
+                        sublessons: sublessons,
+                      ),
+                      onStartSublesson: (sublesson) => _handleSublessonNavigation(
+                        context: context,
+                        ref: ref,
+                        sublesson: sublesson,
                       ),
                     );
                   },
@@ -137,6 +147,7 @@ class LessonMapView extends ConsumerWidget {
             }
 
             final lesson = lessons[index];
+            final sublessons = state.sublessonsByLesson[lesson.id] ?? const [];
             final rules = state.grammarRulesByLesson[lesson.id] ?? const [];
             final phrasesCount = state.phrasesCountByLesson[lesson.id] ?? 0;
             final type = _resolveLessonType(
@@ -149,6 +160,7 @@ class LessonMapView extends ConsumerWidget {
               padding: const EdgeInsets.only(bottom: 14.0),
               child: LessonCardWidget(
                 lesson: lesson,
+                sublessons: sublessons,
                 grammarRules: rules,
                 lessonType: type,
                 onStartLesson: () => _handleLessonNavigation(
@@ -156,6 +168,12 @@ class LessonMapView extends ConsumerWidget {
                   ref: ref,
                   lesson: lesson,
                   lessonType: type,
+                  sublessons: sublessons,
+                ),
+                onStartSublesson: (sublesson) => _handleSublessonNavigation(
+                  context: context,
+                  ref: ref,
+                  sublesson: sublesson,
                 ),
               ),
             );
@@ -187,7 +205,19 @@ class LessonMapView extends ConsumerWidget {
     required WidgetRef ref,
     required LessonEntity lesson,
     required LessonType lessonType,
+    List<SublessonEntity> sublessons = const [],
   }) async {
+    if (sublessons.isNotEmpty) {
+      // Si la lección tiene subpuntos, navega al primer subpunto desbloqueado o primero de la lista
+      final targetSublesson = sublessons.first;
+      await _handleSublessonNavigation(
+        context: context,
+        ref: ref,
+        sublesson: targetSublesson,
+      );
+      return;
+    }
+
     if (lessonType == LessonType.theory) {
       await context.router.push(
         LessonTheoryRoute(
@@ -200,6 +230,29 @@ class LessonMapView extends ConsumerWidget {
         ExerciseSessionRoute(
           lessonId: lesson.id,
           lessonTitle: lesson.title,
+        ),
+      );
+    }
+    ref.read(lessonMapControllerProvider.notifier).loadLessons();
+  }
+
+  Future<void> _handleSublessonNavigation({
+    required BuildContext context,
+    required WidgetRef ref,
+    required SublessonEntity sublesson,
+  }) async {
+    if (sublesson.type == SublessonType.theory) {
+      await context.router.push(
+        LessonTheoryRoute(
+          lessonId: sublesson.lessonId,
+          lessonTitle: 'Punto ${sublesson.pointNumber}: ${sublesson.title}',
+        ),
+      );
+    } else {
+      await context.router.push(
+        ExerciseSessionRoute(
+          lessonId: sublesson.lessonId,
+          lessonTitle: 'Punto ${sublesson.pointNumber}: ${sublesson.title}',
         ),
       );
     }

@@ -13,6 +13,7 @@ part 'app_database.g.dart';
 @DriftDatabase(
   tables: [
     Lessons,
+    Sublessons,
     GrammarRules,
     Dictionary,
     Phrases,
@@ -22,13 +23,22 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onCreate: (Migrator m) async {
           await m.createAll();
           await _createDictionaryFtsIndex();
+        },
+        onUpgrade: (Migrator m, int from, int to) async {
+          if (from < 2) {
+            await m.createTable(sublessons);
+            await m.addColumn(lessons, lessons.romanNumber);
+            await m.addColumn(lessons, lessons.description);
+            await m.addColumn(dictionary, dictionary.sublessonId);
+            await m.addColumn(phrases, phrases.sublessonId);
+          }
         },
         beforeOpen: (details) async {
           // Habilitar integridad referencial (Foreign Keys) en SQLite

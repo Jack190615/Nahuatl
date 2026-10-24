@@ -1,6 +1,7 @@
 class PhraseEntity {
   final int id;
   final int lessonId;
+  final int? sublessonId;
   final int? grammarRuleId;
   final String nahuatlSentence;
   final String spanishTranslation;
@@ -9,6 +10,7 @@ class PhraseEntity {
   const PhraseEntity({
     required this.id,
     required this.lessonId,
+    this.sublessonId,
     this.grammarRuleId,
     required this.nahuatlSentence,
     required this.spanishTranslation,

@@ -108,7 +108,7 @@ class BlogView extends StatelessWidget {
                     const SizedBox(width: 14),
                     Expanded(
                       child: Text(
-                        'Contenido académico y pedagógico en desarrollo activo junto con docentes de Náhuatl Clásico.',
+                        'Contenido académico y pedagógico en desarrollo activo junto con docentes de la BCMC.',
                         style: TextStyle(
                           fontSize: info.scaleFont(13.5),
                           color: AppColors.jadeDark,

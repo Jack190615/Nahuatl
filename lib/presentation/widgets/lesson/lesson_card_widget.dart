@@ -4,24 +4,31 @@ import '../../../core/responsive/responsive_info.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../domain/entities/grammar_rule.dart';
 import '../../../domain/entities/lesson.dart';
+import '../../../domain/entities/sublesson.dart';
 import '../common/app_action_button.dart';
 
-/// Tarjeta reutilizable y responsiva adaptada a las diferentes modalidades de lección:
+/// Tarjeta reutilizable y responsiva adaptada a las diferentes modalidades de lección
+/// y con soporte para subdivisión de puntos pedagógicos (Sublecciones):
 /// 1. Práctica interactiva (con frases).
 /// 2. Teoría / Ortografía / Introducción (sin frases).
-/// 3. Próximamente (en desarrollo).
+/// 3. Modular con Sublecciones (Puntos 4, 5, 6, 7-9, etc.).
+/// 4. Próximamente (en desarrollo).
 class LessonCardWidget extends StatelessWidget {
   final LessonEntity lesson;
+  final List<SublessonEntity> sublessons;
   final List<GrammarRuleEntity> grammarRules;
   final LessonType lessonType;
   final VoidCallback onStartLesson;
+  final void Function(SublessonEntity sublesson)? onStartSublesson;
 
   const LessonCardWidget({
     super.key,
     required this.lesson,
+    this.sublessons = const [],
     required this.grammarRules,
     required this.lessonType,
     required this.onStartLesson,
+    this.onStartSublesson,
   });
 
   @override
@@ -53,6 +60,7 @@ class LessonCardWidget extends StatelessWidget {
 
     final String buttonLabel = switch (lessonType) {
       _ when !isUnlocked => 'Bloqueada',
+      _ when sublessons.isNotEmpty => 'Explorar subtemas (${sublessons.length})',
       LessonType.theory => lesson.id == 1 ? 'Ver introducción' : 'Estudiar lección',
       LessonType.practice => 'Practicar (10 ejercicios)',
       LessonType.comingSoon => 'Más lecciones próximamente',
@@ -60,10 +68,15 @@ class LessonCardWidget extends StatelessWidget {
 
     final IconData buttonIcon = switch (lessonType) {
       _ when !isUnlocked => Icons.lock_outline,
+      _ when sublessons.isNotEmpty => Icons.format_list_bulleted_rounded,
       LessonType.theory => Icons.auto_stories_rounded,
       LessonType.practice => Icons.play_arrow_rounded,
       LessonType.comingSoon => Icons.schedule_rounded,
     };
+
+    final lessonNumberText = lesson.romanNumber != null && lesson.romanNumber!.trim().isNotEmpty
+        ? 'Lección ${lesson.romanNumber}'
+        : 'Lección ${lesson.orderIndex}';
 
     return Card(
       child: Padding(
@@ -89,7 +102,7 @@ class LessonCardWidget extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'Lección ${lesson.orderIndex}',
+                            lessonNumberText,
                             style: TextStyle(
                               fontSize: info.scaleFont(12),
                               fontWeight: FontWeight.w700,
@@ -108,7 +121,7 @@ class LessonCardWidget extends StatelessWidget {
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
-                              tagLabel,
+                              sublessons.isNotEmpty ? '${sublessons.length} subpuntos' : tagLabel,
                               style: TextStyle(
                                 fontSize: info.scaleFont(10.5),
                                 fontWeight: FontWeight.w700,
@@ -125,16 +138,45 @@ class LessonCardWidget extends StatelessWidget {
                           fontSize: info.scaleFont(18),
                           fontWeight: FontWeight.w800,
                           color: isUnlocked
-                              ? AppColors.obsidianText
+                                ? AppColors.obsidianText
                               : AppColors.slateMuted,
                         ),
                       ),
+                      if (lesson.description != null && lesson.description!.trim().isNotEmpty) ...[
+                        const SizedBox(height: 3),
+                        Text(
+                          lesson.description!,
+                          style: TextStyle(
+                            fontSize: info.scaleFont(13),
+                            color: AppColors.slateMuted,
+                            height: 1.3,
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),
               ],
             ),
-            if (grammarRules.isNotEmpty) ...[
+
+            // Si la lección cuenta con sublecciones (puntos del libro), mostrarlos como pasos interactivos
+            if (sublessons.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              const Divider(color: AppColors.borderOutline),
+              const SizedBox(height: 6),
+              ...sublessons.map(
+                (sublesson) => _SublessonItemTile(
+                  sublesson: sublesson,
+                  info: info,
+                  isParentUnlocked: isUnlocked,
+                  onTap: () {
+                    if (isUnlocked && onStartSublesson != null) {
+                      onStartSublesson!(sublesson);
+                    }
+                  },
+                ),
+              ),
+            ] else if (grammarRules.isNotEmpty) ...[
               const SizedBox(height: 12),
               const Divider(color: AppColors.borderOutline),
               const SizedBox(height: 8),
@@ -177,6 +219,99 @@ class LessonCardWidget extends StatelessWidget {
               onPressed: (isUnlocked && lessonType != LessonType.comingSoon)
                   ? onStartLesson
                   : null,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SublessonItemTile extends StatelessWidget {
+  final SublessonEntity sublesson;
+  final ResponsiveInfo info;
+  final bool isParentUnlocked;
+  final VoidCallback onTap;
+
+  const _SublessonItemTile({
+    required this.sublesson,
+    required this.info,
+    required this.isParentUnlocked,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final (IconData typeIcon, Color typeColor, String typeTag) = switch (sublesson.type) {
+      SublessonType.theory => (
+          Icons.auto_stories_rounded,
+          AppColors.jadeDark,
+          'Teoría',
+        ),
+      SublessonType.vocabulary => (
+          Icons.translate_rounded,
+          AppColors.terracottaAccent,
+          'Vocabulario',
+        ),
+      SublessonType.phrases => (
+          Icons.play_circle_outline_rounded,
+          AppColors.jadePrimary,
+          'Práctica',
+        ),
+    };
+
+    return InkWell(
+      onTap: isParentUnlocked ? onTap : null,
+      borderRadius: BorderRadius.circular(10),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 4.0),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: typeColor.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(typeIcon, size: 16, color: typeColor),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Punto ${sublesson.pointNumber}: ${sublesson.title}',
+                    style: TextStyle(
+                      fontSize: info.scaleFont(13.5),
+                      fontWeight: FontWeight.w700,
+                      color: isParentUnlocked ? AppColors.obsidianText : AppColors.slateMuted,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 6),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
+                color: typeColor.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Text(
+                typeTag,
+                style: TextStyle(
+                  fontSize: info.scaleFont(10),
+                  fontWeight: FontWeight.w700,
+                  color: typeColor,
+                ),
+              ),
+            ),
+            const SizedBox(width: 4),
+            Icon(
+              Icons.chevron_right_rounded,
+              size: 18,
+              color: isParentUnlocked ? AppColors.slateMuted : AppColors.borderOutline,
             ),
           ],
         ),

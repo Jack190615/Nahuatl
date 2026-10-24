@@ -46,6 +46,7 @@ enum WordType {
 
 class DictionaryEntryEntity {
   final int id;
+  final int? sublessonId;
   final String nahuatlWord;
   final String spanishTranslation;
   final WordType wordType;
@@ -53,6 +54,7 @@ class DictionaryEntryEntity {
 
   const DictionaryEntryEntity({
     required this.id,
+    this.sublessonId,
     required this.nahuatlWord,
     required this.spanishTranslation,
     required this.wordType,

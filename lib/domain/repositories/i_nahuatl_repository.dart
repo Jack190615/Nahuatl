@@ -2,13 +2,24 @@ import '../entities/dictionary_entry.dart';
 import '../entities/grammar_rule.dart';
 import '../entities/lesson.dart';
 import '../entities/phrase.dart';
+import '../entities/sublesson.dart';
 
 /// Principio de Segregación de Interfaces (ISP - SOLID):
-/// Contrato exclusivo para operaciones de Lecciones.
+/// Contrato exclusivo para operaciones de Lecciones (Capítulos).
 abstract interface class ILessonRepository {
   Future<List<LessonEntity>> getLessons();
   Future<LessonEntity?> getLessonById(int lessonId);
   Future<void> unlockLesson(int lessonId);
+}
+
+/// Principio de Segregación de Interfaces (ISP - SOLID):
+/// Contrato exclusivo para operaciones de Sublecciones / Puntos del Libro.
+abstract interface class ISublessonRepository {
+  Future<List<SublessonEntity>> getSublessonsByLesson(int lessonId);
+  Future<SublessonEntity?> getSublessonById(int sublessonId);
+  Future<void> unlockSublesson(int sublessonId);
+  Future<List<DictionaryEntryEntity>> getVocabularyBySublesson(int sublessonId);
+  Future<List<PhraseEntity>> getPhrasesBySublesson(int sublessonId);
 }
 
 /// Principio de Segregación de Interfaces (ISP - SOLID):
@@ -42,6 +53,7 @@ abstract interface class IPhraseRepository {
 abstract interface class INahuatlRepository
     implements
         ILessonRepository,
+        ISublessonRepository,
         IGrammarRepository,
         IDictionaryRepository,
         IPhraseRepository {}

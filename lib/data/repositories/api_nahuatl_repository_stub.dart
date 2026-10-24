@@ -2,6 +2,7 @@ import '../../domain/entities/dictionary_entry.dart';
 import '../../domain/entities/grammar_rule.dart';
 import '../../domain/entities/lesson.dart';
 import '../../domain/entities/phrase.dart';
+import '../../domain/entities/sublesson.dart';
 import '../../domain/repositories/i_nahuatl_repository.dart';
 
 /// Implementación futura de [INahuatlRepository] conectada a un backend REST/GraphQL.
@@ -23,6 +24,26 @@ class ApiNahuatlRepository implements INahuatlRepository {
 
   @override
   Future<void> unlockLesson(int lessonId) =>
+      throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
+
+  @override
+  Future<List<SublessonEntity>> getSublessonsByLesson(int lessonId) =>
+      throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
+
+  @override
+  Future<SublessonEntity?> getSublessonById(int sublessonId) =>
+      throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
+
+  @override
+  Future<void> unlockSublesson(int sublessonId) =>
+      throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
+
+  @override
+  Future<List<DictionaryEntryEntity>> getVocabularyBySublesson(int sublessonId) =>
+      throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
+
+  @override
+  Future<List<PhraseEntity>> getPhrasesBySublesson(int sublessonId) =>
       throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
 
   @override
