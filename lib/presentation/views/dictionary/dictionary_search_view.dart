@@ -52,7 +52,38 @@ class DictionarySearchView extends ConsumerWidget {
                 hintText: 'Buscar en náhuatl o español (ej. atl, calli, agua)...',
               ),
             ),
-            SizedBox(height: info.verticalSpacing),
+            SizedBox(height: info.verticalSpacing * 0.75),
+            if (!searchState.isLoading && searchState.results.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0, left: 4.0, right: 4.0),
+                child: Row(
+                  children: [
+                    Text(
+                      '${searchState.results.length} vocablos',
+                      style: TextStyle(
+                        fontSize: info.scaleFont(12.5),
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.jadeDark,
+                      ),
+                    ),
+                    const Spacer(),
+                    const Icon(
+                      Icons.sort_by_alpha_rounded,
+                      size: 16,
+                      color: AppColors.slateMuted,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      'Orden alfabético (A-Z)',
+                      style: TextStyle(
+                        fontSize: info.scaleFont(12),
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.slateMuted,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             Expanded(
               child: searchState.isLoading
                   ? const Center(child: CircularProgressIndicator())

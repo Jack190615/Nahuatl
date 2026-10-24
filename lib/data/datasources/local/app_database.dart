@@ -85,11 +85,27 @@ class AppDatabase extends _$AppDatabase {
   }
 
   /// Ejecuta una búsqueda Full-Text Search (FTS5) sobre `dictionary_fts` con soporte de prefijos
-  /// y ordenamiento por relevancia (`bm25`).
+  /// y ordenamiento alfabético garantizado (A-Z) insensible a diacríticos/acentos.
   Future<List<DictionaryRow>> searchDictionaryFts(String rawQuery) async {
     final sanitized = TextNormalizer.normalizeStrict(rawQuery);
     if (sanitized.isEmpty) {
-      return select(dictionary).get();
+      final rows = await (select(dictionary)
+            ..orderBy([
+              (t) => OrderingTerm(
+                    expression: t.nahuatlWord.collate(Collate.noCase),
+                    mode: OrderingMode.asc,
+                  ),
+            ]))
+          .get();
+
+      // Ordenamiento natural alfabético insensible a tildes (á -> a, é -> e, etc.)
+      rows.sort((a, b) {
+        final normA = TextNormalizer.normalizeStrict(a.nahuatlWord);
+        final normB = TextNormalizer.normalizeStrict(b.nahuatlWord);
+        final cmp = normA.compareTo(normB);
+        return cmp != 0 ? cmp : a.nahuatlWord.compareTo(b.nahuatlWord);
+      });
+      return rows;
     }
 
     // Construye expresión de coincidencia por prefijos (ej. "tlac*" OR "call*")
@@ -105,13 +121,21 @@ class AppDatabase extends _$AppDatabase {
       FROM dictionary_fts fts
       INNER JOIN dictionary d ON d.id = fts.rowid
       WHERE dictionary_fts MATCH ?
-      ORDER BY bm25(dictionary_fts) ASC
+      ORDER BY bm25(dictionary_fts) ASC, d.nahuatl_word COLLATE NOCASE ASC
       ''',
       variables: [Variable.withString(ftsMatchQuery)],
       readsFrom: {dictionary},
     ).get();
 
-    return rows.map((QueryRow row) => dictionary.map(row.data)).toList();
+    final resultRows =
+        rows.map((QueryRow row) => dictionary.map(row.data)).toList();
+    resultRows.sort((a, b) {
+      final normA = TextNormalizer.normalizeStrict(a.nahuatlWord);
+      final normB = TextNormalizer.normalizeStrict(b.nahuatlWord);
+      final cmp = normA.compareTo(normB);
+      return cmp != 0 ? cmp : a.nahuatlWord.compareTo(b.nahuatlWord);
+    });
+    return resultRows;
   }
 }
 
