@@ -16,6 +16,7 @@ import 'package:nahuatl_clasico_app/domain/repositories/i_nahuatl_repository.dar
 import 'package:nahuatl_clasico_app/domain/usecases/generate_lesson_exercises_usecase.dart';
 import 'package:nahuatl_clasico_app/presentation/controllers/exercise_engine_controller.dart';
 import 'package:nahuatl_clasico_app/presentation/providers/app_providers.dart';
+import 'package:nahuatl_clasico_app/presentation/views/exercise/exercise_session_view.dart';
 import 'package:nahuatl_clasico_app/presentation/views/welcome/welcome_view.dart';
 import 'package:nahuatl_clasico_app/presentation/widgets/common/defensive_audio_button.dart';
 
@@ -390,6 +391,29 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text("powered by Axolot's Studios"), findsOneWidget);
+    });
+  });
+
+  group('6. Estado Más lecciones próximamente para lección sin frases', () {
+    testWidgets('Muestra "Más lecciones próximamente" cuando id_leccion no tiene frases', (tester) async {
+      final fakeRepo = FakeNahuatlRepository();
+      // Lección 2 no tiene frases en FakeNahuatlRepository
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            nahuatlRepositoryProvider.overrideWithValue(fakeRepo),
+          ],
+          child: const MaterialApp(
+            home: ExerciseSessionView(
+              lessonId: 2,
+              lessonTitle: 'Verbos Intransitivos',
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Más lecciones próximamente'), findsOneWidget);
     });
   });
 }

@@ -7,15 +7,18 @@ import '../../../domain/entities/lesson.dart';
 import '../common/app_action_button.dart';
 
 /// Tarjeta reutilizable y responsiva para mostrar una lección y sus reglas gramaticales.
+/// Soporta estado de "Más lecciones próximamente" cuando no hay frases registradas aún para su id.
 class LessonCardWidget extends StatelessWidget {
   final LessonEntity lesson;
   final List<GrammarRuleEntity> grammarRules;
+  final bool hasPhrases;
   final VoidCallback onStartLesson;
 
   const LessonCardWidget({
     super.key,
     required this.lesson,
     required this.grammarRules,
+    this.hasPhrases = true,
     required this.onStartLesson,
   });
 
@@ -35,12 +38,14 @@ class LessonCardWidget extends StatelessWidget {
                 CircleAvatar(
                   radius: info.isTablet ? 24 : 20,
                   backgroundColor: isUnlocked
-                      ? AppColors.jadeLight
+                      ? (hasPhrases ? AppColors.jadeLight : AppColors.goldHighlight.withValues(alpha: 0.18))
                       : AppColors.borderOutline,
                   child: Icon(
-                    isUnlocked ? Icons.menu_book_rounded : Icons.lock_rounded,
+                    isUnlocked
+                        ? (hasPhrases ? Icons.menu_book_rounded : Icons.hourglass_top_rounded)
+                        : Icons.lock_rounded,
                     color: isUnlocked
-                        ? AppColors.jadePrimary
+                        ? (hasPhrases ? AppColors.jadePrimary : AppColors.goldHighlight)
                         : AppColors.slateMuted,
                   ),
                 ),
@@ -49,15 +54,37 @@ class LessonCardWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Lección ${lesson.orderIndex}',
-                        style: TextStyle(
-                          fontSize: info.scaleFont(12),
-                          fontWeight: FontWeight.w700,
-                          color: isUnlocked
-                              ? AppColors.jadePrimary
-                              : AppColors.slateMuted,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            'Lección ${lesson.orderIndex}',
+                            style: TextStyle(
+                              fontSize: info.scaleFont(12),
+                              fontWeight: FontWeight.w700,
+                              color: isUnlocked
+                                  ? AppColors.jadePrimary
+                                  : AppColors.slateMuted,
+                            ),
+                          ),
+                          if (isUnlocked && !hasPhrases) ...[
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: AppColors.goldHighlight.withValues(alpha: 0.15),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                'Próximamente',
+                                style: TextStyle(
+                                  fontSize: info.scaleFont(10.5),
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.goldHighlight,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
                       ),
                       Text(
                         lesson.title,
@@ -107,8 +134,19 @@ class LessonCardWidget extends StatelessWidget {
             ],
             const SizedBox(height: 14),
             AppActionButton(
-              label: isUnlocked ? 'Practicar (10 ejercicios)' : 'Bloqueada',
-              icon: isUnlocked ? Icons.play_arrow_rounded : Icons.lock_outline,
+              label: !isUnlocked
+                  ? 'Bloqueada'
+                  : (!hasPhrases
+                      ? 'Más lecciones próximamente'
+                      : 'Practicar (10 ejercicios)'),
+              icon: !isUnlocked
+                  ? Icons.lock_outline
+                  : (!hasPhrases
+                      ? Icons.hourglass_top_rounded
+                      : Icons.play_arrow_rounded),
+              variant: !hasPhrases && isUnlocked
+                  ? AppButtonVariant.secondary
+                  : AppButtonVariant.primary,
               onPressed: isUnlocked ? onStartLesson : null,
             ),
           ],

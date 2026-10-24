@@ -16,6 +16,8 @@ import '../../widgets/exercise/text_input_exercise_widget.dart';
 import '../../widgets/exercise/word_bank_exercise_widget.dart';
 
 /// Vista responsiva que ejecuta el bucle de 10 ejercicios de una lección activa.
+/// Si la lección aún no cuenta con frases registradas, muestra el estado
+/// "Más lecciones próximamente".
 @RoutePage()
 class ExerciseSessionView extends ConsumerWidget {
   final int lessonId;
@@ -36,6 +38,76 @@ class ExerciseSessionView extends ConsumerWidget {
     if (sessionState.isLoading) {
       return const ResponsiveScaffold(
         bodyBuilder: _buildLoading,
+      );
+    }
+
+    // Estado cuando la lección no contiene frases disponibles aún
+    if (sessionState.exercises.isEmpty) {
+      return ResponsiveScaffold(
+        appBar: AppBar(
+          title: Text(
+            lessonTitle,
+            style: const TextStyle(fontWeight: FontWeight.w800),
+          ),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_rounded),
+            onPressed: () => context.router.maybePop(),
+          ),
+        ),
+        bodyBuilder: (context, info) => Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: info.verticalSpacing * 2,
+              horizontal: info.horizontalPadding,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(22),
+                  decoration: const BoxDecoration(
+                    color: AppColors.jadeLight,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.hourglass_top_rounded,
+                    size: 64,
+                    color: AppColors.jadePrimary,
+                  ),
+                ),
+                const SizedBox(height: 22),
+                Text(
+                  'Más lecciones próximamente',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: info.scaleFont(24),
+                    fontWeight: FontWeight.w900,
+                    color: AppColors.obsidianText,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'Actualmente no hay frases registradas para esta lección. Estamos preparando nuevo contenido y ejercicios interactivos.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: info.scaleFont(15),
+                    color: AppColors.slateMuted,
+                    height: 1.4,
+                  ),
+                ),
+                const SizedBox(height: 28),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 320),
+                  child: AppActionButton(
+                    label: 'Volver a las lecciones',
+                    icon: Icons.arrow_back_rounded,
+                    onPressed: () => context.router.maybePop(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       );
     }
 

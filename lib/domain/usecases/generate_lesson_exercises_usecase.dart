@@ -35,6 +35,12 @@ class GenerateLessonExercisesUseCase implements IGenerateLessonExercisesUseCase 
     int totalExercises = 10,
   }) async {
     final phrases = await _phraseRepository.getPhrasesByLesson(lessonId);
+    // Si no existen frases para esta lección, devuelve una lista vacía para mostrar
+    // la pantalla de "Más lecciones próximamente"
+    if (phrases.isEmpty) {
+      return const [];
+    }
+
     final List<Exercise> generated = [];
 
     for (int i = 0; i < totalExercises; i++) {

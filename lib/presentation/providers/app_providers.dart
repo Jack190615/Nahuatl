@@ -85,6 +85,7 @@ final lessonMapControllerProvider =
   return LessonMapController(
     lessonRepository: ref.watch(lessonRepositoryProvider),
     grammarRepository: ref.watch(grammarRepositoryProvider),
+    phraseRepository: ref.watch(phraseRepositoryProvider),
   );
 });
 
