@@ -11,8 +11,7 @@ import '../../widgets/common/app_action_button.dart';
 import '../../widgets/common/responsive_scaffold.dart';
 
 /// Pantalla Inicial de Bienvenida (sin login).
-/// Ejecuta de forma transparente el Seeding transaccional de Drift en la primera instalación
-/// y adapta su distribución para celulares y tabletas (Android e iOS).
+/// Diseño limpio y minimalista: Emblema, Título, Subtítulo, Botones de acción y marca.
 @RoutePage()
 class WelcomeView extends ConsumerWidget {
   const WelcomeView({super.key});
@@ -23,38 +22,29 @@ class WelcomeView extends ConsumerWidget {
 
     return ResponsiveScaffold(
       bodyBuilder: (context, info) {
-        final isTabletLandscape =
-            info.isTablet && info.orientation == Orientation.landscape;
-
-        return SingleChildScrollView(
-          physics: MobilePlatformConfig.adaptiveScrollPhysics,
-          padding: EdgeInsets.symmetric(vertical: info.verticalSpacing * 1.5),
-          child: isTabletLandscape
-              ? Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(child: _HeroBrandSection(info: info)),
-                    const SizedBox(width: 36),
-                    Expanded(
-                      child: _WelcomeActionSection(
-                        info: info,
-                        bootstrapAsync: bootstrapAsync,
-                      ),
-                    ),
-                  ],
-                )
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: info.verticalSpacing),
-                    _HeroBrandSection(info: info),
-                    SizedBox(height: info.verticalSpacing * 1.5),
-                    _WelcomeActionSection(
-                      info: info,
-                      bootstrapAsync: bootstrapAsync,
-                    ),
-                  ],
-                ),
+        return Center(
+          child: SingleChildScrollView(
+            physics: MobilePlatformConfig.adaptiveScrollPhysics,
+            padding: EdgeInsets.symmetric(
+              vertical: info.verticalSpacing * 2,
+              horizontal: info.isTablet ? 32 : 8,
+            ),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 460),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _HeroBrandSection(info: info),
+                  SizedBox(height: info.verticalSpacing * 2.5),
+                  _WelcomeActionSection(
+                    info: info,
+                    bootstrapAsync: bootstrapAsync,
+                  ),
+                ],
+              ),
+            ),
+          ),
         );
       },
     );
@@ -68,7 +58,8 @@ class _HeroBrandSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final emblemSize = info.isTablet ? 136.0 : (info.isCompactPhone ? 96.0 : 114.0);
+    final emblemSize =
+        info.isTablet ? 144.0 : (info.isCompactPhone ? 104.0 : 124.0);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -80,6 +71,13 @@ class _HeroBrandSection extends StatelessWidget {
             color: AppColors.jadeLight,
             shape: BoxShape.circle,
             border: Border.all(color: AppColors.jadePrimary, width: 3),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.jadePrimary.withValues(alpha: 0.12),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
+            ],
           ),
           child: Icon(
             Icons.auto_stories_rounded,
@@ -87,7 +85,7 @@ class _HeroBrandSection extends StatelessWidget {
             color: AppColors.jadePrimary,
           ),
         ),
-        SizedBox(height: info.verticalSpacing),
+        SizedBox(height: info.verticalSpacing * 1.25),
         Text(
           'Niltze! · ¡Bienvenido!',
           textAlign: TextAlign.center,
@@ -103,17 +101,17 @@ class _HeroBrandSection extends StatelessWidget {
           'Náhuatl Clásico',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: info.scaleFont(30),
+            fontSize: info.scaleFont(32),
             fontWeight: FontWeight.w900,
             color: AppColors.obsidianText,
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 12),
         Text(
           'Aprende la lengua de los antiguos mexicanos mediante lecciones interactivas, gramática estructurada y diccionario offline con búsqueda instantánea.',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: info.scaleFont(15),
+            fontSize: info.scaleFont(15.5),
             color: AppColors.slateMuted,
             height: 1.45,
           ),
@@ -137,24 +135,6 @@ class _WelcomeActionSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const _FeatureHighlightTile(
-          icon: Icons.extension_rounded,
-          title: '10 Ejercicios Dinámicos por Lección',
-          subtitle: 'Pares de vocabulario, constructor de oraciones y traducción libre.',
-        ),
-        const SizedBox(height: 12),
-        const _FeatureHighlightTile(
-          icon: Icons.search_rounded,
-          title: 'Diccionario FTS5 100% Offline',
-          subtitle: 'Búsqueda instantánea en Náhuatl y Español sin necesidad de internet.',
-        ),
-        const SizedBox(height: 12),
-        const _FeatureHighlightTile(
-          icon: Icons.volume_up_rounded,
-          title: 'Audio Integrado',
-          subtitle: 'Escucha la pronunciación clásica en los vocablos y frases disponibles.',
-        ),
-        SizedBox(height: info.verticalSpacing * 1.5),
         bootstrapAsync.when(
           data: (_) => Column(
             children: [
@@ -196,7 +176,7 @@ class _WelcomeActionSection extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: info.verticalSpacing * 1.25),
+        SizedBox(height: info.verticalSpacing * 1.5),
         Center(
           child: Text(
             "powered by Axolot's Studios",
@@ -210,68 +190,6 @@ class _WelcomeActionSection extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _FeatureHighlightTile extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String subtitle;
-
-  const _FeatureHighlightTile({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final info = ResponsiveInfo.fromContext(context);
-
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: AppColors.cardSurface,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: AppColors.borderOutline, width: 1.5),
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: AppColors.jadeLight,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(icon, color: AppColors.jadePrimary, size: 22),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: info.scaleFont(15),
-                    fontWeight: FontWeight.w800,
-                    color: AppColors.obsidianText,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  subtitle,
-                  style: TextStyle(
-                    fontSize: info.scaleFont(13),
-                    color: AppColors.slateMuted,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
