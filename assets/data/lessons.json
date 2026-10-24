@@ -1,26 +1,26 @@
 [
   {
     "id": 1,
-    "title": "Introducción",
+    "roman_number": "I",
+    "title": "Introducción y Fonética",
+    "description": "Sonidos, ortografía tradicional y acentuación.",
     "order_index": 1,
     "is_unlocked": true
   },
   {
     "id": 2,
-    "title": "Ortografia y pronunciación",
+    "roman_number": "II",
+    "title": "El Sustantivo y la Oración Básica",
+    "description": "Sufijos absolutivos, partículas y la oración nominal.",
     "order_index": 2,
     "is_unlocked": false
   },
   {
     "id": 3,
-    "title": "Sustantivo",
+    "roman_number": "III",
+    "title": "Los Reverenciales y Diminutivos",
+    "description": "El posfijo -tzintli y modificaciones del tema.",
     "order_index": 3,
-    "is_unlocked": false
-  },
-  {
-    "id": 4,
-    "title": "Los reverenciales o diminutivos.",
-    "order_index": 4,
     "is_unlocked": false
   }
 ]

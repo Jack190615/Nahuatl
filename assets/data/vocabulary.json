@@ -1,0 +1,298 @@
+[
+  {
+    "id": 1,
+    "sublesson_id": 2,
+    "nahuatl_word": "amóxtli",
+    "spanish_translation": "libro",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 2,
+    "sublesson_id": 2,
+    "nahuatl_word": "cálli",
+    "spanish_translation": "casa",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 3,
+    "sublesson_id": 2,
+    "nahuatl_word": "cíhtli",
+    "spanish_translation": "abuela",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 4,
+    "sublesson_id": 2,
+    "nahuatl_word": "cíhuatl",
+    "spanish_translation": "mujer",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 5,
+    "sublesson_id": 2,
+    "nahuatl_word": "cóatl",
+    "spanish_translation": "serpiente",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 6,
+    "sublesson_id": 2,
+    "nahuatl_word": "cólli",
+    "spanish_translation": "abuelo",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 7,
+    "sublesson_id": 2,
+    "nahuatl_word": "itzcuíntli",
+    "spanish_translation": "perro",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 8,
+    "sublesson_id": 2,
+    "nahuatl_word": "mázatl",
+    "spanish_translation": "venado",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 9,
+    "sublesson_id": 2,
+    "nahuatl_word": "mécatl",
+    "spanish_translation": "cordón, cuerda",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 10,
+    "sublesson_id": 2,
+    "nahuatl_word": "míchin",
+    "spanish_translation": "pescado",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 11,
+    "sublesson_id": 2,
+    "nahuatl_word": "nántli",
+    "spanish_translation": "madre",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 12,
+    "sublesson_id": 2,
+    "nahuatl_word": "ocuíllin",
+    "spanish_translation": "gusano",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 13,
+    "sublesson_id": 2,
+    "nahuatl_word": "pétlatl",
+    "spanish_translation": "petate",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 14,
+    "sublesson_id": 2,
+    "nahuatl_word": "pílli",
+    "spanish_translation": "niño",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 15,
+    "sublesson_id": 2,
+    "nahuatl_word": "táhtli",
+    "spanish_translation": "padre",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 16,
+    "sublesson_id": 2,
+    "nahuatl_word": "tecólotl",
+    "spanish_translation": "búho",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 17,
+    "sublesson_id": 2,
+    "nahuatl_word": "teopántli",
+    "spanish_translation": "iglesia",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 18,
+    "sublesson_id": 2,
+    "nahuatl_word": "tlácatl",
+    "spanish_translation": "hombre",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 19,
+    "sublesson_id": 2,
+    "nahuatl_word": "tlálli",
+    "spanish_translation": "tierra",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 20,
+    "sublesson_id": 2,
+    "nahuatl_word": "tóchtli",
+    "spanish_translation": "conejo",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 21,
+    "sublesson_id": 2,
+    "nahuatl_word": "xálli",
+    "spanish_translation": "arena",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 22,
+    "sublesson_id": 3,
+    "nahuatl_word": "amo",
+    "spanish_translation": "no",
+    "word_type": "adverbio",
+    "audio_path": null
+  },
+  {
+    "id": 23,
+    "sublesson_id": 3,
+    "nahuatl_word": "ca",
+    "spanish_translation": "está",
+    "word_type": "adverbio",
+    "audio_path": null
+  },
+  {
+    "id": 24,
+    "sublesson_id": 3,
+    "nahuatl_word": "campa",
+    "spanish_translation": "dónde",
+    "word_type": "adverbio",
+    "audio_path": null
+  },
+  {
+    "id": 25,
+    "sublesson_id": 3,
+    "nahuatl_word": "cateh",
+    "spanish_translation": "están",
+    "word_type": "adverbio",
+    "audio_path": null
+  },
+  {
+    "id": 26,
+    "sublesson_id": 3,
+    "nahuatl_word": "ce",
+    "spanish_translation": "uno",
+    "word_type": "numeral",
+    "audio_path": null
+  },
+  {
+    "id": 27,
+    "sublesson_id": 3,
+    "nahuatl_word": "ihuan",
+    "spanish_translation": "y",
+    "word_type": "conjunción",
+    "audio_path": null
+  },
+  {
+    "id": 28,
+    "sublesson_id": 3,
+    "nahuatl_word": "in",
+    "spanish_translation": "el, la",
+    "word_type": "conjunción",
+    "audio_path": null
+  },
+  {
+    "id": 29,
+    "sublesson_id": 3,
+    "nahuatl_word": "inin",
+    "spanish_translation": "este, esta",
+    "word_type": "pronombre",
+    "audio_path": null
+  },
+  {
+    "id": 30,
+    "sublesson_id": 3,
+    "nahuatl_word": "ipan",
+    "spanish_translation": "en, sobre",
+    "word_type": "posposición",
+    "audio_path": null
+  },
+  {
+    "id": 31,
+    "sublesson_id": 3,
+    "nahuatl_word": "itic",
+    "spanish_translation": "dentro de",
+    "word_type": "posposición",
+    "audio_path": null
+  },
+  {
+    "id": 32,
+    "sublesson_id": 3,
+    "nahuatl_word": "nahui",
+    "spanish_translation": "cuatro",
+    "word_type": "numeral",
+    "audio_path": null
+  },
+  {
+    "id": 33,
+    "sublesson_id": 3,
+    "nahuatl_word": "nican",
+    "spanish_translation": "aquí",
+    "word_type": "adverbio",
+    "audio_path": null
+  },
+  {
+    "id": 34,
+    "sublesson_id": 3,
+    "nahuatl_word": "ome",
+    "spanish_translation": "dos",
+    "word_type": "numeral",
+    "audio_path": null
+  },
+  {
+    "id": 35,
+    "sublesson_id": 3,
+    "nahuatl_word": "ompa",
+    "spanish_translation": "allá",
+    "word_type": "adverbio",
+    "audio_path": null
+  },
+  {
+    "id": 36,
+    "sublesson_id": 3,
+    "nahuatl_word": "quema",
+    "spanish_translation": "si",
+    "word_type": "adverbio",
+    "audio_path": null
+  },
+  {
+    "id": 37,
+    "sublesson_id": 3,
+    "nahuatl_word": "yeyi",
+    "spanish_translation": "tres",
+    "word_type": "numeral",
+    "audio_path": null
+  }
+]

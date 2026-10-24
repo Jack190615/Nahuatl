@@ -130,7 +130,7 @@ class _HeroBrandSection extends StatelessWidget {
   }
 }
 
-class _WelcomeActionSection extends StatelessWidget {
+class _WelcomeActionSection extends ConsumerWidget {
   final ResponsiveInfo info;
   final AsyncValue<bool> bootstrapAsync;
 
@@ -140,7 +140,7 @@ class _WelcomeActionSection extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -197,6 +197,38 @@ class _WelcomeActionSection extends StatelessWidget {
               letterSpacing: 0.5,
               color: AppColors.slateMuted,
             ),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Center(
+          child: TextButton.icon(
+            style: TextButton.styleFrom(
+              foregroundColor: AppColors.slateMuted,
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            ),
+            icon: const Icon(Icons.sync_rounded, size: 15),
+            label: Text(
+              'Recargar base de datos local',
+              style: TextStyle(
+                fontSize: info.scaleFont(11),
+                color: AppColors.slateMuted,
+              ),
+            ),
+            onPressed: () async {
+              final seeder = ref.read(databaseSeederServiceProvider);
+              await seeder.forceReseed();
+              ref.invalidate(appBootstrapProvider);
+              ref.read(lessonMapControllerProvider.notifier).loadLessons();
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('✓ Base de datos local recargada con éxito'),
+                    backgroundColor: AppColors.successGreen,
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              }
+            },
           ),
         ),
       ],
