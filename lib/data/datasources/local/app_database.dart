@@ -1,0 +1,114 @@
+import 'dart:io';
+
+import 'package:drift/drift.dart';
+import 'package:drift/native.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
+
+import '../../../core/utils/text_normalizer.dart';
+import 'tables.dart';
+
+part 'app_database.g.dart';
+
+@DriftDatabase(
+  tables: [
+    Lessons,
+    GrammarRules,
+    Dictionary,
+    Phrases,
+  ],
+)
+class AppDatabase extends _$AppDatabase {
+  AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
+
+  @override
+  int get schemaVersion => 1;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onCreate: (Migrator m) async {
+          await m.createAll();
+          await _createDictionaryFtsIndex();
+        },
+        beforeOpen: (details) async {
+          // Habilitar integridad referencial (Foreign Keys) en SQLite
+          await customStatement('PRAGMA foreign_keys = ON');
+        },
+      );
+
+  /// Crea la tabla virtual nativa FTS5 de SQLite (`dictionary_fts`) vinculada a `dictionary`
+  /// y sus tres triggers de sincronización automática (`INSERT`, `DELETE`, `UPDATE`).
+  Future<void> _createDictionaryFtsIndex() async {
+    await customStatement('''
+      CREATE VIRTUAL TABLE IF NOT EXISTS dictionary_fts USING fts5(
+        nahuatl_word,
+        spanish_translation,
+        word_type,
+        content='dictionary',
+        content_rowid='id',
+        tokenize='unicode61 remove_diacritics 2'
+      );
+    ''');
+
+    await customStatement('''
+      CREATE TRIGGER IF NOT EXISTS dictionary_ai AFTER INSERT ON dictionary BEGIN
+        INSERT INTO dictionary_fts(rowid, nahuatl_word, spanish_translation, word_type)
+        VALUES (new.id, new.nahuatl_word, new.spanish_translation, new.word_type);
+      END;
+    ''');
+
+    await customStatement('''
+      CREATE TRIGGER IF NOT EXISTS dictionary_ad AFTER DELETE ON dictionary BEGIN
+        INSERT INTO dictionary_fts(dictionary_fts, rowid, nahuatl_word, spanish_translation, word_type)
+        VALUES ('delete', old.id, old.nahuatl_word, old.spanish_translation, old.word_type);
+      END;
+    ''');
+
+    await customStatement('''
+      CREATE TRIGGER IF NOT EXISTS dictionary_au AFTER UPDATE ON dictionary BEGIN
+        INSERT INTO dictionary_fts(dictionary_fts, rowid, nahuatl_word, spanish_translation, word_type)
+        VALUES ('delete', old.id, old.nahuatl_word, old.spanish_translation, old.word_type);
+        INSERT INTO dictionary_fts(rowid, nahuatl_word, spanish_translation, word_type)
+        VALUES (new.id, new.nahuatl_word, new.spanish_translation, new.word_type);
+      END;
+    ''');
+  }
+
+  /// Ejecuta una búsqueda Full-Text Search (FTS5) sobre `dictionary_fts` con soporte de prefijos
+  /// y ordenamiento por relevancia (`bm25`).
+  Future<List<DictionaryRow>> searchDictionaryFts(String rawQuery) async {
+    final sanitized = TextNormalizer.normalizeStrict(rawQuery);
+    if (sanitized.isEmpty) {
+      return select(dictionary).get();
+    }
+
+    // Construye expresión de coincidencia por prefijos (ej. "tlac*" OR "call*")
+    final ftsMatchQuery = sanitized
+        .split(' ')
+        .where((token) => token.isNotEmpty)
+        .map((token) => '"$token"*')
+        .join(' OR ');
+
+    final rows = await customSelect(
+      '''
+      SELECT d.*
+      FROM dictionary_fts fts
+      INNER JOIN dictionary d ON d.id = fts.rowid
+      WHERE dictionary_fts MATCH ?
+      ORDER BY bm25(dictionary_fts) ASC
+      ''',
+      variables: [Variable.withString(ftsMatchQuery)],
+      readsFrom: {dictionary},
+    ).get();
+
+    return rows.map((QueryRow row) => dictionary.map(row.data)).toList();
+  }
+}
+
+LazyDatabase _openConnection() {
+  return LazyDatabase(() async {
+    final dbFolder = await getApplicationDocumentsDirectory();
+    final file = File(p.join(dbFolder.path, 'nahuatl_clasico.sqlite'));
+    return NativeDatabase.createInBackground(file);
+  });
+}

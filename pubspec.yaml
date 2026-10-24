@@ -1,0 +1,42 @@
+name: nahuatl_clasico_app
+description: Aplicación móvil (Android / iOS ready) de aprendizaje de Náhuatl Clásico con Clean Architecture, SOLID, Drift (FTS5), Riverpod y AutoRoute.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # Base de datos reactiva SQLite con soporte FTS5 (Android & iOS)
+  drift: ^2.18.0
+  sqlite3_flutter_libs: ^0.5.24
+  path_provider: ^2.1.3
+  path: ^1.9.0
+
+  # Gestión de estado e Inyección de Dependencias (DIP)
+  flutter_riverpod: ^2.5.1
+
+  # Navegación declarativa tipada
+  auto_route: ^8.2.0
+
+  # Variables de entorno (archivo .env en la raíz del proyecto)
+  flutter_dotenv: ^5.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  drift_dev: ^2.18.0
+  auto_route_generator: ^8.0.0
+  build_runner: ^2.4.11
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
+    - assets/data/
+    - assets/audio/

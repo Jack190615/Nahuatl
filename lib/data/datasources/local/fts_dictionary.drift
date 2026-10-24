@@ -1,0 +1,30 @@
+-- Declaración opcional en formato .drift para el índice FTS5 de contenido externo sobre `dictionary`.
+-- También se inicializa programáticamente en AppDatabase.migration.onCreate para garantizar compatibilidad directa.
+
+import 'tables.dart';
+
+CREATE VIRTUAL TABLE dictionary_fts USING fts5(
+  nahuatl_word,
+  spanish_translation,
+  word_type,
+  content='dictionary',
+  content_rowid='id',
+  tokenize='unicode61 remove_diacritics 2'
+);
+
+CREATE TRIGGER dictionary_ai AFTER INSERT ON dictionary BEGIN
+  INSERT INTO dictionary_fts(rowid, nahuatl_word, spanish_translation, word_type)
+  VALUES (new.id, new.nahuatl_word, new.spanish_translation, new.word_type);
+END;
+
+CREATE TRIGGER dictionary_ad AFTER DELETE ON dictionary BEGIN
+  INSERT INTO dictionary_fts(dictionary_fts, rowid, nahuatl_word, spanish_translation, word_type)
+  VALUES ('delete', old.id, old.nahuatl_word, old.spanish_translation, old.word_type);
+END;
+
+CREATE TRIGGER dictionary_au AFTER UPDATE ON dictionary BEGIN
+  INSERT INTO dictionary_fts(dictionary_fts, rowid, nahuatl_word, spanish_translation, word_type)
+  VALUES ('delete', old.id, old.nahuatl_word, old.spanish_translation, old.word_type);
+  INSERT INTO dictionary_fts(rowid, nahuatl_word, spanish_translation, word_type)
+  VALUES (new.id, new.nahuatl_word, new.spanish_translation, new.word_type);
+END;

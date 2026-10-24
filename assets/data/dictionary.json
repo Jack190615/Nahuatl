@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "nahuatl_word": "atl",
+    "spanish_translation": "agua",
+    "word_type": "sustantivo",
+    "audio_path": "assets/audio/atl.mp3"
+  },
+  {
+    "id": 2,
+    "nahuatl_word": "calli",
+    "spanish_translation": "casa",
+    "word_type": "sustantivo",
+    "audio_path": "assets/audio/calli.mp3"
+  },
+  {
+    "id": 3,
+    "nahuatl_word": "tlacatl",
+    "spanish_translation": "persona",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 4,
+    "nahuatl_word": "cihuatl",
+    "spanish_translation": "mujer",
+    "word_type": "sustantivo",
+    "audio_path": "assets/audio/cihuatl.mp3"
+  },
+  {
+    "id": 5,
+    "nahuatl_word": "cualli",
+    "spanish_translation": "bueno",
+    "word_type": "adjetivo",
+    "audio_path": null
+  },
+  {
+    "id": 6,
+    "nahuatl_word": "tonalli",
+    "spanish_translation": "día",
+    "word_type": "sustantivo",
+    "audio_path": "assets/audio/tonalli.mp3"
+  },
+  {
+    "id": 7,
+    "nahuatl_word": "nehhuatl",
+    "spanish_translation": "yo",
+    "word_type": "pronombre",
+    "audio_path": null
+  },
+  {
+    "id": 8,
+    "nahuatl_word": "in",
+    "spanish_translation": "el / la",
+    "word_type": "partícula",
+    "audio_path": null
+  }
+]

@@ -1,0 +1,120 @@
+{
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Saludos y Sustantivos Absolutos",
+      "order_index": 1,
+      "is_unlocked": true
+    },
+    {
+      "id": 2,
+      "title": "Prefijos Sujeto y Verbos Intransitivos",
+      "order_index": 2,
+      "is_unlocked": false
+    }
+  ],
+  "grammar_rules": [
+    {
+      "id": 1,
+      "lesson_id": 1,
+      "explanation_text": "En Náhuatl Clásico, los sustantivos en estado absoluto emplean el sufijo absolutivo (-tl, -tli, -li, -in). Por ejemplo: atl (agua), calli (casa), tlacatl (persona)."
+    },
+    {
+      "id": 2,
+      "lesson_id": 1,
+      "explanation_text": "El saludo clásico 'Niltze' o 'Cualli tonalli' se utiliza para desear un buen día."
+    }
+  ],
+  "dictionary": [
+    {
+      "id": 1,
+      "nahuatl_word": "atl",
+      "spanish_translation": "agua",
+      "word_type": "sustantivo",
+      "audio_path": "assets/audio/atl.mp3"
+    },
+    {
+      "id": 2,
+      "nahuatl_word": "calli",
+      "spanish_translation": "casa",
+      "word_type": "sustantivo",
+      "audio_path": "assets/audio/calli.mp3"
+    },
+    {
+      "id": 3,
+      "nahuatl_word": "tlacatl",
+      "spanish_translation": "persona",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 4,
+      "nahuatl_word": "cihuatl",
+      "spanish_translation": "mujer",
+      "word_type": "sustantivo",
+      "audio_path": "assets/audio/cihuatl.mp3"
+    },
+    {
+      "id": 5,
+      "nahuatl_word": "cualli",
+      "spanish_translation": "bueno",
+      "word_type": "adjetivo",
+      "audio_path": null
+    },
+    {
+      "id": 6,
+      "nahuatl_word": "tonalli",
+      "spanish_translation": "día",
+      "word_type": "sustantivo",
+      "audio_path": "assets/audio/tonalli.mp3"
+    },
+    {
+      "id": 7,
+      "nahuatl_word": "nehhuatl",
+      "spanish_translation": "yo",
+      "word_type": "pronombre",
+      "audio_path": null
+    },
+    {
+      "id": 8,
+      "nahuatl_word": "in",
+      "spanish_translation": "el / la",
+      "word_type": "partícula",
+      "audio_path": null
+    }
+  ],
+  "phrases": [
+    {
+      "id": 1,
+      "lesson_id": 1,
+      "grammar_rule_id": 2,
+      "nahuatl_sentence": "Cualli tonalli",
+      "spanish_translation": "Buen día",
+      "audio_path": "assets/audio/cualli_tonalli.mp3"
+    },
+    {
+      "id": 2,
+      "lesson_id": 1,
+      "grammar_rule_id": 1,
+      "nahuatl_sentence": "In cihuatl choca",
+      "spanish_translation": "La mujer llora",
+      "audio_path": null
+    },
+    {
+      "id": 3,
+      "lesson_id": 1,
+      "grammar_rule_id": 1,
+      "nahuatl_sentence": "In tlacatl cochi",
+      "spanish_translation": "La persona duerme",
+      "audio_path": "assets/audio/in_tlacatl_cochi.mp3"
+    },
+    {
+      "id": 4,
+      "lesson_id": 1,
+      "grammar_rule_id": 1,
+      "nahuatl_sentence": "Nehhuatl nitlacua",
+      "spanish_translation": "Yo como",
+      "audio_path": null
+    }
+  ]
+}
