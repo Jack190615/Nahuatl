@@ -1,0 +1,5 @@
+id,lesson_id,grammar_rule_id,nahuatl_sentence,spanish_translation,audio_path
+1,1,2,Cualli tonalli,Buen día,assets/audio/cualli_tonalli.mp3
+2,1,1,In cihuatl choca,La mujer llora,
+3,1,1,In tlacatl cochi,La persona duerme,assets/audio/in_tlacatl_cochi.mp3
+4,1,1,Nehhuatl nitlacua,Yo como,

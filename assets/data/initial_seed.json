@@ -28,58 +28,240 @@
   "dictionary": [
     {
       "id": 1,
-      "nahuatl_word": "atl",
-      "spanish_translation": "agua",
+      "nahuatl_word": "amóxtli",
+      "spanish_translation": "libro",
       "word_type": "sustantivo",
-      "audio_path": "assets/audio/atl.mp3"
+      "audio_path": null
     },
     {
       "id": 2,
-      "nahuatl_word": "calli",
+      "nahuatl_word": "cálli",
       "spanish_translation": "casa",
       "word_type": "sustantivo",
-      "audio_path": "assets/audio/calli.mp3"
+      "audio_path": null
     },
     {
       "id": 3,
-      "nahuatl_word": "tlacatl",
-      "spanish_translation": "persona",
+      "nahuatl_word": "cíhtli",
+      "spanish_translation": "abuela",
       "word_type": "sustantivo",
       "audio_path": null
     },
     {
       "id": 4,
-      "nahuatl_word": "cihuatl",
+      "nahuatl_word": "cíhuatl",
       "spanish_translation": "mujer",
       "word_type": "sustantivo",
-      "audio_path": "assets/audio/cihuatl.mp3"
+      "audio_path": null
     },
     {
       "id": 5,
-      "nahuatl_word": "cualli",
-      "spanish_translation": "bueno",
-      "word_type": "adjetivo",
+      "nahuatl_word": "cóatl",
+      "spanish_translation": "serpiente",
+      "word_type": "sustantivo",
       "audio_path": null
     },
     {
       "id": 6,
-      "nahuatl_word": "tonalli",
-      "spanish_translation": "día",
+      "nahuatl_word": "cólli",
+      "spanish_translation": "abuelo",
       "word_type": "sustantivo",
-      "audio_path": "assets/audio/tonalli.mp3"
+      "audio_path": null
     },
     {
       "id": 7,
-      "nahuatl_word": "nehhuatl",
-      "spanish_translation": "yo",
-      "word_type": "pronombre",
+      "nahuatl_word": "itzcuíntli",
+      "spanish_translation": "perro",
+      "word_type": "sustantivo",
       "audio_path": null
     },
     {
       "id": 8,
+      "nahuatl_word": "máztl",
+      "spanish_translation": "venado",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 9,
+      "nahuatl_word": "mécatl",
+      "spanish_translation": "cordon/cuerda",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 10,
+      "nahuatl_word": "míchin",
+      "spanish_translation": "pescado",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 11,
+      "nahuatl_word": "nántli",
+      "spanish_translation": "madre",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 12,
+      "nahuatl_word": "ocuíllin",
+      "spanish_translation": "gusano",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 13,
+      "nahuatl_word": "pétlatl",
+      "spanish_translation": "petate",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 14,
+      "nahuatl_word": "pílli",
+      "spanish_translation": "niño",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 15,
+      "nahuatl_word": "táhtli",
+      "spanish_translation": "padre",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 16,
+      "nahuatl_word": "tecólotl",
+      "spanish_translation": "búho",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 17,
+      "nahuatl_word": "teopántli",
+      "spanish_translation": "iglesia",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 18,
+      "nahuatl_word": "tlácatl",
+      "spanish_translation": "hombre",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 19,
+      "nahuatl_word": "tlálli",
+      "spanish_translation": "tierra",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 20,
+      "nahuatl_word": "tóchtli",
+      "spanish_translation": "conejo",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 21,
+      "nahuatl_word": "xálli",
+      "spanish_translation": "arena",
+      "word_type": "sustantivo",
+      "audio_path": null
+    },
+    {
+      "id": 22,
+      "nahuatl_word": "amo",
+      "spanish_translation": "no",
+      "word_type": "adverbio",
+      "audio_path": null
+    },
+    {
+      "id": 23,
+      "nahuatl_word": "ca",
+      "spanish_translation": "está",
+      "word_type": "adverbio",
+      "audio_path": null
+    },
+    {
+      "id": 24,
+      "nahuatl_word": "campa",
+      "spanish_translation": "dónde",
+      "word_type": "adverbio",
+      "audio_path": null
+    },
+    {
+      "id": 25,
+      "nahuatl_word": "cateh",
+      "spanish_translation": "están",
+      "word_type": "adverbio",
+      "audio_path": null
+    },
+    {
+      "id": 26,
+      "nahuatl_word": "ce",
+      "spanish_translation": "uno",
+      "word_type": "numeral",
+      "audio_path": null
+    },
+    {
+      "id": 27,
+      "nahuatl_word": "ihuan",
+      "spanish_translation": "y",
+      "word_type": "conjunción",
+      "audio_path": null
+    },
+    {
+      "id": 28,
       "nahuatl_word": "in",
-      "spanish_translation": "el / la",
-      "word_type": "partícula",
+      "spanish_translation": "el, la",
+      "word_type": "conjunción",
+      "audio_path": null
+    },
+    {
+      "id": 29,
+      "nahuatl_word": "inin",
+      "spanish_translation": "este, esta",
+      "word_type": "pronombre",
+      "audio_path": null
+    },
+    {
+      "id": 30,
+      "nahuatl_word": "ipan",
+      "spanish_translation": "en, sobre",
+      "word_type": "posposición",
+      "audio_path": null
+    },
+    {
+      "id": 31,
+      "nahuatl_word": "itic",
+      "spanish_translation": "dentro de",
+      "word_type": "posposición",
+      "audio_path": null
+    },
+    {
+      "id": 32,
+      "nahuatl_word": "nahui",
+      "spanish_translation": "cuatro",
+      "word_type": "numeral",
+      "audio_path": null
+    },
+    {
+      "id": 33,
+      "nahuatl_word": "nican",
+      "spanish_translation": "aquí",
+      "word_type": "adverbio",
+      "audio_path": null
+    },
+    {
+      "id": 34,
+      "nahuatl_word": "ome",
+      "spanish_translation": "dos",
+      "word_type": "numeral",
       "audio_path": null
     }
   ],

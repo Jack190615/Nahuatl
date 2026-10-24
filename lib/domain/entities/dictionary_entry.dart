@@ -5,6 +5,10 @@ enum WordType {
   particula('partícula'),
   adjetivo('adjetivo'),
   pronombre('pronombre'),
+  adverbio('adverbio'),
+  numeral('numeral'),
+  conjuncion('conjunción'),
+  posposicion('posposición'),
   locativo('locativo'),
   otro('otro');
 
@@ -12,11 +16,31 @@ enum WordType {
   const WordType(this.value);
 
   static WordType fromString(String raw) {
-    final normalized = raw.trim().toLowerCase();
-    return WordType.values.firstWhere(
-      (e) => e.value == normalized || e.name == normalized,
-      orElse: () => WordType.otro,
-    );
+    final normalized = raw
+        .trim()
+        .toLowerCase()
+        .replaceAll('á', 'a')
+        .replaceAll('é', 'e')
+        .replaceAll('í', 'i')
+        .replaceAll('ó', 'o')
+        .replaceAll('ú', 'u');
+
+    return switch (normalized) {
+      'sustantivo' => WordType.sustantivo,
+      'verbo' => WordType.verbo,
+      'particula' => WordType.particula,
+      'adjetivo' => WordType.adjetivo,
+      'pronombre' => WordType.pronombre,
+      'adverbio' => WordType.adverbio,
+      'numeral' => WordType.numeral,
+      'conjuncion' => WordType.conjuncion,
+      'posposicion' => WordType.posposicion,
+      'locativo' => WordType.locativo,
+      _ => WordType.values.firstWhere(
+          (e) => e.value.toLowerCase() == raw.trim().toLowerCase(),
+          orElse: () => WordType.otro,
+        ),
+    };
   }
 }
 
