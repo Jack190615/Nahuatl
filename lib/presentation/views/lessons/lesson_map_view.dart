@@ -6,13 +6,17 @@ import '../../../core/platform/mobile_platform_config.dart';
 import '../../../core/responsive/responsive_info.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../domain/entities/grammar_rule.dart';
+import '../../../domain/entities/lesson.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/common/responsive_scaffold.dart';
 import '../../widgets/lesson/lesson_card_widget.dart';
 
 /// Vista principal del Mapa de Lecciones.
-/// Adapta automáticamente el listado a 1 columna en celulares o 2 columnas en tabletas,
-/// e incluye estados de "Más lecciones próximamente" para lecciones aún sin frases.
+/// Clasifica inteligentemente cada lección en:
+/// 1. Práctica (cuando cuenta con oraciones interactivas).
+/// 2. Teoría / Ortografía / Introducción (cuando es de lectura o reglas fonéticas).
+/// 3. Próximamente (cuando está en desarrollo).
 @RoutePage()
 class LessonMapView extends ConsumerWidget {
   const LessonMapView({super.key});
@@ -53,7 +57,6 @@ class LessonMapView extends ConsumerWidget {
 
         final lessons = state.lessons;
 
-        // En tabletas grandes o modo horizontal se organiza en grilla de 2 columnas
         if (info.gridColumns > 1) {
           return SingleChildScrollView(
             physics: MobilePlatformConfig.adaptiveScrollPhysics,
@@ -73,21 +76,23 @@ class LessonMapView extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     final lesson = lessons[index];
                     final rules = state.grammarRulesByLesson[lesson.id] ?? const [];
-                    final hasPhrases = (state.phrasesCountByLesson[lesson.id] ?? 0) > 0;
+                    final phrasesCount = state.phrasesCountByLesson[lesson.id] ?? 0;
+                    final type = _resolveLessonType(
+                      lesson: lesson,
+                      phrasesCount: phrasesCount,
+                      rules: rules,
+                    );
 
                     return LessonCardWidget(
                       lesson: lesson,
                       grammarRules: rules,
-                      hasPhrases: hasPhrases,
-                      onStartLesson: () async {
-                        await context.router.push(
-                          ExerciseSessionRoute(
-                            lessonId: lesson.id,
-                            lessonTitle: lesson.title,
-                          ),
-                        );
-                        ref.read(lessonMapControllerProvider.notifier).loadLessons();
-                      },
+                      lessonType: type,
+                      onStartLesson: () => _handleLessonNavigation(
+                        context: context,
+                        ref: ref,
+                        lesson: lesson,
+                        lessonType: type,
+                      ),
                     );
                   },
                 ),
@@ -101,7 +106,7 @@ class LessonMapView extends ConsumerWidget {
         return ListView.builder(
           physics: MobilePlatformConfig.adaptiveScrollPhysics,
           padding: EdgeInsets.symmetric(vertical: info.verticalSpacing),
-          itemCount: lessons.length + 1, // +1 para el footer de más lecciones
+          itemCount: lessons.length + 1,
           itemBuilder: (context, index) {
             if (index == lessons.length) {
               return Padding(
@@ -112,29 +117,72 @@ class LessonMapView extends ConsumerWidget {
 
             final lesson = lessons[index];
             final rules = state.grammarRulesByLesson[lesson.id] ?? const [];
-            final hasPhrases = (state.phrasesCountByLesson[lesson.id] ?? 0) > 0;
+            final phrasesCount = state.phrasesCountByLesson[lesson.id] ?? 0;
+            final type = _resolveLessonType(
+              lesson: lesson,
+              phrasesCount: phrasesCount,
+              rules: rules,
+            );
 
             return Padding(
               padding: const EdgeInsets.only(bottom: 14.0),
               child: LessonCardWidget(
                 lesson: lesson,
                 grammarRules: rules,
-                hasPhrases: hasPhrases,
-                onStartLesson: () async {
-                  await context.router.push(
-                    ExerciseSessionRoute(
-                      lessonId: lesson.id,
-                      lessonTitle: lesson.title,
-                    ),
-                  );
-                  ref.read(lessonMapControllerProvider.notifier).loadLessons();
-                },
+                lessonType: type,
+                onStartLesson: () => _handleLessonNavigation(
+                  context: context,
+                  ref: ref,
+                  lesson: lesson,
+                  lessonType: type,
+                ),
               ),
             );
           },
         );
       },
     );
+  }
+
+  LessonType _resolveLessonType({
+    required LessonEntity lesson,
+    required int phrasesCount,
+    required List<GrammarRuleEntity> rules,
+  }) {
+    // Si tiene frases, es interactiva práctica
+    if (phrasesCount > 0) {
+      return LessonType.practice;
+    }
+    // Si tiene reglas gramaticales, ortografía o es introductoria
+    if (rules.isNotEmpty || lesson.id <= 2) {
+      return LessonType.theory;
+    }
+    // Si no tiene contenido todavía cargado
+    return LessonType.comingSoon;
+  }
+
+  Future<void> _handleLessonNavigation({
+    required BuildContext context,
+    required WidgetRef ref,
+    required LessonEntity lesson,
+    required LessonType lessonType,
+  }) async {
+    if (lessonType == LessonType.theory) {
+      await context.router.push(
+        LessonTheoryRoute(
+          lessonId: lesson.id,
+          lessonTitle: lesson.title,
+        ),
+      );
+    } else if (lessonType == LessonType.practice) {
+      await context.router.push(
+        ExerciseSessionRoute(
+          lessonId: lesson.id,
+          lessonTitle: lesson.title,
+        ),
+      );
+    }
+    ref.read(lessonMapControllerProvider.notifier).loadLessons();
   }
 }
 
@@ -186,7 +234,7 @@ class _ComingSoonRoadmapFooter extends StatelessWidget {
                 ),
                 const SizedBox(height: 3),
                 Text(
-                  'Estamos expandiendo la ruta de aprendizaje con nuevas frases, vocabulario y ejercicios interactivos.',
+                  'Estamos expandiendo la ruta con nuevas lecciones teóricas y oraciones interactivas.',
                   style: TextStyle(
                     fontSize: info.scaleFont(13),
                     color: AppColors.slateMuted,

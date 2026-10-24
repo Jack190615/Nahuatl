@@ -1,3 +1,15 @@
+/// Modalidad de contenido de una lección en la ruta de aprendizaje.
+enum LessonType {
+  /// Lección interactiva con bucle de 10 ejercicios dinámicos (Pares, Constructor, Traducción).
+  practice,
+
+  /// Lección teórica / gramatical / introductoria (reglas fonéticas, ortografía, conceptos).
+  theory,
+
+  /// Lección en desarrollo sin contenido cargado todavía.
+  comingSoon,
+}
+
 class LessonEntity {
   final int id;
   final String title;

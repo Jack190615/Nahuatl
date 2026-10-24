@@ -41,6 +41,20 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LessonMapView(),
       );
     },
+    LessonTheoryRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<LessonTheoryRouteArgs>(
+          orElse: () =>
+              LessonTheoryRouteArgs(lessonId: pathParams.getInt('lessonId')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: LessonTheoryView(
+          key: args.key,
+          lessonId: args.lessonId,
+          lessonTitle: args.lessonTitle,
+        ),
+      );
+    },
     WelcomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -120,6 +134,50 @@ class LessonMapRoute extends PageRouteInfo<void> {
   static const String name = 'LessonMapRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LessonTheoryView]
+class LessonTheoryRoute extends PageRouteInfo<LessonTheoryRouteArgs> {
+  LessonTheoryRoute({
+    Key? key,
+    required int lessonId,
+    String lessonTitle = 'Teoría de la Lección',
+    List<PageRouteInfo>? children,
+  }) : super(
+          LessonTheoryRoute.name,
+          args: LessonTheoryRouteArgs(
+            key: key,
+            lessonId: lessonId,
+            lessonTitle: lessonTitle,
+          ),
+          rawPathParams: {'lessonId': lessonId},
+          initialChildren: children,
+        );
+
+  static const String name = 'LessonTheoryRoute';
+
+  static const PageInfo<LessonTheoryRouteArgs> page =
+      PageInfo<LessonTheoryRouteArgs>(name);
+}
+
+class LessonTheoryRouteArgs {
+  const LessonTheoryRouteArgs({
+    this.key,
+    required this.lessonId,
+    this.lessonTitle = 'Teoría de la Lección',
+  });
+
+  final Key? key;
+
+  final int lessonId;
+
+  final String lessonTitle;
+
+  @override
+  String toString() {
+    return 'LessonTheoryRouteArgs{key: $key, lessonId: $lessonId, lessonTitle: $lessonTitle}';
+  }
 }
 
 /// generated route for

@@ -17,6 +17,7 @@ import 'package:nahuatl_clasico_app/domain/usecases/generate_lesson_exercises_us
 import 'package:nahuatl_clasico_app/presentation/controllers/exercise_engine_controller.dart';
 import 'package:nahuatl_clasico_app/presentation/providers/app_providers.dart';
 import 'package:nahuatl_clasico_app/presentation/views/exercise/exercise_session_view.dart';
+import 'package:nahuatl_clasico_app/presentation/views/lessons/lesson_theory_view.dart';
 import 'package:nahuatl_clasico_app/presentation/views/welcome/welcome_view.dart';
 import 'package:nahuatl_clasico_app/presentation/widgets/common/defensive_audio_button.dart';
 
@@ -414,6 +415,40 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Más lecciones próximamente'), findsOneWidget);
+    });
+  });
+
+  group('7. Lecciones Teóricas e Introductorias (LessonTheoryView)', () {
+    testWidgets('Muestra la teoría y desbloquea la siguiente lección al completar', (tester) async {
+      final fakeRepo = FakeNahuatlRepository();
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            nahuatlRepositoryProvider.overrideWithValue(fakeRepo),
+          ],
+          child: const MaterialApp(
+            home: LessonTheoryView(
+              lessonId: 1,
+              lessonTitle: 'Introducción',
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('LECCIÓN INTRODUCTORIA'), findsOneWidget);
+      expect(find.text('Sufijo absolutivo -tl, -tli, -li.'), findsOneWidget);
+
+      final completeButton = find.text('Entendido, completar lección');
+      expect(completeButton, findsOneWidget);
+
+      await tester.tap(completeButton);
+      await tester.pumpAndSettle();
+
+      // Verificar que la lección 2 fue desbloqueada
+      final lesson2 = await fakeRepo.getLessonById(2);
+      expect(lesson2?.isUnlocked, isTrue);
     });
   });
 }

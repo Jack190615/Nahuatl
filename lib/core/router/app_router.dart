@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../presentation/views/dictionary/dictionary_search_view.dart';
 import '../../presentation/views/exercise/exercise_session_view.dart';
 import '../../presentation/views/lessons/lesson_map_view.dart';
+import '../../presentation/views/lessons/lesson_theory_view.dart';
 import '../../presentation/views/welcome/welcome_view.dart';
 
 part 'app_router.gr.dart';
@@ -36,6 +37,11 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: ExerciseSessionRoute.page,
           path: '/lessons/:lessonId/practice',
+        ),
+        // Estudio de lección teórica, fonética o introductoria
+        AutoRoute(
+          page: LessonTheoryRoute.page,
+          path: '/lessons/:lessonId/theory',
         ),
         // Buscador Full-Text Search (FTS5)
         AutoRoute(

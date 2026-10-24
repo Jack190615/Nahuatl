@@ -1,12 +1,17 @@
 [
   {
     "id": 1,
-    "lesson_id": 2,
-    "explanation_text": "la transcripción de la lengua mexicana o nahuatl por medio del alfabeto latino data de principios del siglo XVI."
+    "lesson_id": 1,
+    "explanation_text": "¡Niltze! Bienvenido al aprendizaje del Náhuatl Clásico (Mexihcatlahtolli). El náhuatl fue la lengua vehicular de Mesoamérica durante siglos y el idioma del imperio mexica. Es una lengua de carácter aglutinante donde prefijos y sufijos se combinan para crear expresiones precisas y poéticas. A través de este curso dominarás su fonética, gramática y vocabulario esencial."
   },
   {
     "id": 2,
+    "lesson_id": 2,
+    "explanation_text": "Reglas de pronunciación y ortografía clásica:\n\na) La a se pronuncia como en padre: ámatl (papel/libro), átl (agua), cálli (casa).\nb) La e es como el fonema en hemos: mécatl (cuerda), tétl (piedra).\nc) La i se pronuncia como en niño: pílli (niño), tianquíztli (mercado).\nd) La o se pronuncia como en hombre: cólli (abuelo), óme (dos), tecólotl (búho). En algunos dialectos puede sonar cercana a la u.\ne) El fonema 'tl' es un sonido sordo característico: átl, tlácatl, pétlatl.\nf) La 'hu' o 'uh' suena como 'w': cíhuatl, nehhuatl."
+  },
+  {
+    "id": 3,
     "lesson_id": 3,
-    "explanation_text": "Puede tener una de las siguientes terminaciones: -tl, -tli, -li, -in."
+    "explanation_text": "Los sustantivos en estado absoluto emplean sufijos absolutivos característicos:\n\n- '-tl' tras vocal (ej. á-tl, cóa-tl).\n- '-tli' tras consonante (ej. amóx-tli, tóch-tli, itzcuín-tli).\n- '-li' tras raíces terminadas en 'l' por asimilación (ej. cal-li, tlāl-li).\n- '-in' para ciertos animales e insectos (ej. mich-in, ocuíl-lin)."
   }
 ]

@@ -6,19 +6,21 @@ import '../../../domain/entities/grammar_rule.dart';
 import '../../../domain/entities/lesson.dart';
 import '../common/app_action_button.dart';
 
-/// Tarjeta reutilizable y responsiva para mostrar una lección y sus reglas gramaticales.
-/// Soporta estado de "Más lecciones próximamente" cuando no hay frases registradas aún para su id.
+/// Tarjeta reutilizable y responsiva adaptada a las diferentes modalidades de lección:
+/// 1. Práctica interactiva (con frases).
+/// 2. Teoría / Ortografía / Introducción (sin frases).
+/// 3. Próximamente (en desarrollo).
 class LessonCardWidget extends StatelessWidget {
   final LessonEntity lesson;
   final List<GrammarRuleEntity> grammarRules;
-  final bool hasPhrases;
+  final LessonType lessonType;
   final VoidCallback onStartLesson;
 
   const LessonCardWidget({
     super.key,
     required this.lesson,
     required this.grammarRules,
-    this.hasPhrases = true,
+    required this.lessonType,
     required this.onStartLesson,
   });
 
@@ -26,6 +28,42 @@ class LessonCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final info = ResponsiveInfo.fromContext(context);
     final isUnlocked = lesson.isUnlocked;
+
+    // Configuración visual según modalidad
+    final (IconData avatarIcon, Color avatarBg, Color avatarColor, String tagLabel) = switch (lessonType) {
+      LessonType.practice => (
+          Icons.play_circle_fill_rounded,
+          AppColors.jadeLight,
+          AppColors.jadePrimary,
+          'Práctica (Frases)',
+        ),
+      LessonType.theory => (
+          Icons.menu_book_rounded,
+          AppColors.jadeLight,
+          AppColors.jadeDark,
+          lesson.id == 1 ? 'Introducción' : 'Reglas y Ortografía',
+        ),
+      LessonType.comingSoon => (
+          Icons.hourglass_top_rounded,
+          AppColors.borderOutline.withValues(alpha: 0.5),
+          AppColors.slateMuted,
+          'Próximamente',
+        ),
+    };
+
+    final String buttonLabel = switch (lessonType) {
+      _ when !isUnlocked => 'Bloqueada',
+      LessonType.theory => lesson.id == 1 ? 'Ver introducción' : 'Estudiar lección',
+      LessonType.practice => 'Practicar (10 ejercicios)',
+      LessonType.comingSoon => 'Más lecciones próximamente',
+    };
+
+    final IconData buttonIcon = switch (lessonType) {
+      _ when !isUnlocked => Icons.lock_outline,
+      LessonType.theory => Icons.auto_stories_rounded,
+      LessonType.practice => Icons.play_arrow_rounded,
+      LessonType.comingSoon => Icons.schedule_rounded,
+    };
 
     return Card(
       child: Padding(
@@ -37,16 +75,10 @@ class LessonCardWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: info.isTablet ? 24 : 20,
-                  backgroundColor: isUnlocked
-                      ? (hasPhrases ? AppColors.jadeLight : AppColors.goldHighlight.withValues(alpha: 0.18))
-                      : AppColors.borderOutline,
+                  backgroundColor: isUnlocked ? avatarBg : AppColors.borderOutline,
                   child: Icon(
-                    isUnlocked
-                        ? (hasPhrases ? Icons.menu_book_rounded : Icons.hourglass_top_rounded)
-                        : Icons.lock_rounded,
-                    color: isUnlocked
-                        ? (hasPhrases ? AppColors.jadePrimary : AppColors.goldHighlight)
-                        : AppColors.slateMuted,
+                    isUnlocked ? avatarIcon : Icons.lock_rounded,
+                    color: isUnlocked ? avatarColor : AppColors.slateMuted,
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -66,26 +98,27 @@ class LessonCardWidget extends StatelessWidget {
                                   : AppColors.slateMuted,
                             ),
                           ),
-                          if (isUnlocked && !hasPhrases) ...[
-                            const SizedBox(width: 8),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                              decoration: BoxDecoration(
-                                color: AppColors.goldHighlight.withValues(alpha: 0.15),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                'Próximamente',
-                                style: TextStyle(
-                                  fontSize: info.scaleFont(10.5),
-                                  fontWeight: FontWeight.w700,
-                                  color: AppColors.goldHighlight,
-                                ),
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: isUnlocked
+                                  ? AppColors.jadeLight
+                                  : AppColors.borderOutline.withValues(alpha: 0.4),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              tagLabel,
+                              style: TextStyle(
+                                fontSize: info.scaleFont(10.5),
+                                fontWeight: FontWeight.w700,
+                                color: isUnlocked ? AppColors.jadeDark : AppColors.slateMuted,
                               ),
                             ),
-                          ],
+                          ),
                         ],
                       ),
+                      const SizedBox(height: 2),
                       Text(
                         lesson.title,
                         style: TextStyle(
@@ -120,6 +153,8 @@ class LessonCardWidget extends StatelessWidget {
                       Expanded(
                         child: Text(
                           rule.explanationText,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: info.scaleFont(13.5),
                             color: AppColors.slateMuted,
@@ -134,20 +169,14 @@ class LessonCardWidget extends StatelessWidget {
             ],
             const SizedBox(height: 14),
             AppActionButton(
-              label: !isUnlocked
-                  ? 'Bloqueada'
-                  : (!hasPhrases
-                      ? 'Más lecciones próximamente'
-                      : 'Practicar (10 ejercicios)'),
-              icon: !isUnlocked
-                  ? Icons.lock_outline
-                  : (!hasPhrases
-                      ? Icons.hourglass_top_rounded
-                      : Icons.play_arrow_rounded),
-              variant: !hasPhrases && isUnlocked
+              label: buttonLabel,
+              icon: buttonIcon,
+              variant: lessonType == LessonType.comingSoon || !isUnlocked
                   ? AppButtonVariant.secondary
                   : AppButtonVariant.primary,
-              onPressed: isUnlocked ? onStartLesson : null,
+              onPressed: (isUnlocked && lessonType != LessonType.comingSoon)
+                  ? onStartLesson
+                  : null,
             ),
           ],
         ),
