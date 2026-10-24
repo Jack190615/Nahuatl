@@ -8,7 +8,7 @@
     },
     {
       "id": 2,
-      "title": "Ortografía y pronunciación",
+      "title": "Ortografia y pronunciación",
       "order_index": 2,
       "is_unlocked": false
     },
@@ -29,17 +29,17 @@
     {
       "id": 1,
       "lesson_id": 1,
-      "explanation_text": "¡Niltze! Bienvenido al aprendizaje del Náhuatl Clásico (Mexihcatlahtolli). El náhuatl fue la lengua vehicular de Mesoamérica durante siglos y el idioma del imperio mexica. Es una lengua de carácter aglutinante donde prefijos y sufijos se combinan para crear expresiones precisas y poéticas. A través de este curso dominarás su fonética, gramática y vocabulario esencial."
+      "explanation_text": "En los últimos 450 años se han elaborado varios sistemas para la transcripción de la lengua mexicana o nahuatl por medio del alfabeto europeo. El más conocido fue el de los misioneros franciscanos que legaron a México en la primera mitad del siglo XVI. Podemos llamarlo el \"tradicional\". Hoy, en México y Centroamérica, los toponímicos, nombres de personajes y elementos culturales, se escriben con una ortografía basada en la tradicional: Chapultepec, Cuauhtémoc, Quetzalcóatl, cacahuate, teponaztli, etc.\n\nEn 1940 el Consejo de Lenguas Indígenas del Instituto Nacional Indigenista de México elaboró y aprobó un alfabeto fonético. Es un sistema práctico, útil y exacto, pero necesita de signos que no se encuentran en las máquinas de escribir comunes y corrientes, y que no existen en la mayoría de las imprentas. Algunas variaciones de este sistema fonético han sido utilizadas por lingüistas profesionales en nuestros tiempos. Por razones tipográficas se usará el alfabeto tradicional en estas lecciones. Para estos apuntes se utilizarán los 18 sonidos usados comúnmente en la mayoría de los dialectos del Altiplano."
     },
     {
       "id": 2,
       "lesson_id": 2,
-      "explanation_text": "Reglas de pronunciación y ortografía clásica:\n\na) La a se pronuncia como en padre: ámatl (papel/libro), átl (agua), cálli (casa).\nb) La e es como el fonema en hemos: mécatl (cuerda), tétl (piedra).\nc) La i se pronuncia como en niño: pílli (niño), tianquíztli (mercado).\nd) La o se pronuncia como en hombre: cólli (abuelo), óme (dos), tecólotl (búho). En algunos dialectos puede sonar cercana a la u.\ne) El fonema 'tl' es un sonido sordo característico: átl, tlácatl, pétlatl.\nf) La 'hu' o 'uh' suena como 'w': cíhuatl, nehhuatl."
+      "explanation_text": "El acento aparece en la penúltima sílaba. Los siguientes ejemplos y las palabras que aparecen en la lección que sigue llevarán acento escrito, aunque de ahí en adelante no se utilizará.\nLas siguientes comparaciones con el español son aproximadas:\na) La a se pronuncia como la a en padre: ámatl, átl, cálli.\nb) La e es como el mismo fonema en hemos: mécatl, tétl, mémeh.\nc) La i se pronuncia como en niño: pílli, tianquíztli. En algunos dialectos existe un sonido parecido a la i en el inglés wish.\nd) La o es la misma que se encuentra en hombre: cólli, óme, tecólotl. En algunos dialectos hay la tendencia de pronunciarla como la u,o existe la u como sonido aparte, lo cual a veces ha creado dos ortografias para ciertas palabras como Tetzcoco o Tetzcuco.\ne) El sonido de la s se escribe con la ortografía tradicional: za, ce, ci, zo, zu. Se pronuncia como la s en solo: cíhtli, tianquíztli, mázatl. (Escritura fonética: s.)\nf) El sonido de la se escribe con la ortografia tradicional: ca, que, qui, co, cu. Cálli, ocuíllin, tianquíztli, quéman. (Escritura fonética: k.)\ng) La ch se pronuncia como en tachamos: míchin, tóchtli, chiquíhuitl. (Escritura fonética: č.)\nb) El sonido de la se escribe hua, hue, hui, huo: huállauh, huéhca, huél, cíhuatl. (Escritura fonética: w.)\ni) La h se utilizará en estas lecciones para indicar un sonido parecido a la j en paja: táhtli, cíhtli, amámeh. Varía algo de dialecto en dialecto y es un simple saltillo en algunos casos. En otros se utilizan tanto la b como el saltillo.(Escritura fonética: h) \nj) Laly la ll se pronuncian como en alabado: cálli, élotl.\nk) La m se pronuncia como en español: ámo, ómpa.\n1) La n se pronuncia como en español: nántdi.\nm) La t se pronuncia como en español: cáteh.\nn) La p se pronuncia como en español: ípan.\no) La tl es un sonido independiente, parecido pero no idéntico a la tl en Atlántico: tlácatl, pétlatl.\np) La ts es un sonido independiente y se escribe con tz: itzcuíntli, atzíntli. (Escritura fonéticа: ¢.)\nq) La x se pronuncia como la sh inglesa (shell) o como la ch francesa (chalet): xálli, amóxtli. (Escritura fonética: š.)\nr) La y se pronuncia como la y de yeso: yéyi."
     },
     {
       "id": 3,
       "lesson_id": 3,
-      "explanation_text": "Los sustantivos en estado absoluto emplean sufijos absolutivos característicos:\n\n- '-tl' tras vocal (ej. á-tl, cóa-tl).\n- '-tli' tras consonante (ej. amóx-tli, tóch-tli, itzcuín-tli).\n- '-li' tras raíces terminadas en 'l' por asimilación (ej. cal-li, tlāl-li).\n- '-in' para ciertos animales e insectos (ej. mich-in, ocuíl-lin)."
+      "explanation_text": "Puede tener una de las siguientes terminaciones: -tl, -tli, -li o -in."
     }
   ],
   "dictionary": [
@@ -280,6 +280,27 @@
       "spanish_translation": "dos",
       "word_type": "numeral",
       "audio_path": null
+    },
+    {
+      "id": 35,
+      "nahuatl_word": "ompa",
+      "spanish_translation": "allá",
+      "word_type": "adverbio",
+      "audio_path": null
+    },
+    {
+      "id": 36,
+      "nahuatl_word": "quema",
+      "spanish_translation": "si",
+      "word_type": "adverbio",
+      "audio_path": null
+    },
+    {
+      "id": 37,
+      "nahuatl_word": "yeyi",
+      "spanish_translation": "tres",
+      "word_type": "numeral",
+      "audio_path": null
     }
   ],
   "phrases": [
@@ -425,6 +446,406 @@
       "grammar_rule_id": null,
       "nahuatl_sentence": "In tecolotl ompa ca",
       "spanish_translation": "El búho está allá",
+      "audio_path": null
+    },
+    {
+      "id": 19,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa ca in táhtli",
+      "spanish_translation": "¿Dónde esta el padre?",
+      "audio_path": null
+    },
+    {
+      "id": 20,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Táhtli ámo nícan ca. Ompa ca",
+      "spanish_translation": "El padre no está aquí. Está allá",
+      "audio_path": null
+    },
+    {
+      "id": 21,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa cáteh yéyi mécatl",
+      "spanish_translation": "¿Dónde están los cuatro cordones?",
+      "audio_path": null
+    },
+    {
+      "id": 22,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Yéyi mécatl nícan",
+      "spanish_translation": "Aquí hay tres cordones",
+      "audio_path": null
+    },
+    {
+      "id": 23,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Campa ca in cíhtli",
+      "spanish_translation": "¿Dónde está la abuela?",
+      "audio_path": null
+    },
+    {
+      "id": 24,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In cíhtli ípan tlálli",
+      "spanish_translation": "La abuela está sobre la tierra",
+      "audio_path": null
+    },
+    {
+      "id": 25,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa ca itzcuíntli",
+      "spanish_translation": "¿Dónde está el perro?",
+      "audio_path": null
+    },
+    {
+      "id": 26,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Itzcuíntli ómpa ípan tetl",
+      "spanish_translation": "El perro está allá sobre la piedra",
+      "audio_path": null
+    },
+    {
+      "id": 27,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Itzcuíntli ámo nícan",
+      "spanish_translation": "El perro no está aquí",
+      "audio_path": null
+    },
+    {
+      "id": 28,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Quéma, átl íhuan tetl nícan",
+      "spanish_translation": "Si, el agua y la piedra están aquí",
+      "audio_path": null
+    },
+    {
+      "id": 29,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa ca in pílli",
+      "spanish_translation": "¿Dónde está el niño?",
+      "audio_path": null
+    },
+    {
+      "id": 30,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Ompa ca",
+      "spanish_translation": "Está allá.",
+      "audio_path": null
+    },
+    {
+      "id": 31,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Quéma, in colli nícan",
+      "spanish_translation": "Sí, el abuelo está aquí.",
+      "audio_path": null
+    },
+    {
+      "id": 32,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Xálli ític in cálli",
+      "spanish_translation": "La arena está dentro de la casa.",
+      "audio_path": null
+    },
+    {
+      "id": 33,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Tecólotl ímpa ca ín teopántli",
+      "spanish_translation": "El búho está sobre la iglesia.",
+      "audio_path": null
+    },
+    {
+      "id": 34,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Ámo, in cálli nícan ca",
+      "spanish_translation": "No, la casa no está aquí.",
+      "audio_path": null
+    },
+    {
+      "id": 35,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Ín cíhuatl ípan tianquíztli",
+      "spanish_translation": "La mujer está en el mercado.",
+      "audio_path": null
+    },
+    {
+      "id": 36,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa nícan itzcuíntli",
+      "spanish_translation": "¿Está aquí el perro?",
+      "audio_path": null
+    },
+    {
+      "id": 37,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa ca mázatl",
+      "spanish_translation": "¿Dónde está el venado?",
+      "audio_path": null
+    },
+    {
+      "id": 38,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cáteh nícan náhui pétlatl",
+      "spanish_translation": "¿Están aquí cuatro petates?",
+      "audio_path": null
+    },
+    {
+      "id": 39,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Ámo, in cálli cáteh ític ca",
+      "spanish_translation": "No, están dentro de la casa.",
+      "audio_path": null
+    },
+    {
+      "id": 40,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Míchin ític átl",
+      "spanish_translation": "El pescado está dentro del agua.",
+      "audio_path": null
+    },
+    {
+      "id": 41,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Ámo, cíhtli ámo nícan ca",
+      "spanish_translation": "No, la abuela no está aquí.",
+      "audio_path": null
+    },
+    {
+      "id": 42,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Quéma, cíhtli ompa ca",
+      "spanish_translation": "Sí, la abuela está allá.",
+      "audio_path": null
+    },
+    {
+      "id": 43,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Ocuíllin ític ca tlálli",
+      "spanish_translation": "¿Está el gusano dentro de la tierra?",
+      "audio_path": null
+    },
+    {
+      "id": 44,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Campa ca yéyi pílli",
+      "spanish_translation": "¿Dónde están los tres niños?",
+      "audio_path": null
+    },
+    {
+      "id": 45,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In mázatl in cóatl nícan ca",
+      "spanish_translation": "El venado y la serpiente están aquí.",
+      "audio_path": null
+    },
+    {
+      "id": 46,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Amóxtli ípan cálli",
+      "spanish_translation": "Está el libro sobre la casa.",
+      "audio_path": null
+    },
+    {
+      "id": 47,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In tlácatl ític xálli",
+      "spanish_translation": "El hombre está dentro de la arena.",
+      "audio_path": null
+    },
+    {
+      "id": 48,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In cíhuatl ípan tianquíztli",
+      "spanish_translation": "¿La madre está en el mercado?",
+      "audio_path": null
+    },
+    {
+      "id": 49,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa ca in cólli",
+      "spanish_translation": "¿Dónde está el abuelo?",
+      "audio_path": null
+    },
+    {
+      "id": 50,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa ca cólli",
+      "spanish_translation": "¿Dónde está el abuelo?",
+      "audio_path": null
+    },
+    {
+      "id": 51,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In cólli ómpa ca.",
+      "spanish_translation": "El abuelo está acá",
+      "audio_path": null
+    },
+    {
+      "id": 52,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In míchin ític átl.",
+      "spanish_translation": "El pescado está dentro del agua.",
+      "audio_path": null
+    },
+    {
+      "id": 53,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In atl ámo nícan.",
+      "spanish_translation": "El agua no está aquí",
+      "audio_path": null
+    },
+    {
+      "id": 54,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Quéma, in cíhtli ípan cálli.",
+      "spanish_translation": "Si, la abuela está dentro de la casa",
+      "audio_path": null
+    },
+    {
+      "id": 55,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa cáteh tetl íhuan átl",
+      "spanish_translation": "¿Dónde están la piedra y el agua?",
+      "audio_path": null
+    },
+    {
+      "id": 56,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In cíhtli ompa ític teopántli.",
+      "spanish_translation": "La abuela está allá dentro de la iglesia",
+      "audio_path": null
+    },
+    {
+      "id": 57,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Tecólotl ámo ític atl.",
+      "spanish_translation": "El búho no esta dentro del agua",
+      "audio_path": null
+    },
+    {
+      "id": 58,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In ocuillin ípan cálli",
+      "spanish_translation": "¿El gusano está sobre la casa?",
+      "audio_path": null
+    },
+    {
+      "id": 59,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In pílli ámo nícan ca.",
+      "spanish_translation": "El niño no está aquí",
+      "audio_path": null
+    },
+    {
+      "id": 60,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In itzcuíntli nícan. Ámo",
+      "spanish_translation": "¿El perro está aquí? No",
+      "audio_path": null
+    },
+    {
+      "id": 61,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In pílli nícan.",
+      "spanish_translation": "El niño está aquí",
+      "audio_path": null
+    },
+    {
+      "id": 62,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "In pílli nícan ca.",
+      "spanish_translation": "El niño está aquí",
+      "audio_path": null
+    },
+    {
+      "id": 63,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Pílli nícan ca.",
+      "spanish_translation": "El niño está aquí",
+      "audio_path": null
+    },
+    {
+      "id": 64,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Ce mázatl ómpa.",
+      "spanish_translation": "Un venado está allá",
+      "audio_path": null
+    },
+    {
+      "id": 65,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Ce tetl ític átl.",
+      "spanish_translation": "Una piedra dentro del agua",
+      "audio_path": null
+    },
+    {
+      "id": 66,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Ce tecólotl ític teopántli",
+      "spanish_translation": "¿Un búho dentro de la iglesia?",
+      "audio_path": null
+    },
+    {
+      "id": 67,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Cámpa cáteh mécatl íhuan pétlatl",
+      "spanish_translation": "¿Dónde estaán el cordon y el petate?",
+      "audio_path": null
+    },
+    {
+      "id": 68,
+      "lesson_id": 3,
+      "grammar_rule_id": null,
+      "nahuatl_sentence": "Quéma itzcuíntli nícan ca.",
+      "spanish_translation": "Si, el perro está aquí",
       "audio_path": null
     }
   ]

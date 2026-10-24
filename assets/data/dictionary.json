@@ -236,5 +236,26 @@
     "spanish_translation": "dos",
     "word_type": "numeral",
     "audio_path": null
+  },
+  {
+    "id": 35,
+    "nahuatl_word": "ompa",
+    "spanish_translation": "allá",
+    "word_type": "adverbio",
+    "audio_path": null
+  },
+  {
+    "id": 36,
+    "nahuatl_word": "quema",
+    "spanish_translation": "si",
+    "word_type": "adverbio",
+    "audio_path": null
+  },
+  {
+    "id": 37,
+    "nahuatl_word": "yeyi",
+    "spanish_translation": "tres",
+    "word_type": "numeral",
+    "audio_path": null
   }
 ]
