@@ -1,11 +1,7 @@
-import 'dart:io';
-
 import 'package:drift/drift.dart';
-import 'package:drift/native.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
 
 import '../../../core/utils/text_normalizer.dart';
+import 'connection/connection.dart' as impl;
 import 'tables.dart';
 
 part 'app_database.g.dart';
@@ -20,7 +16,7 @@ part 'app_database.g.dart';
   ],
 )
 class AppDatabase extends _$AppDatabase {
-  AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
+  AppDatabase([QueryExecutor? executor]) : super(executor ?? impl.openConnection());
 
   @override
   int get schemaVersion => 2;
@@ -137,12 +133,4 @@ class AppDatabase extends _$AppDatabase {
     });
     return resultRows;
   }
-}
-
-LazyDatabase _openConnection() {
-  return LazyDatabase(() async {
-    final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(p.join(dbFolder.path, 'nahuatl_clasico.sqlite'));
-    return NativeDatabase.createInBackground(file);
-  });
 }
