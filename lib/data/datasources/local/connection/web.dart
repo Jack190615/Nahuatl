@@ -5,8 +5,8 @@ QueryExecutor openConnection() {
   return LazyDatabase(() async {
     final result = await WasmDatabase.open(
       databaseName: 'nahuatl_clasico',
-      sqlite3Uri: Uri.parse('sqlite3.wasm'),
-      driftWorkerUri: Uri.parse('drift_worker.js'),
+      sqlite3Uri: Uri.base.resolve('sqlite3.wasm'),
+      driftWorkerUri: Uri.base.resolve('drift_worker.js'),
     );
     return result.resolvedExecutor;
   });
