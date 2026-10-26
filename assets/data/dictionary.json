@@ -17,6 +17,46 @@
   },
   {
     "id": 3,
+    "sublesson_id": 6,
+    "nahuatl_word": "amoxtzintli",
+    "spanish_translation": "librito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 4,
+    "sublesson_id": 7,
+    "nahuatl_word": "amoxtzintli",
+    "spanish_translation": "librito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 5,
+    "sublesson_id": 6,
+    "nahuatl_word": "atzintli",
+    "spanish_translation": "agüita",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 6,
+    "sublesson_id": 7,
+    "nahuatl_word": "atzintli",
+    "spanish_translation": "agüita",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 7,
+    "sublesson_id": 10,
+    "nahuatl_word": "atzitzin",
+    "spanish_translation": "agüitas",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 8,
     "sublesson_id": 3,
     "nahuatl_word": "ca",
     "spanish_translation": "está",
@@ -24,7 +64,7 @@
     "audio_path": null
   },
   {
-    "id": 4,
+    "id": 9,
     "sublesson_id": 2,
     "nahuatl_word": "cálli",
     "spanish_translation": "casa",
@@ -32,7 +72,23 @@
     "audio_path": null
   },
   {
-    "id": 5,
+    "id": 10,
+    "sublesson_id": 6,
+    "nahuatl_word": "caltzintli",
+    "spanish_translation": "casita",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 11,
+    "sublesson_id": 10,
+    "nahuatl_word": "caltzitzin",
+    "spanish_translation": "casitas",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 12,
     "sublesson_id": 3,
     "nahuatl_word": "campa",
     "spanish_translation": "dónde",
@@ -40,7 +96,7 @@
     "audio_path": null
   },
   {
-    "id": 6,
+    "id": 13,
     "sublesson_id": 3,
     "nahuatl_word": "cateh",
     "spanish_translation": "están",
@@ -48,7 +104,7 @@
     "audio_path": null
   },
   {
-    "id": 7,
+    "id": 14,
     "sublesson_id": 3,
     "nahuatl_word": "ce",
     "spanish_translation": "uno",
@@ -56,7 +112,7 @@
     "audio_path": null
   },
   {
-    "id": 8,
+    "id": 15,
     "sublesson_id": 2,
     "nahuatl_word": "cíhtli",
     "spanish_translation": "abuela",
@@ -64,7 +120,15 @@
     "audio_path": null
   },
   {
-    "id": 9,
+    "id": 16,
+    "sublesson_id": 7,
+    "nahuatl_word": "cihtzintli",
+    "spanish_translation": "abuelita",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 17,
     "sublesson_id": 2,
     "nahuatl_word": "cíhuatl",
     "spanish_translation": "mujer",
@@ -72,7 +136,15 @@
     "audio_path": null
   },
   {
-    "id": 10,
+    "id": 18,
+    "sublesson_id": 7,
+    "nahuatl_word": "cihuatzintli",
+    "spanish_translation": "mujercita",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 19,
     "sublesson_id": 2,
     "nahuatl_word": "cóatl",
     "spanish_translation": "serpiente",
@@ -80,7 +152,15 @@
     "audio_path": null
   },
   {
-    "id": 11,
+    "id": 20,
+    "sublesson_id": 7,
+    "nahuatl_word": "coatzintli",
+    "spanish_translation": "serpientita",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 21,
     "sublesson_id": 2,
     "nahuatl_word": "cólli",
     "spanish_translation": "abuelo",
@@ -88,7 +168,15 @@
     "audio_path": null
   },
   {
-    "id": 12,
+    "id": 22,
+    "sublesson_id": 7,
+    "nahuatl_word": "coltzintli",
+    "spanish_translation": "abuelito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 23,
     "sublesson_id": 3,
     "nahuatl_word": "ihuan",
     "spanish_translation": "y",
@@ -96,7 +184,7 @@
     "audio_path": null
   },
   {
-    "id": 13,
+    "id": 24,
     "sublesson_id": 3,
     "nahuatl_word": "in",
     "spanish_translation": "el, la",
@@ -104,7 +192,7 @@
     "audio_path": null
   },
   {
-    "id": 14,
+    "id": 25,
     "sublesson_id": 3,
     "nahuatl_word": "inin",
     "spanish_translation": "este, esta",
@@ -112,7 +200,7 @@
     "audio_path": null
   },
   {
-    "id": 15,
+    "id": 26,
     "sublesson_id": 3,
     "nahuatl_word": "ipan",
     "spanish_translation": "en, sobre",
@@ -120,7 +208,7 @@
     "audio_path": null
   },
   {
-    "id": 16,
+    "id": 27,
     "sublesson_id": 3,
     "nahuatl_word": "itic",
     "spanish_translation": "dentro de",
@@ -128,7 +216,7 @@
     "audio_path": null
   },
   {
-    "id": 17,
+    "id": 28,
     "sublesson_id": 2,
     "nahuatl_word": "itzcuíntli",
     "spanish_translation": "perro",
@@ -136,7 +224,31 @@
     "audio_path": null
   },
   {
-    "id": 18,
+    "id": 29,
+    "sublesson_id": 8,
+    "nahuatl_word": "iztac",
+    "spanish_translation": "blanco",
+    "word_type": "adjetivo",
+    "audio_path": null
+  },
+  {
+    "id": 30,
+    "sublesson_id": 7,
+    "nahuatl_word": "iztcuintzintli",
+    "spanish_translation": "perrito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 31,
+    "sublesson_id": 8,
+    "nahuatl_word": "Malintzin",
+    "spanish_translation": "Maria",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 32,
     "sublesson_id": 2,
     "nahuatl_word": "mázatl",
     "spanish_translation": "venado",
@@ -144,7 +256,15 @@
     "audio_path": null
   },
   {
-    "id": 19,
+    "id": 33,
+    "sublesson_id": 6,
+    "nahuatl_word": "mazatzintli",
+    "spanish_translation": "venadito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 34,
     "sublesson_id": 2,
     "nahuatl_word": "mécatl",
     "spanish_translation": "cordón, cuerda",
@@ -152,7 +272,15 @@
     "audio_path": null
   },
   {
-    "id": 20,
+    "id": 35,
+    "sublesson_id": 7,
+    "nahuatl_word": "mecatzintli",
+    "spanish_translation": "cordoncito, cuerdita",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 36,
     "sublesson_id": 2,
     "nahuatl_word": "míchin",
     "spanish_translation": "pescado",
@@ -160,7 +288,23 @@
     "audio_path": null
   },
   {
-    "id": 21,
+    "id": 37,
+    "sublesson_id": 7,
+    "nahuatl_word": "michtzintli",
+    "spanish_translation": "pecesito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 38,
+    "sublesson_id": 10,
+    "nahuatl_word": "michtzitzin",
+    "spanish_translation": "pecesitos",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 39,
     "sublesson_id": 3,
     "nahuatl_word": "nahui",
     "spanish_translation": "cuatro",
@@ -168,7 +312,7 @@
     "audio_path": null
   },
   {
-    "id": 22,
+    "id": 40,
     "sublesson_id": 2,
     "nahuatl_word": "nántli",
     "spanish_translation": "madre",
@@ -176,7 +320,15 @@
     "audio_path": null
   },
   {
-    "id": 23,
+    "id": 41,
+    "sublesson_id": 7,
+    "nahuatl_word": "nantzintli",
+    "spanish_translation": "madrecita",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 42,
     "sublesson_id": 3,
     "nahuatl_word": "nican",
     "spanish_translation": "aquí",
@@ -184,7 +336,7 @@
     "audio_path": null
   },
   {
-    "id": 24,
+    "id": 43,
     "sublesson_id": 2,
     "nahuatl_word": "ocuíllin",
     "spanish_translation": "gusano",
@@ -192,7 +344,31 @@
     "audio_path": null
   },
   {
-    "id": 25,
+    "id": 44,
+    "sublesson_id": 7,
+    "nahuatl_word": "ocuiltzintli",
+    "spanish_translation": "gusanito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 45,
+    "sublesson_id": 6,
+    "nahuatl_word": "ocuiltzintli",
+    "spanish_translation": "gusanito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 46,
+    "sublesson_id": 10,
+    "nahuatl_word": "ocuiltzitzin",
+    "spanish_translation": "gusanitos",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 47,
     "sublesson_id": 3,
     "nahuatl_word": "ome",
     "spanish_translation": "dos",
@@ -200,7 +376,7 @@
     "audio_path": null
   },
   {
-    "id": 26,
+    "id": 48,
     "sublesson_id": 3,
     "nahuatl_word": "ompa",
     "spanish_translation": "allá",
@@ -208,7 +384,7 @@
     "audio_path": null
   },
   {
-    "id": 27,
+    "id": 49,
     "sublesson_id": 2,
     "nahuatl_word": "pétlatl",
     "spanish_translation": "petate",
@@ -216,7 +392,23 @@
     "audio_path": null
   },
   {
-    "id": 28,
+    "id": 50,
+    "sublesson_id": 7,
+    "nahuatl_word": "petlatzintli",
+    "spanish_translation": "petatito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 51,
+    "sublesson_id": 10,
+    "nahuatl_word": "petlatzitzin",
+    "spanish_translation": "petatitos",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 52,
     "sublesson_id": 2,
     "nahuatl_word": "pílli",
     "spanish_translation": "niño",
@@ -224,7 +416,23 @@
     "audio_path": null
   },
   {
-    "id": 29,
+    "id": 53,
+    "sublesson_id": 6,
+    "nahuatl_word": "piltzintli",
+    "spanish_translation": "niñito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 54,
+    "sublesson_id": 10,
+    "nahuatl_word": "piltzitzin",
+    "spanish_translation": "niñitos",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 55,
     "sublesson_id": 3,
     "nahuatl_word": "quema",
     "spanish_translation": "si",
@@ -232,7 +440,31 @@
     "audio_path": null
   },
   {
-    "id": 30,
+    "id": 56,
+    "sublesson_id": 8,
+    "nahuatl_word": "quexqui",
+    "spanish_translation": "¿Cuántos?",
+    "word_type": "pronombre interrogativo",
+    "audio_path": null
+  },
+  {
+    "id": 57,
+    "sublesson_id": 8,
+    "nahuatl_word": "quichihua",
+    "spanish_translation": "el hace, hace",
+    "word_type": "verbo",
+    "audio_path": null
+  },
+  {
+    "id": 58,
+    "sublesson_id": 8,
+    "nahuatl_word": "quipia",
+    "spanish_translation": "el tiene, tiene",
+    "word_type": "verbo",
+    "audio_path": null
+  },
+  {
+    "id": 59,
     "sublesson_id": 2,
     "nahuatl_word": "táhtli",
     "spanish_translation": "padre",
@@ -240,7 +472,23 @@
     "audio_path": null
   },
   {
-    "id": 31,
+    "id": 60,
+    "sublesson_id": 7,
+    "nahuatl_word": "tahtzintli",
+    "spanish_translation": "padrecito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 61,
+    "sublesson_id": 10,
+    "nahuatl_word": "tahtzitzin",
+    "spanish_translation": "padrecitos",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 62,
     "sublesson_id": 2,
     "nahuatl_word": "tecólotl",
     "spanish_translation": "búho",
@@ -248,7 +496,23 @@
     "audio_path": null
   },
   {
-    "id": 32,
+    "id": 63,
+    "sublesson_id": 7,
+    "nahuatl_word": "tecolotzintli",
+    "spanish_translation": "buhito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 64,
+    "sublesson_id": 10,
+    "nahuatl_word": "tecolotzitzin",
+    "spanish_translation": "buhitos",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 65,
     "sublesson_id": 2,
     "nahuatl_word": "teopántli",
     "spanish_translation": "iglesia",
@@ -256,7 +520,55 @@
     "audio_path": null
   },
   {
-    "id": 33,
+    "id": 66,
+    "sublesson_id": 7,
+    "nahuatl_word": "teopantzintli",
+    "spanish_translation": "iglesita",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 67,
+    "sublesson_id": 10,
+    "nahuatl_word": "teopantzitzin",
+    "spanish_translation": "iglesitas",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 68,
+    "sublesson_id": 6,
+    "nahuatl_word": "tetzintli",
+    "spanish_translation": "piedrita",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 69,
+    "sublesson_id": 10,
+    "nahuatl_word": "tetzitzin",
+    "spanish_translation": "piedritas",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 70,
+    "sublesson_id": 7,
+    "nahuatl_word": "tianquiztzintli",
+    "spanish_translation": "tianguisito, mercadito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 71,
+    "sublesson_id": 10,
+    "nahuatl_word": "tianquiztzitzin",
+    "spanish_translation": "tianguisitos, mercaditos",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 72,
     "sublesson_id": 2,
     "nahuatl_word": "tlácatl",
     "spanish_translation": "hombre",
@@ -264,7 +576,23 @@
     "audio_path": null
   },
   {
-    "id": 34,
+    "id": 73,
+    "sublesson_id": 7,
+    "nahuatl_word": "tlacatzintli",
+    "spanish_translation": "hombrecito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 74,
+    "sublesson_id": 10,
+    "nahuatl_word": "tlacatzitzin",
+    "spanish_translation": "hombrecitos",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 75,
     "sublesson_id": 2,
     "nahuatl_word": "tlálli",
     "spanish_translation": "tierra",
@@ -272,7 +600,15 @@
     "audio_path": null
   },
   {
-    "id": 35,
+    "id": 76,
+    "sublesson_id": 7,
+    "nahuatl_word": "tlaltzintli",
+    "spanish_translation": "tierrita",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 77,
     "sublesson_id": 2,
     "nahuatl_word": "tóchtli",
     "spanish_translation": "conejo",
@@ -280,7 +616,15 @@
     "audio_path": null
   },
   {
-    "id": 36,
+    "id": 78,
+    "sublesson_id": 7,
+    "nahuatl_word": "tochtzintli",
+    "spanish_translation": "conejito",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 79,
     "sublesson_id": 2,
     "nahuatl_word": "xálli",
     "spanish_translation": "arena",
@@ -288,7 +632,23 @@
     "audio_path": null
   },
   {
-    "id": 37,
+    "id": 80,
+    "sublesson_id": 7,
+    "nahuatl_word": "xaltzintli",
+    "spanish_translation": "arenilla",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 81,
+    "sublesson_id": 8,
+    "nahuatl_word": "Xuan",
+    "spanish_translation": "Juan",
+    "word_type": "sustantivo",
+    "audio_path": null
+  },
+  {
+    "id": 82,
     "sublesson_id": 3,
     "nahuatl_word": "yeyi",
     "spanish_translation": "tres",

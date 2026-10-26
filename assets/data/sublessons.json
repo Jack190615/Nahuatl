@@ -62,7 +62,7 @@
   {
     "id": 7,
     "lesson_id": 3,
-    "point_number": "11",
+    "point_number": "11-12",
     "title": "Traducción al español (-tzintli)",
     "type": "vocabulario",
     "theory_content": "Traducir las palabras con reverencial al español.",
@@ -72,11 +72,41 @@
   {
     "id": 8,
     "lesson_id": 3,
-    "point_number": "12",
-    "title": "Traducción al náhuatl (-tzintli)",
+    "point_number": "13",
+    "title": "Palabras nuevas",
     "type": "vocabulario",
-    "theory_content": "Traducir del español al náhuatl con sufijo reverencial.",
+    "theory_content": "Nuevas memorizaciones",
     "order_index": 8,
+    "is_unlocked": false
+  },
+  {
+    "id": 9,
+    "lesson_id": 3,
+    "point_number": "14-15",
+    "title": "Ejercicios de traducción",
+    "type": "frases",
+    "theory_content": "Traducir las siguientes oraciones al español y al náhuatl.",
+    "order_index": 9,
+    "is_unlocked": false
+  },
+  {
+    "id": 10,
+    "lesson_id": 3,
+    "point_number": "16",
+    "title": "Plural en diminutivos",
+    "type": "teoria",
+    "theory_content": "Se cambia el posfijo -tzintli por -tzitzin",
+    "order_index": 10,
+    "is_unlocked": false
+  },
+  {
+    "id": 11,
+    "lesson_id": 3,
+    "point_number": "17",
+    "title": "Ejercicios de traducción",
+    "type": "frases",
+    "theory_content": "Traducir las siguientes oraciones al náhuatl.",
+    "order_index": 11,
     "is_unlocked": false
   }
 ]
