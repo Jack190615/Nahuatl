@@ -2,7 +2,7 @@
   {
     "id": 1,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa átl",
     "spanish_translation": "¿Dónde está el agua?",
@@ -11,7 +11,7 @@
   {
     "id": 2,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca átl",
     "spanish_translation": "¿Dónde está el agua?",
@@ -20,7 +20,7 @@
   {
     "id": 3,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa in átl",
     "spanish_translation": "¿Dónde está el agua?",
@@ -29,7 +29,7 @@
   {
     "id": 4,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Átl nican ca",
     "spanish_translation": "¿El agua está aquí?",
@@ -38,7 +38,7 @@
   {
     "id": 5,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In átl nican",
     "spanish_translation": "El agua está aquí",
@@ -47,7 +47,7 @@
   {
     "id": 6,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Nícan cateh ome cálli",
     "spanish_translation": "Aquí están dos casas",
@@ -56,7 +56,7 @@
   {
     "id": 7,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ome cálli nícan",
     "spanish_translation": "Aquí están dos casas",
@@ -65,7 +65,7 @@
   {
     "id": 8,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in pílli",
     "spanish_translation": "¿Dónde está el niño?",
@@ -74,7 +74,7 @@
   {
     "id": 9,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tlácatl ític teopantli",
     "spanish_translation": "¿El hombre está dentro de la iglesia?",
@@ -83,7 +83,7 @@
   {
     "id": 10,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quéma, tlácatl itic teopantli",
     "spanish_translation": "Si, el hombre está dentro de la iglesia",
@@ -92,7 +92,7 @@
   {
     "id": 11,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Amo, in ocuíllin ámo ípan xálli",
     "spanish_translation": "No, el gusano no está sobre la arena",
@@ -101,7 +101,7 @@
   {
     "id": 12,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ome tétl ípan pétlatl",
     "spanish_translation": "Están dos piedras sobre el petate",
@@ -110,7 +110,7 @@
   {
     "id": 13,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cálli ámo ípan xálli",
     "spanish_translation": "La casa no está sobre la arena",
@@ -119,7 +119,7 @@
   {
     "id": 14,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Náhui mécatl ípan tlálli",
     "spanish_translation": "Están cuatro cordones en la tierra",
@@ -128,7 +128,7 @@
   {
     "id": 15,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ce nántli ípan tianquíztli",
     "spanish_translation": "Una madre está en el mercado",
@@ -137,7 +137,7 @@
   {
     "id": 16,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In mázatl ámo ípan tlálli",
     "spanish_translation": "El venado no está en la tierra",
@@ -146,7 +146,7 @@
   {
     "id": 17,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in técolotl",
     "spanish_translation": "¿Dónde está el búho?",
@@ -155,7 +155,7 @@
   {
     "id": 18,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tecolotl ompa ca",
     "spanish_translation": "El búho está allá",
@@ -164,7 +164,7 @@
   {
     "id": 19,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in táhtli",
     "spanish_translation": "¿Dónde esta el padre?",
@@ -173,7 +173,7 @@
   {
     "id": 20,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Táhtli ámo nícan ca. Ompa ca",
     "spanish_translation": "El padre no está aquí. Está allá",
@@ -182,7 +182,7 @@
   {
     "id": 21,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa cáteh yéyi mécatl",
     "spanish_translation": "¿Dónde están los cuatro cordones?",
@@ -191,7 +191,7 @@
   {
     "id": 22,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Yéyi mécatl nícan",
     "spanish_translation": "Aquí hay tres cordones",
@@ -200,7 +200,7 @@
   {
     "id": 23,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Campa ca in cíhtli",
     "spanish_translation": "¿Dónde está la abuela?",
@@ -209,7 +209,7 @@
   {
     "id": 24,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cíhtli ípan tlálli",
     "spanish_translation": "La abuela está sobre la tierra",
@@ -218,7 +218,7 @@
   {
     "id": 25,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca itzcuíntli",
     "spanish_translation": "¿Dónde está el perro?",
@@ -227,7 +227,7 @@
   {
     "id": 26,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Itzcuíntli ómpa ípan tetl",
     "spanish_translation": "El perro está allá sobre la piedra",
@@ -236,7 +236,7 @@
   {
     "id": 27,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Itzcuíntli ámo nícan",
     "spanish_translation": "El perro no está aquí",
@@ -245,7 +245,7 @@
   {
     "id": 28,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quéma, átl íhuan tetl nícan",
     "spanish_translation": "Si, el agua y la piedra están aquí",
@@ -254,7 +254,7 @@
   {
     "id": 29,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in pílli",
     "spanish_translation": "¿Dónde está el niño?",
@@ -263,7 +263,7 @@
   {
     "id": 30,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ompa ca",
     "spanish_translation": "Está allá.",
@@ -272,7 +272,7 @@
   {
     "id": 31,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quéma, in colli nícan",
     "spanish_translation": "Sí, el abuelo está aquí.",
@@ -281,7 +281,7 @@
   {
     "id": 32,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Xálli ític in cálli",
     "spanish_translation": "La arena está dentro de la casa.",
@@ -290,7 +290,7 @@
   {
     "id": 33,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Tecólotl ímpa ca ín teopántli",
     "spanish_translation": "El búho está sobre la iglesia.",
@@ -299,7 +299,7 @@
   {
     "id": 34,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ámo, in cálli nícan ca",
     "spanish_translation": "No, la casa no está aquí.",
@@ -308,7 +308,7 @@
   {
     "id": 35,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ín cíhuatl ípan tianquíztli",
     "spanish_translation": "La mujer está en el mercado.",
@@ -317,7 +317,7 @@
   {
     "id": 36,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa nícan itzcuíntli",
     "spanish_translation": "¿Está aquí el perro?",
@@ -326,7 +326,7 @@
   {
     "id": 37,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca mázatl",
     "spanish_translation": "¿Dónde está el venado?",
@@ -335,7 +335,7 @@
   {
     "id": 38,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cáteh nícan náhui pétlatl",
     "spanish_translation": "¿Están aquí cuatro petates?",
@@ -344,7 +344,7 @@
   {
     "id": 39,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ámo, in cálli cáteh ític ca",
     "spanish_translation": "No, están dentro de la casa.",
@@ -353,7 +353,7 @@
   {
     "id": 40,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Míchin ític átl",
     "spanish_translation": "El pescado está dentro del agua.",
@@ -362,7 +362,7 @@
   {
     "id": 41,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ámo, cíhtli ámo nícan ca",
     "spanish_translation": "No, la abuela no está aquí.",
@@ -371,7 +371,7 @@
   {
     "id": 42,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quéma, cíhtli ompa ca",
     "spanish_translation": "Sí, la abuela está allá.",
@@ -380,7 +380,7 @@
   {
     "id": 43,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ocuíllin ític ca tlálli",
     "spanish_translation": "¿Está el gusano dentro de la tierra?",
@@ -389,7 +389,7 @@
   {
     "id": 44,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Campa ca yéyi pílli",
     "spanish_translation": "¿Dónde están los tres niños?",
@@ -398,7 +398,7 @@
   {
     "id": 45,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In mázatl in cóatl nícan ca",
     "spanish_translation": "El venado y la serpiente están aquí.",
@@ -407,7 +407,7 @@
   {
     "id": 46,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Amóxtli ípan cálli",
     "spanish_translation": "Está el libro sobre la casa.",
@@ -416,7 +416,7 @@
   {
     "id": 47,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tlácatl ític xálli",
     "spanish_translation": "El hombre está dentro de la arena.",
@@ -425,7 +425,7 @@
   {
     "id": 48,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cíhuatl ípan tianquíztli",
     "spanish_translation": "¿La madre está en el mercado?",
@@ -434,7 +434,7 @@
   {
     "id": 49,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in cólli",
     "spanish_translation": "¿Dónde está el abuelo?",
@@ -443,7 +443,7 @@
   {
     "id": 50,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca cólli",
     "spanish_translation": "¿Dónde está el abuelo?",
@@ -452,7 +452,7 @@
   {
     "id": 51,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cólli ómpa ca.",
     "spanish_translation": "El abuelo está acá",
@@ -461,7 +461,7 @@
   {
     "id": 52,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In míchin ític átl.",
     "spanish_translation": "El pescado está dentro del agua.",
@@ -470,7 +470,7 @@
   {
     "id": 53,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In atl ámo nícan.",
     "spanish_translation": "El agua no está aquí",
@@ -479,7 +479,7 @@
   {
     "id": 54,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quéma, in cíhtli ípan cálli.",
     "spanish_translation": "Si, la abuela está dentro de la casa",
@@ -488,7 +488,7 @@
   {
     "id": 55,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa cáteh tetl íhuan átl",
     "spanish_translation": "¿Dónde están la piedra y el agua?",
@@ -497,7 +497,7 @@
   {
     "id": 56,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cíhtli ompa ític teopántli.",
     "spanish_translation": "La abuela está allá dentro de la iglesia",
@@ -506,7 +506,7 @@
   {
     "id": 57,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Tecólotl ámo ític atl.",
     "spanish_translation": "El búho no esta dentro del agua",
@@ -515,7 +515,7 @@
   {
     "id": 58,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In ocuillin ípan cálli",
     "spanish_translation": "¿El gusano está sobre la casa?",
@@ -524,7 +524,7 @@
   {
     "id": 59,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In pílli ámo nícan ca.",
     "spanish_translation": "El niño no está aquí",
@@ -533,7 +533,7 @@
   {
     "id": 60,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In itzcuíntli nícan. Ámo",
     "spanish_translation": "¿El perro está aquí? No",
@@ -542,7 +542,7 @@
   {
     "id": 61,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In pílli nícan.",
     "spanish_translation": "El niño está aquí",
@@ -551,7 +551,7 @@
   {
     "id": 62,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In pílli nícan ca.",
     "spanish_translation": "El niño está aquí",
@@ -560,7 +560,7 @@
   {
     "id": 63,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Pílli nícan ca.",
     "spanish_translation": "El niño está aquí",
@@ -569,7 +569,7 @@
   {
     "id": 64,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ce mázatl ómpa.",
     "spanish_translation": "Un venado está allá",
@@ -578,7 +578,7 @@
   {
     "id": 65,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ce tetl ític átl.",
     "spanish_translation": "Una piedra dentro del agua",
@@ -587,7 +587,7 @@
   {
     "id": 66,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ce tecólotl ític teopántli",
     "spanish_translation": "¿Un búho dentro de la iglesia?",
@@ -596,7 +596,7 @@
   {
     "id": 67,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa cáteh mécatl íhuan pétlatl",
     "spanish_translation": "¿Dónde están el cordon y el petate?",
@@ -605,7 +605,7 @@
   {
     "id": 68,
     "lesson_id": 2,
-    "sublesson_id": 5,
+    "sublesson_id": 6,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quéma itzcuíntli nícan ca",
     "spanish_translation": "Si, el perro está aquí",
@@ -614,7 +614,7 @@
   {
     "id": 69,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cihuatzintli nican ca",
     "spanish_translation": "La mujercita está aquí",
@@ -623,7 +623,7 @@
   {
     "id": 70,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In coatzintli ompa ca",
     "spanish_translation": "La serpientita está allá",
@@ -632,7 +632,7 @@
   {
     "id": 71,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Campa ca in michin",
     "spanish_translation": "¿Dónde esta el pescado?",
@@ -641,7 +641,7 @@
   {
     "id": 72,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Mazatzintli amo nican; ompa ca.",
     "spanish_translation": "El venadito no está aquí; esta allá",
@@ -650,7 +650,7 @@
   {
     "id": 73,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In coltzintli quichihua ce calli.",
     "spanish_translation": "El abuelito hace una casa",
@@ -659,7 +659,7 @@
   {
     "id": 74,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In piltzintli ipan xaltzintli.",
     "spanish_translation": "El niñito está sobre la arenilla",
@@ -668,7 +668,7 @@
   {
     "id": 75,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Nantli quipia ce calli.",
     "spanish_translation": "La madrecita tiene una casa",
@@ -677,7 +677,7 @@
   {
     "id": 76,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tochtzintli ipan tlalli iztac.",
     "spanish_translation": "El conejito esta sobre la tierra blanca",
@@ -686,7 +686,7 @@
   {
     "id": 77,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Xuantzin quipia ce mecatzintli.",
     "spanish_translation": "Juanito tiene un cordoncito",
@@ -695,7 +695,7 @@
   {
     "id": 78,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tlacatl quichihua ce iztac teopantzintli.",
     "spanish_translation": "El hombre hace una iglesita blanca",
@@ -704,7 +704,7 @@
   {
     "id": 79,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Malintzin quichihua ce calli.",
     "spanish_translation": "Maria hace una casa",
@@ -713,7 +713,7 @@
   {
     "id": 80,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quema, in cihtzintli itic caltzintli.",
     "spanish_translation": "Si, la abuelita esta dentro de la casita",
@@ -722,7 +722,7 @@
   {
     "id": 81,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Amo, Xuantzin amo quipia in amoxtzintli",
     "spanish_translation": "No, Juan no tiene el libro",
@@ -731,7 +731,7 @@
   {
     "id": 82,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In coatzintli ompa itic xaltzintli",
     "spanish_translation": "La serpientita está allá sobre la arenilla",
@@ -740,7 +740,7 @@
   {
     "id": 83,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Campa ca in iztac mazatzintli",
     "spanish_translation": "¿Dónde está el venadito blanco?",
@@ -749,7 +749,7 @@
   {
     "id": 84,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ome mecatl ipan petlatzintli.",
     "spanish_translation": "Un cordon sobre el petetito",
@@ -758,7 +758,7 @@
   {
     "id": 85,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quema, Malintzin quichihua ce caltzintli.",
     "spanish_translation": "Si, Maria hace una casita",
@@ -767,7 +767,7 @@
   {
     "id": 86,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Tahtzintli ompa ca ipan teopantli.",
     "spanish_translation": "El padrecito esta acá dentro de la iglesia",
@@ -776,7 +776,7 @@
   {
     "id": 87,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In coatzintli ihuan tecolotzintli cateh ipan tetl.",
     "spanish_translation": "La serpientita y el búhito están sobre la piedra",
@@ -785,7 +785,7 @@
   {
     "id": 88,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In michtzintli itic atzintli",
     "spanish_translation": "El pescadito está dentro del agüita",
@@ -794,7 +794,7 @@
   {
     "id": 89,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in amoxltzintli",
     "spanish_translation": "¿Dónde está el librito?",
@@ -803,7 +803,7 @@
   {
     "id": 90,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In caltzintli amo nican; ompa ca",
     "spanish_translation": "La casita no está aquí; está allá",
@@ -812,7 +812,7 @@
   {
     "id": 91,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Nícan cihtzintli ca",
     "spanish_translation": "¿Está la abuelita aquí?",
@@ -821,7 +821,7 @@
   {
     "id": 92,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Amo, cihtzintli ompa ca",
     "spanish_translation": "No, la abuelita está allá.",
@@ -830,7 +830,7 @@
   {
     "id": 93,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In coltzintli quipia iztac caltzintli",
     "spanish_translation": "El abuelito tiene una casita blanca.",
@@ -839,7 +839,7 @@
   {
     "id": 94,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In mázatzintli ípan tianquiztli",
     "spanish_translation": "El venadito está en el mercado.",
@@ -848,7 +848,7 @@
   {
     "id": 95,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Malintzin quichihua ce mecatzintli",
     "spanish_translation": "María hace un cordoncito",
@@ -857,7 +857,7 @@
   {
     "id": 96,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In iztac tetzintli itac tlálli",
     "spanish_translation": "La piedrita blanca está dentro de la tierra.",
@@ -866,7 +866,7 @@
   {
     "id": 97,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cihuatl amo quichihua in petatzintli",
     "spanish_translation": "La mujer no hace el petatito.",
@@ -875,7 +875,7 @@
   {
     "id": 98,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in mecatzintli, nican",
     "spanish_translation": "¿Dónde está el cordoncito? ¿Aquí?",
@@ -884,7 +884,7 @@
   {
     "id": 99,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Xuan quipia in teopantzintli",
     "spanish_translation": "¿Juan tiene una iglesita?",
@@ -893,7 +893,7 @@
   {
     "id": 100,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In nántzintli quichihua in petatzintli",
     "spanish_translation": "La madrecita hace un petatito.",
@@ -902,7 +902,7 @@
   {
     "id": 101,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in iztac itzcuintzintli",
     "spanish_translation": "¿Dónde está el perrito blanco?",
@@ -911,7 +911,7 @@
   {
     "id": 102,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Nícan ca in tianquiztzintli",
     "spanish_translation": "Está aquí el mercadito.",
@@ -920,7 +920,7 @@
   {
     "id": 103,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tlácatzintli ihuan in cihuatzintli nícan ca",
     "spanish_translation": "El hombrecito y la mujercita están aquí.",
@@ -929,7 +929,7 @@
   {
     "id": 104,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in tetzintli, itac tlálli",
     "spanish_translation": "¿Dónde está la piedrita? ¿Sobre la tierra?",
@@ -938,7 +938,7 @@
   {
     "id": 105,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Xuan quipia ce caltzintli",
     "spanish_translation": "Juan tiene una casita.",
@@ -947,7 +947,7 @@
   {
     "id": 106,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In pilli ipan teopantzintli",
     "spanish_translation": "El niño está en la iglesita.",
@@ -956,7 +956,7 @@
   {
     "id": 107,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tecolotl ihuan in ocuillin amo nican ca",
     "spanish_translation": "El búho y el gusano no están aquí.",
@@ -965,10 +965,280 @@
   {
     "id": 108,
     "lesson_id": 3,
-    "sublesson_id": 9,
+    "sublesson_id": 10,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in táhtzintli",
     "spanish_translation": "¿Dónde está el padrecito?",
+    "audio_path": null
+  },
+  {
+    "id": 109,
+    "lesson_id": 3,
+    "sublesson_id": 11,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Cámp cáteh in mecatzintzin",
+    "spanish_translation": "¿Dónde están los cordoncitos?",
+    "audio_path": null
+  },
+  {
+    "id": 110,
+    "lesson_id": 3,
+    "sublesson_id": 11,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "In coltzintzin cáteh ompa",
+    "spanish_translation": "Los abuelitos están allá.",
+    "audio_path": null
+  },
+  {
+    "id": 111,
+    "lesson_id": 3,
+    "sublesson_id": 11,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Quexqui tochtzintzin cáteh ca tlálli",
+    "spanish_translation": "¿Cuántos conejitos están en la tierra?",
+    "audio_path": null
+  },
+  {
+    "id": 112,
+    "lesson_id": 3,
+    "sublesson_id": 11,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "In tlacatzintli quipia in tláltzintli",
+    "spanish_translation": "El hombrecito tiene su tierrita.",
+    "audio_path": null
+  },
+  {
+    "id": 113,
+    "lesson_id": 3,
+    "sublesson_id": 11,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "In itzcuintzintzin cáteh in tlálli",
+    "spanish_translation": "Los perritos están en la tierra.",
+    "audio_path": null
+  },
+  {
+    "id": 114,
+    "lesson_id": 3,
+    "sublesson_id": 11,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Quema, in amoxtzintzin cáteh in iztac teopántli",
+    "spanish_translation": "Sí, los libritos están en la iglesia blanca.",
+    "audio_path": null
+  },
+  {
+    "id": 115,
+    "lesson_id": 3,
+    "sublesson_id": 11,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "In itzcuintzintzin ihuan in mazatzitzin ámo cáteh nícan",
+    "spanish_translation": "Los perritos y los venaditos no están aquí.",
+    "audio_path": null
+  },
+  {
+    "id": 116,
+    "lesson_id": 3,
+    "sublesson_id": 11,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Quexqui petatzintzin cáteh in caltzintzin",
+    "spanish_translation": "¿Cuántos petatitos están en las casitas?",
+    "audio_path": null
+  },
+  {
+    "id": 117,
+    "lesson_id": 3,
+    "sublesson_id": 11,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "In cihtzintzin cáteh in tianquiztli",
+    "spanish_translation": "Las abuelitas están en el mercado.",
+    "audio_path": null
+  },
+  {
+    "id": 118,
+    "lesson_id": 3,
+    "sublesson_id": 11,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Quexqui ocuiltzintzin ompa cáteh",
+    "spanish_translation": "¿Cuántos gusanitos están allá?",
+    "audio_path": null
+  },
+  {
+    "id": 119,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "In cihuatzintli quipia ce tianquiztli.",
+    "spanish_translation": "La mujercita tiene un mercado",
+    "audio_path": null
+  },
+  {
+    "id": 120,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Quema, Xuantzin quichihua ce petlatontli.",
+    "spanish_translation": "Si, Juan hace un petatillo",
+    "audio_path": null
+  },
+  {
+    "id": 121,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Amo, in tlacatl ihuan in pilli amo nican cateh.",
+    "spanish_translation": "No, el hombre y el niño no están aquí",
+    "audio_path": null
+  },
+  {
+    "id": 122,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Ocuiltoton amo ipan petlatoton.",
+    "spanish_translation": "El gusanillo no está en el petatillo",
+    "audio_path": null
+  },
+  {
+    "id": 123,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Malintzin quichihua ce mecatzintli.",
+    "spanish_translation": "María hace un cordoncito",
+    "audio_path": null
+  },
+  {
+    "id": 124,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Ome itzcuintoton, yeyi tochtoton, nahui tecolototon.",
+    "spanish_translation": "Dos perrillos, tres conejillos, cuatro buhecillos",
+    "audio_path": null
+  },
+  {
+    "id": 125,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Cihuatl ihuan tlacatl itic ome caltoton",
+    "spanish_translation": "¿La mujer y el hombre están dentro de las dos casillas?",
+    "audio_path": null
+  },
+  {
+    "id": 126,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "In piltontli ipan petlatontli.",
+    "spanish_translation": "El niñito está sobre el petatillo",
+    "audio_path": null
+  },
+  {
+    "id": 127,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Tlacatzintli amo quichihua ce caltontli.",
+    "spanish_translation": "El hombrecito no hace una casilla",
+    "audio_path": null
+  },
+  {
+    "id": 128,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "In cihuatzintli quipia ce mecatontli.",
+    "spanish_translation": "La mujercita tiene un cordoncillo",
+    "audio_path": null
+  },
+  {
+    "id": 129,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Teopantzitzin ompa cateh.",
+    "spanish_translation": "Las iglesitas están allá",
+    "audio_path": null
+  },
+  {
+    "id": 130,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Tochtoton ipan tetoton.",
+    "spanish_translation": "Los conejillos están sobre las piedrillas",
+    "audio_path": null
+  },
+  {
+    "id": 131,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Tlacatontli quipia ce cihtzintli",
+    "spanish_translation": "El hombrecillo tiene una abuelita",
+    "audio_path": null
+  },
+  {
+    "id": 132,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Cihuatontli quipia in caltontli.",
+    "spanish_translation": "La mujercita tiene una casilla",
+    "audio_path": null
+  },
+  {
+    "id": 133,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Atoton itic caltoton.",
+    "spanish_translation": "El agüilla dentro de la casilla",
+    "audio_path": null
+  },
+  {
+    "id": 134,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Quexqui mecatoton ipan tlaltoton",
+    "spanish_translation": "¿Cuántos cordoncillos hay sobre la tierrilla?",
+    "audio_path": null
+  },
+  {
+    "id": 135,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Tecolotontli itic teopantli.",
+    "spanish_translation": "El buhecillo dentro de la iglesia",
+    "audio_path": null
+  },
+  {
+    "id": 136,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Quexqui ocuiltoton nican",
+    "spanish_translation": "¿Cuántos gusanillos hay aquí?",
+    "audio_path": null
+  },
+  {
+    "id": 137,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Tahtzintli quichihua ce teopantontli.",
+    "spanish_translation": "El padrecito hace una iglesita",
+    "audio_path": null
+  },
+  {
+    "id": 138,
+    "lesson_id": 3,
+    "sublesson_id": 16,
+    "grammar_rule_id": null,
+    "nahuatl_sentence": "Quexqui caltzitzin ompa",
+    "spanish_translation": "¿Cuántas casitas están?",
     "audio_path": null
   }
 ]
