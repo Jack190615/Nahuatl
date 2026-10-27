@@ -29,14 +29,18 @@ abstract class _$AppRouter extends RootStackRouter {
     },
     ExerciseSessionRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
+      final queryParams = routeData.queryParams;
       final args = routeData.argsAs<ExerciseSessionRouteArgs>(
           orElse: () => ExerciseSessionRouteArgs(
-              lessonId: pathParams.getInt('lessonId')));
+                lessonId: pathParams.getInt('lessonId'),
+                sublessonId: queryParams.optInt('sublessonId'),
+              ));
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: ExerciseSessionView(
           key: args.key,
           lessonId: args.lessonId,
+          sublessonId: args.sublessonId,
           lessonTitle: args.lessonTitle,
         ),
       );
@@ -49,14 +53,18 @@ abstract class _$AppRouter extends RootStackRouter {
     },
     LessonTheoryRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
+      final queryParams = routeData.queryParams;
       final args = routeData.argsAs<LessonTheoryRouteArgs>(
-          orElse: () =>
-              LessonTheoryRouteArgs(lessonId: pathParams.getInt('lessonId')));
+          orElse: () => LessonTheoryRouteArgs(
+                lessonId: pathParams.getInt('lessonId'),
+                sublessonId: queryParams.optInt('sublessonId'),
+              ));
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: LessonTheoryView(
           key: args.key,
           lessonId: args.lessonId,
+          sublessonId: args.sublessonId,
           lessonTitle: args.lessonTitle,
         ),
       );
@@ -110,6 +118,7 @@ class ExerciseSessionRoute extends PageRouteInfo<ExerciseSessionRouteArgs> {
   ExerciseSessionRoute({
     Key? key,
     required int lessonId,
+    int? sublessonId,
     String lessonTitle = 'Práctica de Lección',
     List<PageRouteInfo>? children,
   }) : super(
@@ -117,9 +126,11 @@ class ExerciseSessionRoute extends PageRouteInfo<ExerciseSessionRouteArgs> {
           args: ExerciseSessionRouteArgs(
             key: key,
             lessonId: lessonId,
+            sublessonId: sublessonId,
             lessonTitle: lessonTitle,
           ),
           rawPathParams: {'lessonId': lessonId},
+          rawQueryParams: {'sublessonId': sublessonId},
           initialChildren: children,
         );
 
@@ -133,6 +144,7 @@ class ExerciseSessionRouteArgs {
   const ExerciseSessionRouteArgs({
     this.key,
     required this.lessonId,
+    this.sublessonId,
     this.lessonTitle = 'Práctica de Lección',
   });
 
@@ -140,11 +152,13 @@ class ExerciseSessionRouteArgs {
 
   final int lessonId;
 
+  final int? sublessonId;
+
   final String lessonTitle;
 
   @override
   String toString() {
-    return 'ExerciseSessionRouteArgs{key: $key, lessonId: $lessonId, lessonTitle: $lessonTitle}';
+    return 'ExerciseSessionRouteArgs{key: $key, lessonId: $lessonId, sublessonId: $sublessonId, lessonTitle: $lessonTitle}';
   }
 }
 
@@ -168,6 +182,7 @@ class LessonTheoryRoute extends PageRouteInfo<LessonTheoryRouteArgs> {
   LessonTheoryRoute({
     Key? key,
     required int lessonId,
+    int? sublessonId,
     String lessonTitle = 'Teoría de la Lección',
     List<PageRouteInfo>? children,
   }) : super(
@@ -175,9 +190,11 @@ class LessonTheoryRoute extends PageRouteInfo<LessonTheoryRouteArgs> {
           args: LessonTheoryRouteArgs(
             key: key,
             lessonId: lessonId,
+            sublessonId: sublessonId,
             lessonTitle: lessonTitle,
           ),
           rawPathParams: {'lessonId': lessonId},
+          rawQueryParams: {'sublessonId': sublessonId},
           initialChildren: children,
         );
 
@@ -191,6 +208,7 @@ class LessonTheoryRouteArgs {
   const LessonTheoryRouteArgs({
     this.key,
     required this.lessonId,
+    this.sublessonId,
     this.lessonTitle = 'Teoría de la Lección',
   });
 
@@ -198,11 +216,13 @@ class LessonTheoryRouteArgs {
 
   final int lessonId;
 
+  final int? sublessonId;
+
   final String lessonTitle;
 
   @override
   String toString() {
-    return 'LessonTheoryRouteArgs{key: $key, lessonId: $lessonId, lessonTitle: $lessonTitle}';
+    return 'LessonTheoryRouteArgs{key: $key, lessonId: $lessonId, sublessonId: $sublessonId, lessonTitle: $lessonTitle}';
   }
 }
 

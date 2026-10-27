@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/config/env_config.dart';
@@ -101,14 +102,37 @@ final dictionarySearchControllerProvider = StateNotifierProvider.autoDispose<
   );
 });
 
+@immutable
+class ExerciseSessionArgs {
+  final int lessonId;
+  final int? sublessonId;
+
+  const ExerciseSessionArgs({
+    required this.lessonId,
+    this.sublessonId,
+  });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ExerciseSessionArgs &&
+          other.lessonId == lessonId &&
+          other.sublessonId == sublessonId;
+
+  @override
+  int get hashCode => Object.hash(lessonId, sublessonId);
+}
+
 final exerciseEngineControllerProvider = StateNotifierProvider.autoDispose
-    .family<ExerciseEngineController, ExerciseSessionState, int>(
-  (ref, lessonId) {
+    .family<ExerciseEngineController, ExerciseSessionState, ExerciseSessionArgs>(
+  (ref, args) {
     return ExerciseEngineController(
-      lessonId: lessonId,
+      lessonId: args.lessonId,
+      sublessonId: args.sublessonId,
       generateExercisesUseCase:
           ref.watch(generateLessonExercisesUseCaseProvider),
       lessonRepository: ref.watch(lessonRepositoryProvider),
+      sublessonRepository: ref.watch(sublessonRepositoryProvider),
     );
   },
 );

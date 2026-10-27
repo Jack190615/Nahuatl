@@ -97,6 +97,19 @@ class DriftNahuatlRepository implements INahuatlRepository {
   }
 
   @override
+  Future<List<DictionaryEntryEntity>> getVocabularyByLesson(int lessonId) async {
+    final sublessonRows = await (_db.select(_db.sublessons)
+          ..where((t) => t.lessonId.equals(lessonId)))
+        .get();
+    final sublessonIds = sublessonRows.map((s) => s.id).toList();
+    if (sublessonIds.isEmpty) return const [];
+    final query = _db.select(_db.dictionary)
+      ..where((t) => t.sublessonId.isIn(sublessonIds));
+    final rows = await query.get();
+    return rows.map(_mapDictionaryRowToEntity).toList(growable: false);
+  }
+
+  @override
   Future<List<PhraseEntity>> getPhrasesBySublesson(int sublessonId) async {
     final query = _db.select(_db.phrases)
       ..where((t) => t.sublessonId.equals(sublessonId));
@@ -153,8 +166,17 @@ class DriftNahuatlRepository implements INahuatlRepository {
 
   @override
   Future<List<PhraseEntity>> getPhrasesByLesson(int lessonId) async {
+    final sublessonRows = await (_db.select(_db.sublessons)
+          ..where((t) => t.lessonId.equals(lessonId)))
+        .get();
+    final sublessonIds = sublessonRows.map((s) => s.id).toList();
+
     final query = _db.select(_db.phrases)
-      ..where((t) => t.lessonId.equals(lessonId));
+      ..where((t) =>
+          t.lessonId.equals(lessonId) |
+          (sublessonIds.isNotEmpty
+              ? t.sublessonId.isIn(sublessonIds)
+              : const Constant(false)));
     final rows = await query.get();
     return rows.map(_mapPhraseRowToEntity).toList(growable: false);
   }

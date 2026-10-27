@@ -45,6 +45,7 @@ class FakeNahuatlRepository implements INahuatlRepository {
   final List<DictionaryEntryEntity> _dictionary = const [
     DictionaryEntryEntity(
       id: 1,
+      sublessonId: 2,
       nahuatlWord: 'atl',
       spanishTranslation: 'agua',
       wordType: WordType.sustantivo,
@@ -52,6 +53,7 @@ class FakeNahuatlRepository implements INahuatlRepository {
     ),
     DictionaryEntryEntity(
       id: 2,
+      sublessonId: 2,
       nahuatlWord: 'calli',
       spanishTranslation: 'casa',
       wordType: WordType.sustantivo,
@@ -59,6 +61,7 @@ class FakeNahuatlRepository implements INahuatlRepository {
     ),
     DictionaryEntryEntity(
       id: 3,
+      sublessonId: 3,
       nahuatlWord: 'tlacatl',
       spanishTranslation: 'persona',
       wordType: WordType.sustantivo,
@@ -66,6 +69,7 @@ class FakeNahuatlRepository implements INahuatlRepository {
     ),
     DictionaryEntryEntity(
       id: 4,
+      sublessonId: 3,
       nahuatlWord: 'cihuatl',
       spanishTranslation: 'mujer',
       wordType: WordType.sustantivo,
@@ -77,6 +81,7 @@ class FakeNahuatlRepository implements INahuatlRepository {
     PhraseEntity(
       id: 10,
       lessonId: 1,
+      sublessonId: 5,
       grammarRuleId: 1,
       nahuatlSentence: 'In cihuatl choca',
       spanishTranslation: '¡La mujer llora!',
@@ -85,6 +90,7 @@ class FakeNahuatlRepository implements INahuatlRepository {
     PhraseEntity(
       id: 11,
       lessonId: 1,
+      sublessonId: 5,
       grammarRuleId: 1,
       nahuatlSentence: 'Cualli tonalli',
       spanishTranslation: 'Buen día',
@@ -130,11 +136,15 @@ class FakeNahuatlRepository implements INahuatlRepository {
 
   @override
   Future<List<DictionaryEntryEntity>> getVocabularyBySublesson(int sublessonId) async =>
-      const [];
+      _dictionary.where((d) => d.sublessonId == sublessonId).toList();
+
+  @override
+  Future<List<DictionaryEntryEntity>> getVocabularyByLesson(int lessonId) async =>
+      lessonId == 1 ? _dictionary : const [];
 
   @override
   Future<List<PhraseEntity>> getPhrasesBySublesson(int sublessonId) async =>
-      const [];
+      _phrases.where((p) => p.sublessonId == sublessonId).toList();
 
   @override
   Future<List<GrammarRuleEntity>> getGrammarRulesByLesson(int lessonId) async =>
@@ -665,6 +675,49 @@ void main() {
       await repo.completeLesson(1);
       final completedLesson = await repo.getLessonById(1);
       expect(completedLesson?.isCompleted, isTrue);
+    });
+  });
+
+  group('13. Soporte de Ejercicios por Sublección y Sublecciones de Vocabulario', () {
+    test('Genera ejercicios de vocabulario cuando la sublección no tiene frases', () async {
+      final repo = FakeNahuatlRepository();
+      final useCase = GenerateLessonExercisesUseCase(
+        phraseRepository: repo,
+        dictionaryRepository: repo,
+      );
+
+      // Sublección 2 es de tipo vocabulario (sin frases)
+      final exercises = await useCase.execute(
+        lessonId: 2,
+        sublessonId: 2,
+        totalExercises: 6,
+      );
+
+      expect(exercises, isNotEmpty);
+      expect(exercises.length, equals(6));
+      expect(
+        exercises.any((e) => e is MatchingExercise || e is TextInputExercise),
+        isTrue,
+      );
+    });
+
+    test('Genera ejercicios de frases cuando la sublección contiene frases', () async {
+      final repo = FakeNahuatlRepository();
+      final useCase = GenerateLessonExercisesUseCase(
+        phraseRepository: repo,
+        dictionaryRepository: repo,
+      );
+
+      // Sublección 5 contiene frases
+      final exercises = await useCase.execute(
+        lessonId: 1,
+        sublessonId: 5,
+        totalExercises: 6,
+      );
+
+      expect(exercises, isNotEmpty);
+      expect(exercises.length, equals(6));
+      expect(exercises.any((e) => e is WordBankExercise), isTrue);
     });
   });
 }

@@ -6,6 +6,7 @@ import '../../../core/platform/mobile_platform_config.dart';
 import '../../../core/responsive/responsive_info.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../domain/entities/grammar_rule.dart';
+import '../../../domain/entities/sublesson.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/common/app_action_button.dart';
 import '../../widgets/common/responsive_scaffold.dart';
@@ -17,26 +18,41 @@ final lessonGrammarRulesProvider =
   return grammarRepo.getGrammarRulesByLesson(lessonId);
 });
 
-/// Vista responsiva para estudiar lecciones de carácter teórico, ortográfico o introductorio
-/// (lecciones que no requieren bucle de oraciones prácticas).
+/// Provider familiar para consultar el detalle de una sublección específica.
+final sublessonDetailProvider =
+    FutureProvider.autoDispose.family<SublessonEntity?, int>((ref, sublessonId) async {
+  final sublessonRepo = ref.watch(sublessonRepositoryProvider);
+  return sublessonRepo.getSublessonById(sublessonId);
+});
+
+/// Vista responsiva para estudiar lecciones o puntos de carácter teórico, ortográfico o explicativo.
 @RoutePage()
 class LessonTheoryView extends ConsumerWidget {
   final int lessonId;
+  final int? sublessonId;
   final String lessonTitle;
 
   const LessonTheoryView({
     super.key,
     @PathParam('lessonId') required this.lessonId,
+    @queryParam this.sublessonId,
     this.lessonTitle = 'Teoría de la Lección',
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final rulesAsync = ref.watch(lessonGrammarRulesProvider(lessonId));
+    final sublessonAsync = sublessonId != null
+        ? ref.watch(sublessonDetailProvider(sublessonId!))
+        : null;
+
     final lessonMapState = ref.watch(lessonMapControllerProvider);
     final currentLesson =
         lessonMapState.lessons.where((l) => l.id == lessonId).firstOrNull;
-    final isAlreadyCompleted = currentLesson?.isCompleted ?? false;
+
+    final isAlreadyCompleted = sublessonId != null
+        ? (sublessonAsync?.value?.isCompleted ?? false)
+        : (currentLesson?.isCompleted ?? false);
 
     return ResponsiveScaffold(
       appBar: AppBar(
@@ -57,7 +73,9 @@ class LessonTheoryView extends ConsumerWidget {
           top: false,
           child: isAlreadyCompleted
               ? AppActionButton(
-                  label: 'Lección ya completada',
+                  label: sublessonId != null
+                      ? 'Punto ya completado'
+                      : 'Lección ya completada',
                   icon: Icons.check_circle_outline_rounded,
                   variant: AppButtonVariant.secondary,
                   onPressed: () {
@@ -65,7 +83,9 @@ class LessonTheoryView extends ConsumerWidget {
                   },
                 )
               : AppActionButton(
-                  label: 'Entendido, completar lección',
+                  label: sublessonId != null
+                      ? 'Entendido, completar punto'
+                      : 'Entendido, completar lección',
                   icon: Icons.check_circle_rounded,
                   onPressed: () async {
                     await _completeAndUnlockNext(context, ref);
@@ -83,6 +103,10 @@ class LessonTheoryView extends ConsumerWidget {
             ),
           ),
           data: (rules) {
+            final specificTheory = sublessonAsync?.value?.theoryContent?.trim();
+            final hasSpecificTheory =
+                specificTheory != null && specificTheory.isNotEmpty;
+
             return SingleChildScrollView(
               physics: MobilePlatformConfig.adaptiveScrollPhysics,
               padding: EdgeInsets.symmetric(vertical: info.verticalSpacing),
@@ -95,7 +119,15 @@ class LessonTheoryView extends ConsumerWidget {
                     info: info,
                   ),
                   SizedBox(height: info.verticalSpacing),
-                  if (rules.isEmpty)
+                  if (hasSpecificTheory)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 14.0),
+                      child: _GrammarSectionCard(
+                        explanationText: specificTheory,
+                        info: info,
+                      ),
+                    ),
+                  if (rules.isEmpty && !hasSpecificTheory)
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
@@ -133,25 +165,51 @@ class LessonTheoryView extends ConsumerWidget {
 
   Future<void> _completeAndUnlockNext(BuildContext context, WidgetRef ref) async {
     final lessonRepo = ref.read(lessonRepositoryProvider);
-    // Registrar lección como completada de forma permanente en SQLite
-    await lessonRepo.completeLesson(lessonId);
+    final sublessonRepo = ref.read(sublessonRepositoryProvider);
 
-    final allLessons = await lessonRepo.getLessons();
-
-    final currentIndex = allLessons.indexWhere((l) => l.id == lessonId);
-    if (currentIndex != -1 && currentIndex + 1 < allLessons.length) {
-      final nextLesson = allLessons[currentIndex + 1];
-      if (!nextLesson.isUnlocked) {
-        await lessonRepo.unlockLesson(nextLesson.id);
+    if (sublessonId != null) {
+      await sublessonRepo.completeSublesson(sublessonId!);
+      final sublessons = await sublessonRepo.getSublessonsByLesson(lessonId);
+      final currentIdx = sublessons.indexWhere((s) => s.id == sublessonId);
+      if (currentIdx != -1 && currentIdx + 1 < sublessons.length) {
+        final nextSub = sublessons[currentIdx + 1];
+        if (!nextSub.isUnlocked) {
+          await sublessonRepo.unlockSublesson(nextSub.id);
+        }
+      }
+      final allCompleted = sublessons.every(
+        (s) => s.id == sublessonId ? true : s.isCompleted,
+      );
+      if (allCompleted) {
+        await lessonRepo.completeLesson(lessonId);
+        final allLessons = await lessonRepo.getLessons();
+        final currentLessonIdx = allLessons.indexWhere((l) => l.id == lessonId);
+        if (currentLessonIdx != -1 && currentLessonIdx + 1 < allLessons.length) {
+          final nextLesson = allLessons[currentLessonIdx + 1];
+          if (!nextLesson.isUnlocked) {
+            await lessonRepo.unlockLesson(nextLesson.id);
+          }
+        }
+      }
+    } else {
+      await lessonRepo.completeLesson(lessonId);
+      final allLessons = await lessonRepo.getLessons();
+      final currentIndex = allLessons.indexWhere((l) => l.id == lessonId);
+      if (currentIndex != -1 && currentIndex + 1 < allLessons.length) {
+        final nextLesson = allLessons[currentIndex + 1];
+        if (!nextLesson.isUnlocked) {
+          await lessonRepo.unlockLesson(nextLesson.id);
+        }
       }
     }
+
     // Refrescar mapa de lecciones para actualizar estado visual y candados
     ref.read(lessonMapControllerProvider.notifier).loadLessons();
 
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('¡Lección completada! Siguiente lección desbloqueada.'),
+          content: Text('¡Contenido completado! Has desbloqueado el siguiente paso.'),
           backgroundColor: AppColors.successGreen,
           duration: Duration(seconds: 2),
         ),

@@ -38,12 +38,15 @@ abstract interface class IDictionaryRepository {
     required int limit,
     List<int> excludeIds = const [],
   });
+  Future<List<DictionaryEntryEntity>> getVocabularyBySublesson(int sublessonId);
+  Future<List<DictionaryEntryEntity>> getVocabularyByLesson(int lessonId);
 }
 
 /// Principio de Segregación de Interfaces (ISP - SOLID):
 /// Contrato exclusivo para Frases y extracción de palabras trampa.
 abstract interface class IPhraseRepository {
   Future<List<PhraseEntity>> getPhrasesByLesson(int lessonId);
+  Future<List<PhraseEntity>> getPhrasesBySublesson(int sublessonId);
   Future<List<String>> getRandomDistractorNahuatlWords({
     required int count,
     required Set<String> excludedWords,

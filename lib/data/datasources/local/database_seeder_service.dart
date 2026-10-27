@@ -46,6 +46,18 @@ class DatabaseSeederService {
           .getSingle();
 
       if (currentCount > 0) {
+        // Reparar frases con lesson_id huérfano si la base de datos existía previamente
+        final orphanPhrases = await (_db.select(_db.phrases)..where((t) => t.lessonId.isNull())).get();
+        if (orphanPhrases.isNotEmpty) {
+          final allSublessons = await _db.select(_db.sublessons).get();
+          final map = {for (final s in allSublessons) s.id: s.lessonId};
+          for (final p in orphanPhrases) {
+            if (p.sublessonId != null && map.containsKey(p.sublessonId)) {
+              await (_db.update(_db.phrases)..where((t) => t.id.equals(p.id)))
+                  .write(PhrasesCompanion(lessonId: Value(map[p.sublessonId])));
+            }
+          }
+        }
         return false; // La base de datos ya fue inicializada previamente
       }
 

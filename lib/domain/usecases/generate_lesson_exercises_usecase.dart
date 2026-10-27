@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import '../entities/dictionary_entry.dart';
 import '../entities/exercise.dart';
 import '../entities/phrase.dart';
 import '../repositories/i_nahuatl_repository.dart';
@@ -9,6 +10,7 @@ import '../repositories/i_nahuatl_repository.dart';
 abstract interface class IGenerateLessonExercisesUseCase {
   Future<List<Exercise>> execute({
     required int lessonId,
+    int? sublessonId,
     int totalExercises = 10,
   });
 }
@@ -32,55 +34,118 @@ class GenerateLessonExercisesUseCase implements IGenerateLessonExercisesUseCase 
   @override
   Future<List<Exercise>> execute({
     required int lessonId,
+    int? sublessonId,
     int totalExercises = 10,
   }) async {
-    final phrases = await _phraseRepository.getPhrasesByLesson(lessonId);
-    // Si no existen frases para esta lección, devuelve una lista vacía para mostrar
-    // la pantalla de "Más lecciones próximamente"
-    if (phrases.isEmpty) {
+    List<PhraseEntity> phrases;
+    List<DictionaryEntryEntity> lessonVocab;
+
+    if (sublessonId != null) {
+      phrases = await _phraseRepository.getPhrasesBySublesson(sublessonId);
+      lessonVocab =
+          await _dictionaryRepository.getVocabularyBySublesson(sublessonId);
+    } else {
+      phrases = await _phraseRepository.getPhrasesByLesson(lessonId);
+      lessonVocab =
+          await _dictionaryRepository.getVocabularyByLesson(lessonId);
+    }
+
+    // Si no existen frases ni vocabulario, devuelve lista vacía ("Más lecciones próximamente")
+    if (phrases.isEmpty && lessonVocab.isEmpty) {
       return const [];
     }
 
     final List<Exercise> generated = [];
 
-    for (int i = 0; i < totalExercises; i++) {
-      final mod = phrases.isEmpty ? 0 : (i % 3);
+    if (phrases.isNotEmpty) {
+      // 1. Sesión basada en frases (con pares de vocabulario preferente si existen)
+      for (int i = 0; i < totalExercises; i++) {
+        final mod = i % 3;
 
-      if (mod == 0) {
-        generated.add(await _buildMatchingExercise(lessonId: lessonId, index: i));
-      } else if (mod == 1) {
-        final phrase = phrases[i % phrases.length];
-        generated.add(
-          await _buildWordBankExercise(
-            lessonId: lessonId,
-            index: i,
-            phrase: phrase,
-          ),
-        );
-      } else {
-        final phrase = phrases[i % phrases.length];
-        generated.add(
-          _buildTextInputExercise(
-            lessonId: lessonId,
-            index: i,
-            phrase: phrase,
-          ),
-        );
+        if (mod == 0) {
+          generated.add(
+            await _buildMatchingExercise(
+              lessonId: lessonId,
+              index: i,
+              preferredEntries: lessonVocab.isNotEmpty ? lessonVocab : null,
+            ),
+          );
+        } else if (mod == 1) {
+          final phrase = phrases[i % phrases.length];
+          generated.add(
+            await _buildWordBankExercise(
+              lessonId: lessonId,
+              index: i,
+              phrase: phrase,
+            ),
+          );
+        } else {
+          final phrase = phrases[i % phrases.length];
+          generated.add(
+            _buildTextInputExercise(
+              lessonId: lessonId,
+              index: i,
+              phrase: phrase,
+            ),
+          );
+        }
+      }
+    } else {
+      // 2. Sesión para sublección de vocabulario puro (sin frases)
+      for (int i = 0; i < totalExercises; i++) {
+        final mod = i % 2;
+
+        if (mod == 0) {
+          generated.add(
+            await _buildMatchingExercise(
+              lessonId: lessonId,
+              index: i,
+              preferredEntries: lessonVocab,
+            ),
+          );
+        } else {
+          final entry = lessonVocab[i % lessonVocab.length];
+          generated.add(
+            TextInputExercise(
+              exerciseId: 'vocab_text_${lessonId}_$i',
+              phraseId: entry.id,
+              direction: TranslationDirection.nahuatlToSpanish,
+              promptSentence: entry.nahuatlWord,
+              expectedAnswer: entry.spanishTranslation,
+              audioPath: entry.resolvedAssetAudioPath,
+            ),
+          );
+        }
       }
     }
 
     return generated;
   }
 
-  /// 1. Matching (Pares): Extrae 4 pares de `Dictionary`, los separa en dos listas
-  /// independientes y las aleatoriza conservando su `dictionaryId` relacional.
+  /// 1. Matching (Pares): Extrae pares de `Dictionary`, priorizando vocabulario de la lección
+  /// si está disponible, los separa en dos columnas independientes y las aleatoriza.
   Future<MatchingExercise> _buildMatchingExercise({
     required int lessonId,
     required int index,
+    List<DictionaryEntryEntity>? preferredEntries,
   }) async {
-    final entries = await _dictionaryRepository.getRandomDictionaryEntries(
-      limit: matchingPairsCount,
-    );
+    final List<DictionaryEntryEntity> entries = [];
+
+    if (preferredEntries != null && preferredEntries.isNotEmpty) {
+      final pool = List<DictionaryEntryEntity>.from(preferredEntries)
+        ..shuffle(_random);
+      entries.addAll(pool.take(matchingPairsCount));
+    }
+
+    if (entries.length < matchingPairsCount) {
+      final needed = matchingPairsCount - entries.length;
+      final excludeIds = entries.map((e) => e.id).toList();
+      final extra = await _dictionaryRepository.getRandomDictionaryEntries(
+        limit: needed,
+        excludeIds: excludeIds,
+      );
+      entries.addAll(extra);
+    }
 
     final nahuatlColumn = entries
         .map(

@@ -204,8 +204,14 @@ class LessonMapView extends ConsumerWidget {
     List<SublessonEntity> sublessons = const [],
   }) async {
     if (sublessons.isNotEmpty) {
-      // Si la lección tiene subpuntos, navega al primer subpunto desbloqueado o primero de la lista
-      final targetSublesson = sublessons.first;
+      // Navega al primer subpunto desbloqueado y pendiente, o al primero desbloqueado
+      final targetSublesson = sublessons.firstWhere(
+        (s) => s.isUnlocked && !s.isCompleted,
+        orElse: () => sublessons.firstWhere(
+          (s) => s.isUnlocked,
+          orElse: () => sublessons.first,
+        ),
+      );
       await _handleSublessonNavigation(
         context: context,
         ref: ref,
@@ -241,6 +247,7 @@ class LessonMapView extends ConsumerWidget {
       await context.router.push(
         LessonTheoryRoute(
           lessonId: sublesson.lessonId,
+          sublessonId: sublesson.id,
           lessonTitle: 'Punto ${sublesson.pointNumber}: ${sublesson.title}',
         ),
       );
@@ -248,6 +255,7 @@ class LessonMapView extends ConsumerWidget {
       await context.router.push(
         ExerciseSessionRoute(
           lessonId: sublesson.lessonId,
+          sublessonId: sublesson.id,
           lessonTitle: 'Punto ${sublesson.pointNumber}: ${sublesson.title}',
         ),
       );

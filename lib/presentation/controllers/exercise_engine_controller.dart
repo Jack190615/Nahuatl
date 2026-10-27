@@ -19,6 +19,7 @@ enum ExerciseEvaluationStatus {
 @immutable
 class ExerciseSessionState {
   final int lessonId;
+  final int? sublessonId;
   final bool isLoading;
   final String? errorMessage;
 
@@ -69,6 +70,7 @@ class ExerciseSessionState {
 
   const ExerciseSessionState({
     required this.lessonId,
+    this.sublessonId,
     this.isLoading = true,
     this.errorMessage,
     this.exercises = const [],
@@ -146,6 +148,7 @@ class ExerciseSessionState {
   }) {
     return ExerciseSessionState(
       lessonId: lessonId,
+      sublessonId: sublessonId,
       isLoading: isLoading ?? this.isLoading,
       errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
       exercises: exercises ?? this.exercises,
@@ -180,14 +183,17 @@ class ExerciseEngineController extends StateNotifier<ExerciseSessionState> {
 
   final IGenerateLessonExercisesUseCase _generateExercisesUseCase;
   final ILessonRepository _lessonRepository;
+  final ISublessonRepository? _sublessonRepository;
   final MatchingExerciseEvaluator _matchingEvaluator;
   final WordBankExerciseEvaluator _wordBankEvaluator;
   final TextInputExerciseEvaluator _textInputEvaluator;
 
   ExerciseEngineController({
     required int lessonId,
+    int? sublessonId,
     required IGenerateLessonExercisesUseCase generateExercisesUseCase,
     required ILessonRepository lessonRepository,
+    ISublessonRepository? sublessonRepository,
     MatchingExerciseEvaluator matchingEvaluator =
         const MatchingExerciseEvaluator(),
     WordBankExerciseEvaluator wordBankEvaluator =
@@ -196,10 +202,11 @@ class ExerciseEngineController extends StateNotifier<ExerciseSessionState> {
         const TextInputExerciseEvaluator(),
   })  : _generateExercisesUseCase = generateExercisesUseCase,
         _lessonRepository = lessonRepository,
+        _sublessonRepository = sublessonRepository,
         _matchingEvaluator = matchingEvaluator,
         _wordBankEvaluator = wordBankEvaluator,
         _textInputEvaluator = textInputEvaluator,
-        super(ExerciseSessionState(lessonId: lessonId)) {
+        super(ExerciseSessionState(lessonId: lessonId, sublessonId: sublessonId)) {
     loadLessonExercises();
   }
 
@@ -210,11 +217,13 @@ class ExerciseEngineController extends StateNotifier<ExerciseSessionState> {
     try {
       final generatedExercises = await _generateExercisesUseCase.execute(
         lessonId: state.lessonId,
+        sublessonId: state.sublessonId,
         totalExercises: totalExercisesPerLesson,
       );
 
       state = ExerciseSessionState(
         lessonId: state.lessonId,
+        sublessonId: state.sublessonId,
         isLoading: false,
         exercises: generatedExercises,
         currentExerciseIndex: 0,
@@ -507,10 +516,35 @@ class ExerciseEngineController extends StateNotifier<ExerciseSessionState> {
     final passed = state.scorePercentage >= 50.0;
 
     if (passed) {
-      // Desbloquea la siguiente lección al alcanzar el mínimo de 50%
-      await _unlockNextLessonIfAvailable();
-      // Registra la lección como completada en SQLite
-      await _lessonRepository.completeLesson(state.lessonId);
+      if (state.sublessonId != null && _sublessonRepository != null) {
+        // Marca la sublección activa como completada en SQLite
+        await _sublessonRepository.completeSublesson(state.sublessonId!);
+
+        // Desbloquea la siguiente sublección del mismo capítulo
+        final sublessons = await _sublessonRepository
+            .getSublessonsByLesson(state.lessonId);
+        final currentIdx =
+            sublessons.indexWhere((s) => s.id == state.sublessonId);
+        if (currentIdx != -1 && currentIdx + 1 < sublessons.length) {
+          final nextSub = sublessons[currentIdx + 1];
+          if (!nextSub.isUnlocked) {
+            await _sublessonRepository.unlockSublesson(nextSub.id);
+          }
+        }
+
+        // Si todas las sublecciones fueron completadas, completa la lección principal
+        final allCompleted = sublessons.every(
+            (s) => s.id == state.sublessonId ? true : s.isCompleted);
+        if (allCompleted) {
+          await _lessonRepository.completeLesson(state.lessonId);
+          await _unlockNextLessonIfAvailable();
+        }
+      } else {
+        // Desbloquea la siguiente lección al alcanzar el mínimo de 50%
+        await _unlockNextLessonIfAvailable();
+        // Registra la lección como completada en SQLite
+        await _lessonRepository.completeLesson(state.lessonId);
+      }
     }
 
     state = state.copyWith(
@@ -521,7 +555,10 @@ class ExerciseEngineController extends StateNotifier<ExerciseSessionState> {
   }
 
   Future<void> retryLesson() async {
-    state = ExerciseSessionState(lessonId: state.lessonId);
+    state = ExerciseSessionState(
+      lessonId: state.lessonId,
+      sublessonId: state.sublessonId,
+    );
     await loadLessonExercises();
   }
 

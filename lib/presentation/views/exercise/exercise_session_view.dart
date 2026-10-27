@@ -21,19 +21,25 @@ import '../../widgets/exercise/word_bank_exercise_widget.dart';
 @RoutePage()
 class ExerciseSessionView extends ConsumerWidget {
   final int lessonId;
+  final int? sublessonId;
   final String lessonTitle;
 
   const ExerciseSessionView({
     super.key,
     @PathParam('lessonId') required this.lessonId,
+    @queryParam this.sublessonId,
     this.lessonTitle = 'Práctica de Lección',
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sessionState = ref.watch(exerciseEngineControllerProvider(lessonId));
+    final args = ExerciseSessionArgs(
+      lessonId: lessonId,
+      sublessonId: sublessonId,
+    );
+    final sessionState = ref.watch(exerciseEngineControllerProvider(args));
     final controller =
-        ref.read(exerciseEngineControllerProvider(lessonId).notifier);
+        ref.read(exerciseEngineControllerProvider(args).notifier);
 
     if (sessionState.isLoading) {
       return const ResponsiveScaffold(

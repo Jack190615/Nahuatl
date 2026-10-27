@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa átl",
@@ -10,7 +10,7 @@
   },
   {
     "id": 2,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca átl",
@@ -19,7 +19,7 @@
   },
   {
     "id": 3,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa in átl",
@@ -28,7 +28,7 @@
   },
   {
     "id": 4,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Átl nican ca",
@@ -37,7 +37,7 @@
   },
   {
     "id": 5,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In átl nican",
@@ -46,7 +46,7 @@
   },
   {
     "id": 6,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Nícan cateh ome cálli",
@@ -55,7 +55,7 @@
   },
   {
     "id": 7,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ome cálli nícan",
@@ -64,7 +64,7 @@
   },
   {
     "id": 8,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in pílli",
@@ -73,7 +73,7 @@
   },
   {
     "id": 9,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tlácatl ític teopantli",
@@ -82,7 +82,7 @@
   },
   {
     "id": 10,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quéma, tlácatl itic teopantli",
@@ -91,7 +91,7 @@
   },
   {
     "id": 11,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Amo, in ocuíllin ámo ípan xálli",
@@ -100,7 +100,7 @@
   },
   {
     "id": 12,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ome tétl ípan pétlatl",
@@ -109,7 +109,7 @@
   },
   {
     "id": 13,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cálli ámo ípan xálli",
@@ -118,7 +118,7 @@
   },
   {
     "id": 14,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Náhui mécatl ípan tlálli",
@@ -127,7 +127,7 @@
   },
   {
     "id": 15,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ce nántli ípan tianquíztli",
@@ -136,7 +136,7 @@
   },
   {
     "id": 16,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In mázatl ámo ípan tlálli",
@@ -145,7 +145,7 @@
   },
   {
     "id": 17,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in técolotl",
@@ -154,7 +154,7 @@
   },
   {
     "id": 18,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tecolotl ompa ca",
@@ -163,7 +163,7 @@
   },
   {
     "id": 19,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in táhtli",
@@ -172,7 +172,7 @@
   },
   {
     "id": 20,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Táhtli ámo nícan ca. Ompa ca",
@@ -181,7 +181,7 @@
   },
   {
     "id": 21,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa cáteh yéyi mécatl",
@@ -190,7 +190,7 @@
   },
   {
     "id": 22,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Yéyi mécatl nícan",
@@ -199,7 +199,7 @@
   },
   {
     "id": 23,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Campa ca in cíhtli",
@@ -208,7 +208,7 @@
   },
   {
     "id": 24,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cíhtli ípan tlálli",
@@ -217,7 +217,7 @@
   },
   {
     "id": 25,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca itzcuíntli",
@@ -226,7 +226,7 @@
   },
   {
     "id": 26,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Itzcuíntli ómpa ípan tetl",
@@ -235,7 +235,7 @@
   },
   {
     "id": 27,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Itzcuíntli ámo nícan",
@@ -244,7 +244,7 @@
   },
   {
     "id": 28,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quéma, átl íhuan tetl nícan",
@@ -253,7 +253,7 @@
   },
   {
     "id": 29,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in pílli",
@@ -262,7 +262,7 @@
   },
   {
     "id": 30,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ompa ca",
@@ -271,7 +271,7 @@
   },
   {
     "id": 31,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quéma, in colli nícan",
@@ -280,7 +280,7 @@
   },
   {
     "id": 32,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Xálli ític in cálli",
@@ -289,7 +289,7 @@
   },
   {
     "id": 33,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Tecólotl ímpa ca ín teopántli",
@@ -298,7 +298,7 @@
   },
   {
     "id": 34,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ámo, in cálli nícan ca",
@@ -307,7 +307,7 @@
   },
   {
     "id": 35,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ín cíhuatl ípan tianquíztli",
@@ -316,7 +316,7 @@
   },
   {
     "id": 36,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa nícan itzcuíntli",
@@ -325,7 +325,7 @@
   },
   {
     "id": 37,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca mázatl",
@@ -334,7 +334,7 @@
   },
   {
     "id": 38,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cáteh nícan náhui pétlatl",
@@ -343,7 +343,7 @@
   },
   {
     "id": 39,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ámo, in cálli cáteh ític ca",
@@ -352,7 +352,7 @@
   },
   {
     "id": 40,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Míchin ític átl",
@@ -361,7 +361,7 @@
   },
   {
     "id": 41,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ámo, cíhtli ámo nícan ca",
@@ -370,7 +370,7 @@
   },
   {
     "id": 42,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quéma, cíhtli ompa ca",
@@ -379,7 +379,7 @@
   },
   {
     "id": 43,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ocuíllin ític ca tlálli",
@@ -388,7 +388,7 @@
   },
   {
     "id": 44,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Campa ca yéyi pílli",
@@ -397,7 +397,7 @@
   },
   {
     "id": 45,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In mázatl in cóatl nícan ca",
@@ -406,7 +406,7 @@
   },
   {
     "id": 46,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Amóxtli ípan cálli",
@@ -415,7 +415,7 @@
   },
   {
     "id": 47,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tlácatl ític xálli",
@@ -424,7 +424,7 @@
   },
   {
     "id": 48,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cíhuatl ípan tianquíztli",
@@ -433,7 +433,7 @@
   },
   {
     "id": 49,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in cólli",
@@ -442,7 +442,7 @@
   },
   {
     "id": 50,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca cólli",
@@ -451,7 +451,7 @@
   },
   {
     "id": 51,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cólli ómpa ca.",
@@ -460,7 +460,7 @@
   },
   {
     "id": 52,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In míchin ític átl.",
@@ -469,7 +469,7 @@
   },
   {
     "id": 53,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In atl ámo nícan.",
@@ -478,7 +478,7 @@
   },
   {
     "id": 54,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quéma, in cíhtli ípan cálli.",
@@ -487,7 +487,7 @@
   },
   {
     "id": 55,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa cáteh tetl íhuan átl",
@@ -496,7 +496,7 @@
   },
   {
     "id": 56,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cíhtli ompa ític teopántli.",
@@ -505,7 +505,7 @@
   },
   {
     "id": 57,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Tecólotl ámo ític atl.",
@@ -514,7 +514,7 @@
   },
   {
     "id": 58,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In ocuillin ípan cálli",
@@ -523,7 +523,7 @@
   },
   {
     "id": 59,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In pílli ámo nícan ca.",
@@ -532,7 +532,7 @@
   },
   {
     "id": 60,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In itzcuíntli nícan. Ámo",
@@ -541,7 +541,7 @@
   },
   {
     "id": 61,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In pílli nícan.",
@@ -550,7 +550,7 @@
   },
   {
     "id": 62,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In pílli nícan ca.",
@@ -559,7 +559,7 @@
   },
   {
     "id": 63,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Pílli nícan ca.",
@@ -568,7 +568,7 @@
   },
   {
     "id": 64,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ce mázatl ómpa.",
@@ -577,7 +577,7 @@
   },
   {
     "id": 65,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ce tetl ític átl.",
@@ -586,7 +586,7 @@
   },
   {
     "id": 66,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ce tecólotl ític teopántli",
@@ -595,7 +595,7 @@
   },
   {
     "id": 67,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa cáteh mécatl íhuan pétlatl",
@@ -604,7 +604,7 @@
   },
   {
     "id": 68,
-    "lesson_id": null,
+    "lesson_id": 2,
     "sublesson_id": 5,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quéma itzcuíntli nícan ca",
@@ -613,7 +613,7 @@
   },
   {
     "id": 69,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cihuatzintli nican ca",
@@ -622,7 +622,7 @@
   },
   {
     "id": 70,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In coatzintli ompa ca",
@@ -631,7 +631,7 @@
   },
   {
     "id": 71,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Campa ca in michin",
@@ -640,7 +640,7 @@
   },
   {
     "id": 72,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Mazatzintli amo nican; ompa ca.",
@@ -649,7 +649,7 @@
   },
   {
     "id": 73,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In coltzintli quichihua ce calli.",
@@ -658,7 +658,7 @@
   },
   {
     "id": 74,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In piltzintli ipan xaltzintli.",
@@ -667,7 +667,7 @@
   },
   {
     "id": 75,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Nantli quipia ce calli.",
@@ -676,7 +676,7 @@
   },
   {
     "id": 76,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tochtzintli ipan tlalli iztac.",
@@ -685,7 +685,7 @@
   },
   {
     "id": 77,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Xuantzin quipia ce mecatzintli.",
@@ -694,7 +694,7 @@
   },
   {
     "id": 78,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tlacatl quichihua ce iztac teopantzintli.",
@@ -703,7 +703,7 @@
   },
   {
     "id": 79,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Malintzin quichihua ce calli.",
@@ -712,7 +712,7 @@
   },
   {
     "id": 80,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quema, in cihtzintli itic caltzintli.",
@@ -721,7 +721,7 @@
   },
   {
     "id": 81,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Amo, Xuantzin amo quipia in amoxtzintli",
@@ -730,7 +730,7 @@
   },
   {
     "id": 82,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In coatzintli ompa itic xaltzintli",
@@ -739,7 +739,7 @@
   },
   {
     "id": 83,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Campa ca in iztac mazatzintli",
@@ -748,7 +748,7 @@
   },
   {
     "id": 84,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Ome mecatl ipan petlatzintli.",
@@ -757,7 +757,7 @@
   },
   {
     "id": 85,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Quema, Malintzin quichihua ce caltzintli.",
@@ -766,7 +766,7 @@
   },
   {
     "id": 86,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Tahtzintli ompa ca ipan teopantli.",
@@ -775,7 +775,7 @@
   },
   {
     "id": 87,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In coatzintli ihuan tecolotzintli cateh ipan tetl.",
@@ -784,7 +784,7 @@
   },
   {
     "id": 88,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In michtzintli itic atzintli",
@@ -793,7 +793,7 @@
   },
   {
     "id": 89,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in amoxltzintli",
@@ -802,7 +802,7 @@
   },
   {
     "id": 90,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In caltzintli amo nican; ompa ca",
@@ -811,7 +811,7 @@
   },
   {
     "id": 91,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Nícan cihtzintli ca",
@@ -820,7 +820,7 @@
   },
   {
     "id": 92,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Amo, cihtzintli ompa ca",
@@ -829,7 +829,7 @@
   },
   {
     "id": 93,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In coltzintli quipia iztac caltzintli",
@@ -838,7 +838,7 @@
   },
   {
     "id": 94,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In mázatzintli ípan tianquiztli",
@@ -847,7 +847,7 @@
   },
   {
     "id": 95,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Malintzin quichihua ce mecatzintli",
@@ -856,7 +856,7 @@
   },
   {
     "id": 96,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In iztac tetzintli itac tlálli",
@@ -865,7 +865,7 @@
   },
   {
     "id": 97,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In cihuatl amo quichihua in petatzintli",
@@ -874,7 +874,7 @@
   },
   {
     "id": 98,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in mecatzintli, nican",
@@ -883,7 +883,7 @@
   },
   {
     "id": 99,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Xuan quipia in teopantzintli",
@@ -892,7 +892,7 @@
   },
   {
     "id": 100,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In nántzintli quichihua in petatzintli",
@@ -901,7 +901,7 @@
   },
   {
     "id": 101,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in iztac itzcuintzintli",
@@ -910,7 +910,7 @@
   },
   {
     "id": 102,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Nícan ca in tianquiztzintli",
@@ -919,7 +919,7 @@
   },
   {
     "id": 103,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tlácatzintli ihuan in cihuatzintli nícan ca",
@@ -928,7 +928,7 @@
   },
   {
     "id": 104,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in tetzintli, itac tlálli",
@@ -937,7 +937,7 @@
   },
   {
     "id": 105,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Xuan quipia ce caltzintli",
@@ -946,7 +946,7 @@
   },
   {
     "id": 106,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In pilli ipan teopantzintli",
@@ -955,7 +955,7 @@
   },
   {
     "id": 107,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "In tecolotl ihuan in ocuillin amo nican ca",
@@ -964,7 +964,7 @@
   },
   {
     "id": 108,
-    "lesson_id": null,
+    "lesson_id": 3,
     "sublesson_id": 9,
     "grammar_rule_id": null,
     "nahuatl_sentence": "Cámpa ca in táhtzintli",

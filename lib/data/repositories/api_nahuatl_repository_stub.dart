@@ -51,6 +51,10 @@ class ApiNahuatlRepository implements INahuatlRepository {
       throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
 
   @override
+  Future<List<DictionaryEntryEntity>> getVocabularyByLesson(int lessonId) =>
+      throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
+
+  @override
   Future<List<PhraseEntity>> getPhrasesBySublesson(int sublessonId) =>
       throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
 
