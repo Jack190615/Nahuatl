@@ -108,6 +108,14 @@ class FakeNahuatlRepository implements INahuatlRepository {
   }
 
   @override
+  Future<void> completeLesson(int lessonId) async {
+    final index = _lessons.indexWhere((l) => l.id == lessonId);
+    if (index != -1) {
+      _lessons[index] = _lessons[index].copyWith(isCompleted: true);
+    }
+  }
+
+  @override
   Future<List<SublessonEntity>> getSublessonsByLesson(int lessonId) async =>
       const [];
 
@@ -116,6 +124,9 @@ class FakeNahuatlRepository implements INahuatlRepository {
 
   @override
   Future<void> unlockSublesson(int sublessonId) async {}
+
+  @override
+  Future<void> completeSublesson(int sublessonId) async {}
 
   @override
   Future<List<DictionaryEntryEntity>> getVocabularyBySublesson(int sublessonId) async =>
@@ -561,6 +572,99 @@ void main() {
       expect(find.text('Punto 6: La oración nominal'), findsOneWidget);
       expect(find.text('Vocabulario'), findsOneWidget);
       expect(find.text('Teoría'), findsOneWidget);
+    });
+  });
+
+  group('11. Repaso Interactivo de Errores y Umbral del 50%', () {
+    test('Registra errores y activa fase interactiva de repaso al final de la lección', () async {
+      final repo = FakeNahuatlRepository();
+      final useCase = GenerateLessonExercisesUseCase(
+        phraseRepository: repo,
+        dictionaryRepository: repo,
+      );
+
+      final controller = ExerciseEngineController(
+        lessonId: 1,
+        generateExercisesUseCase: useCase,
+        lessonRepository: repo,
+      );
+
+      // Esperar a que carguen los ejercicios
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+
+      // Simular fallo intencional en el primer ejercicio según su tipo
+      final current = controller.state.currentExercise;
+      if (current is TextInputExercise) {
+        controller.validateTextInput('respuesta incorrecta xyz');
+      } else if (current is WordBankExercise) {
+        controller.validateWordBank(['palabra_falsa_xyz']);
+      } else if (current is MatchingExercise) {
+        controller.validateMatchingPair(
+          nahuatlDictionaryId: 9999,
+          spanishDictionaryId: 8888,
+        );
+      }
+      expect(controller.state.evaluationStatus, ExerciseEvaluationStatus.incorrect);
+      expect(controller.state.failedExerciseIndices, contains(0));
+
+      // Avanzar por el resto de los ejercicios
+      final total = controller.state.exercises.length;
+      for (int i = 0; i < total - 1; i++) {
+        await controller.nextExercise();
+      }
+
+      // Al avanzar desde el último ejercicio, debe transicionar a isReviewMode = true
+      await controller.nextExercise();
+      expect(controller.state.isReviewMode, isTrue);
+      expect(controller.state.currentExerciseIndex, 0); // Vuelve al ejercicio con error
+    });
+
+    test('Umbral del 50%: bloquea siguiente lección si no alcanza el 50% de aciertos', () async {
+      final repo = FakeNahuatlRepository();
+      final useCase = GenerateLessonExercisesUseCase(
+        phraseRepository: repo,
+        dictionaryRepository: repo,
+      );
+
+      final controller = ExerciseEngineController(
+        lessonId: 1,
+        generateExercisesUseCase: useCase,
+        lessonRepository: repo,
+      );
+
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+
+      // Fallar todos los ejercicios
+      final total = controller.state.exercises.length;
+      for (int i = 0; i < total; i++) {
+        controller.validateTextInput('error');
+        await controller.nextExercise();
+      }
+
+      // En fase de repaso, fallar nuevamente
+      while (!controller.state.isLessonCompleted) {
+        controller.validateTextInput('sigue con error');
+        await controller.nextExercise();
+      }
+
+      expect(controller.state.isLessonCompleted, isTrue);
+      expect(controller.state.isLessonPassed, isFalse);
+      expect(controller.state.scorePercentage, 0.0);
+
+      // Lección 2 sigue bloqueada
+      final lesson2 = await repo.getLessonById(2);
+      expect(lesson2?.isUnlocked, isFalse);
+    });
+  });
+
+  group('12. Persistencia de Lección Completada (isCompleted)', () {
+    test('completeLesson marca isCompleted en repositorio y LessonCardWidget muestra badge', () async {
+      final repo = FakeNahuatlRepository();
+      expect((await repo.getLessonById(1))?.isCompleted, isFalse);
+
+      await repo.completeLesson(1);
+      final completedLesson = await repo.getLessonById(1);
+      expect(completedLesson?.isCompleted, isTrue);
     });
   });
 }

@@ -53,9 +53,26 @@ class $LessonsTable extends Lessons with TableInfo<$LessonsTable, LessonRow> {
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('CHECK ("is_unlocked" IN (0, 1))'),
       defaultValue: const Constant(false));
+  static const VerificationMeta _isCompletedMeta =
+      const VerificationMeta('isCompleted');
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, romanNumber, title, description, orderIndex, isUnlocked];
+  late final GeneratedColumn<bool> isCompleted = GeneratedColumn<bool>(
+      'is_completed', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("is_completed" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        romanNumber,
+        title,
+        description,
+        orderIndex,
+        isUnlocked,
+        isCompleted
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -101,6 +118,12 @@ class $LessonsTable extends Lessons with TableInfo<$LessonsTable, LessonRow> {
           isUnlocked.isAcceptableOrUnknown(
               data['is_unlocked']!, _isUnlockedMeta));
     }
+    if (data.containsKey('is_completed')) {
+      context.handle(
+          _isCompletedMeta,
+          isCompleted.isAcceptableOrUnknown(
+              data['is_completed']!, _isCompletedMeta));
+    }
     return context;
   }
 
@@ -122,6 +145,8 @@ class $LessonsTable extends Lessons with TableInfo<$LessonsTable, LessonRow> {
           .read(DriftSqlType.int, data['${effectivePrefix}order_index'])!,
       isUnlocked: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}is_unlocked'])!,
+      isCompleted: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_completed'])!,
     );
   }
 
@@ -138,13 +163,15 @@ class LessonRow extends DataClass implements Insertable<LessonRow> {
   final String? description;
   final int orderIndex;
   final bool isUnlocked;
+  final bool isCompleted;
   const LessonRow(
       {required this.id,
       this.romanNumber,
       required this.title,
       this.description,
       required this.orderIndex,
-      required this.isUnlocked});
+      required this.isUnlocked,
+      required this.isCompleted});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -158,6 +185,7 @@ class LessonRow extends DataClass implements Insertable<LessonRow> {
     }
     map['order_index'] = Variable<int>(orderIndex);
     map['is_unlocked'] = Variable<bool>(isUnlocked);
+    map['is_completed'] = Variable<bool>(isCompleted);
     return map;
   }
 
@@ -173,6 +201,7 @@ class LessonRow extends DataClass implements Insertable<LessonRow> {
           : Value(description),
       orderIndex: Value(orderIndex),
       isUnlocked: Value(isUnlocked),
+      isCompleted: Value(isCompleted),
     );
   }
 
@@ -186,6 +215,7 @@ class LessonRow extends DataClass implements Insertable<LessonRow> {
       description: serializer.fromJson<String?>(json['description']),
       orderIndex: serializer.fromJson<int>(json['orderIndex']),
       isUnlocked: serializer.fromJson<bool>(json['isUnlocked']),
+      isCompleted: serializer.fromJson<bool>(json['isCompleted']),
     );
   }
   @override
@@ -198,6 +228,7 @@ class LessonRow extends DataClass implements Insertable<LessonRow> {
       'description': serializer.toJson<String?>(description),
       'orderIndex': serializer.toJson<int>(orderIndex),
       'isUnlocked': serializer.toJson<bool>(isUnlocked),
+      'isCompleted': serializer.toJson<bool>(isCompleted),
     };
   }
 
@@ -207,7 +238,8 @@ class LessonRow extends DataClass implements Insertable<LessonRow> {
           String? title,
           Value<String?> description = const Value.absent(),
           int? orderIndex,
-          bool? isUnlocked}) =>
+          bool? isUnlocked,
+          bool? isCompleted}) =>
       LessonRow(
         id: id ?? this.id,
         romanNumber: romanNumber.present ? romanNumber.value : this.romanNumber,
@@ -215,6 +247,7 @@ class LessonRow extends DataClass implements Insertable<LessonRow> {
         description: description.present ? description.value : this.description,
         orderIndex: orderIndex ?? this.orderIndex,
         isUnlocked: isUnlocked ?? this.isUnlocked,
+        isCompleted: isCompleted ?? this.isCompleted,
       );
   LessonRow copyWithCompanion(LessonsCompanion data) {
     return LessonRow(
@@ -228,6 +261,8 @@ class LessonRow extends DataClass implements Insertable<LessonRow> {
           data.orderIndex.present ? data.orderIndex.value : this.orderIndex,
       isUnlocked:
           data.isUnlocked.present ? data.isUnlocked.value : this.isUnlocked,
+      isCompleted:
+          data.isCompleted.present ? data.isCompleted.value : this.isCompleted,
     );
   }
 
@@ -239,14 +274,15 @@ class LessonRow extends DataClass implements Insertable<LessonRow> {
           ..write('title: $title, ')
           ..write('description: $description, ')
           ..write('orderIndex: $orderIndex, ')
-          ..write('isUnlocked: $isUnlocked')
+          ..write('isUnlocked: $isUnlocked, ')
+          ..write('isCompleted: $isCompleted')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, romanNumber, title, description, orderIndex, isUnlocked);
+  int get hashCode => Object.hash(
+      id, romanNumber, title, description, orderIndex, isUnlocked, isCompleted);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -256,7 +292,8 @@ class LessonRow extends DataClass implements Insertable<LessonRow> {
           other.title == this.title &&
           other.description == this.description &&
           other.orderIndex == this.orderIndex &&
-          other.isUnlocked == this.isUnlocked);
+          other.isUnlocked == this.isUnlocked &&
+          other.isCompleted == this.isCompleted);
 }
 
 class LessonsCompanion extends UpdateCompanion<LessonRow> {
@@ -266,6 +303,7 @@ class LessonsCompanion extends UpdateCompanion<LessonRow> {
   final Value<String?> description;
   final Value<int> orderIndex;
   final Value<bool> isUnlocked;
+  final Value<bool> isCompleted;
   const LessonsCompanion({
     this.id = const Value.absent(),
     this.romanNumber = const Value.absent(),
@@ -273,6 +311,7 @@ class LessonsCompanion extends UpdateCompanion<LessonRow> {
     this.description = const Value.absent(),
     this.orderIndex = const Value.absent(),
     this.isUnlocked = const Value.absent(),
+    this.isCompleted = const Value.absent(),
   });
   LessonsCompanion.insert({
     this.id = const Value.absent(),
@@ -281,6 +320,7 @@ class LessonsCompanion extends UpdateCompanion<LessonRow> {
     this.description = const Value.absent(),
     required int orderIndex,
     this.isUnlocked = const Value.absent(),
+    this.isCompleted = const Value.absent(),
   })  : title = Value(title),
         orderIndex = Value(orderIndex);
   static Insertable<LessonRow> custom({
@@ -290,6 +330,7 @@ class LessonsCompanion extends UpdateCompanion<LessonRow> {
     Expression<String>? description,
     Expression<int>? orderIndex,
     Expression<bool>? isUnlocked,
+    Expression<bool>? isCompleted,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -298,6 +339,7 @@ class LessonsCompanion extends UpdateCompanion<LessonRow> {
       if (description != null) 'description': description,
       if (orderIndex != null) 'order_index': orderIndex,
       if (isUnlocked != null) 'is_unlocked': isUnlocked,
+      if (isCompleted != null) 'is_completed': isCompleted,
     });
   }
 
@@ -307,7 +349,8 @@ class LessonsCompanion extends UpdateCompanion<LessonRow> {
       Value<String>? title,
       Value<String?>? description,
       Value<int>? orderIndex,
-      Value<bool>? isUnlocked}) {
+      Value<bool>? isUnlocked,
+      Value<bool>? isCompleted}) {
     return LessonsCompanion(
       id: id ?? this.id,
       romanNumber: romanNumber ?? this.romanNumber,
@@ -315,6 +358,7 @@ class LessonsCompanion extends UpdateCompanion<LessonRow> {
       description: description ?? this.description,
       orderIndex: orderIndex ?? this.orderIndex,
       isUnlocked: isUnlocked ?? this.isUnlocked,
+      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 
@@ -339,6 +383,9 @@ class LessonsCompanion extends UpdateCompanion<LessonRow> {
     if (isUnlocked.present) {
       map['is_unlocked'] = Variable<bool>(isUnlocked.value);
     }
+    if (isCompleted.present) {
+      map['is_completed'] = Variable<bool>(isCompleted.value);
+    }
     return map;
   }
 
@@ -350,7 +397,8 @@ class LessonsCompanion extends UpdateCompanion<LessonRow> {
           ..write('title: $title, ')
           ..write('description: $description, ')
           ..write('orderIndex: $orderIndex, ')
-          ..write('isUnlocked: $isUnlocked')
+          ..write('isUnlocked: $isUnlocked, ')
+          ..write('isCompleted: $isCompleted')
           ..write(')'))
         .toString();
   }
@@ -424,6 +472,16 @@ class $SublessonsTable extends Sublessons
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('CHECK ("is_unlocked" IN (0, 1))'),
       defaultValue: const Constant(false));
+  static const VerificationMeta _isCompletedMeta =
+      const VerificationMeta('isCompleted');
+  @override
+  late final GeneratedColumn<bool> isCompleted = GeneratedColumn<bool>(
+      'is_completed', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("is_completed" IN (0, 1))'),
+      defaultValue: const Constant(false));
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -433,7 +491,8 @@ class $SublessonsTable extends Sublessons
         type,
         theoryContent,
         orderIndex,
-        isUnlocked
+        isUnlocked,
+        isCompleted
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -494,6 +553,12 @@ class $SublessonsTable extends Sublessons
           isUnlocked.isAcceptableOrUnknown(
               data['is_unlocked']!, _isUnlockedMeta));
     }
+    if (data.containsKey('is_completed')) {
+      context.handle(
+          _isCompletedMeta,
+          isCompleted.isAcceptableOrUnknown(
+              data['is_completed']!, _isCompletedMeta));
+    }
     return context;
   }
 
@@ -519,6 +584,8 @@ class $SublessonsTable extends Sublessons
           .read(DriftSqlType.int, data['${effectivePrefix}order_index'])!,
       isUnlocked: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}is_unlocked'])!,
+      isCompleted: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_completed'])!,
     );
   }
 
@@ -543,6 +610,7 @@ class SublessonRow extends DataClass implements Insertable<SublessonRow> {
   final String? theoryContent;
   final int orderIndex;
   final bool isUnlocked;
+  final bool isCompleted;
   const SublessonRow(
       {required this.id,
       required this.lessonId,
@@ -551,7 +619,8 @@ class SublessonRow extends DataClass implements Insertable<SublessonRow> {
       required this.type,
       this.theoryContent,
       required this.orderIndex,
-      required this.isUnlocked});
+      required this.isUnlocked,
+      required this.isCompleted});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -565,6 +634,7 @@ class SublessonRow extends DataClass implements Insertable<SublessonRow> {
     }
     map['order_index'] = Variable<int>(orderIndex);
     map['is_unlocked'] = Variable<bool>(isUnlocked);
+    map['is_completed'] = Variable<bool>(isCompleted);
     return map;
   }
 
@@ -580,6 +650,7 @@ class SublessonRow extends DataClass implements Insertable<SublessonRow> {
           : Value(theoryContent),
       orderIndex: Value(orderIndex),
       isUnlocked: Value(isUnlocked),
+      isCompleted: Value(isCompleted),
     );
   }
 
@@ -595,6 +666,7 @@ class SublessonRow extends DataClass implements Insertable<SublessonRow> {
       theoryContent: serializer.fromJson<String?>(json['theoryContent']),
       orderIndex: serializer.fromJson<int>(json['orderIndex']),
       isUnlocked: serializer.fromJson<bool>(json['isUnlocked']),
+      isCompleted: serializer.fromJson<bool>(json['isCompleted']),
     );
   }
   @override
@@ -609,6 +681,7 @@ class SublessonRow extends DataClass implements Insertable<SublessonRow> {
       'theoryContent': serializer.toJson<String?>(theoryContent),
       'orderIndex': serializer.toJson<int>(orderIndex),
       'isUnlocked': serializer.toJson<bool>(isUnlocked),
+      'isCompleted': serializer.toJson<bool>(isCompleted),
     };
   }
 
@@ -620,7 +693,8 @@ class SublessonRow extends DataClass implements Insertable<SublessonRow> {
           String? type,
           Value<String?> theoryContent = const Value.absent(),
           int? orderIndex,
-          bool? isUnlocked}) =>
+          bool? isUnlocked,
+          bool? isCompleted}) =>
       SublessonRow(
         id: id ?? this.id,
         lessonId: lessonId ?? this.lessonId,
@@ -631,6 +705,7 @@ class SublessonRow extends DataClass implements Insertable<SublessonRow> {
             theoryContent.present ? theoryContent.value : this.theoryContent,
         orderIndex: orderIndex ?? this.orderIndex,
         isUnlocked: isUnlocked ?? this.isUnlocked,
+        isCompleted: isCompleted ?? this.isCompleted,
       );
   SublessonRow copyWithCompanion(SublessonsCompanion data) {
     return SublessonRow(
@@ -647,6 +722,8 @@ class SublessonRow extends DataClass implements Insertable<SublessonRow> {
           data.orderIndex.present ? data.orderIndex.value : this.orderIndex,
       isUnlocked:
           data.isUnlocked.present ? data.isUnlocked.value : this.isUnlocked,
+      isCompleted:
+          data.isCompleted.present ? data.isCompleted.value : this.isCompleted,
     );
   }
 
@@ -660,14 +737,15 @@ class SublessonRow extends DataClass implements Insertable<SublessonRow> {
           ..write('type: $type, ')
           ..write('theoryContent: $theoryContent, ')
           ..write('orderIndex: $orderIndex, ')
-          ..write('isUnlocked: $isUnlocked')
+          ..write('isUnlocked: $isUnlocked, ')
+          ..write('isCompleted: $isCompleted')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode => Object.hash(id, lessonId, pointNumber, title, type,
-      theoryContent, orderIndex, isUnlocked);
+      theoryContent, orderIndex, isUnlocked, isCompleted);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -679,7 +757,8 @@ class SublessonRow extends DataClass implements Insertable<SublessonRow> {
           other.type == this.type &&
           other.theoryContent == this.theoryContent &&
           other.orderIndex == this.orderIndex &&
-          other.isUnlocked == this.isUnlocked);
+          other.isUnlocked == this.isUnlocked &&
+          other.isCompleted == this.isCompleted);
 }
 
 class SublessonsCompanion extends UpdateCompanion<SublessonRow> {
@@ -691,6 +770,7 @@ class SublessonsCompanion extends UpdateCompanion<SublessonRow> {
   final Value<String?> theoryContent;
   final Value<int> orderIndex;
   final Value<bool> isUnlocked;
+  final Value<bool> isCompleted;
   const SublessonsCompanion({
     this.id = const Value.absent(),
     this.lessonId = const Value.absent(),
@@ -700,6 +780,7 @@ class SublessonsCompanion extends UpdateCompanion<SublessonRow> {
     this.theoryContent = const Value.absent(),
     this.orderIndex = const Value.absent(),
     this.isUnlocked = const Value.absent(),
+    this.isCompleted = const Value.absent(),
   });
   SublessonsCompanion.insert({
     this.id = const Value.absent(),
@@ -710,6 +791,7 @@ class SublessonsCompanion extends UpdateCompanion<SublessonRow> {
     this.theoryContent = const Value.absent(),
     required int orderIndex,
     this.isUnlocked = const Value.absent(),
+    this.isCompleted = const Value.absent(),
   })  : lessonId = Value(lessonId),
         pointNumber = Value(pointNumber),
         title = Value(title),
@@ -724,6 +806,7 @@ class SublessonsCompanion extends UpdateCompanion<SublessonRow> {
     Expression<String>? theoryContent,
     Expression<int>? orderIndex,
     Expression<bool>? isUnlocked,
+    Expression<bool>? isCompleted,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -734,6 +817,7 @@ class SublessonsCompanion extends UpdateCompanion<SublessonRow> {
       if (theoryContent != null) 'theory_content': theoryContent,
       if (orderIndex != null) 'order_index': orderIndex,
       if (isUnlocked != null) 'is_unlocked': isUnlocked,
+      if (isCompleted != null) 'is_completed': isCompleted,
     });
   }
 
@@ -745,7 +829,8 @@ class SublessonsCompanion extends UpdateCompanion<SublessonRow> {
       Value<String>? type,
       Value<String?>? theoryContent,
       Value<int>? orderIndex,
-      Value<bool>? isUnlocked}) {
+      Value<bool>? isUnlocked,
+      Value<bool>? isCompleted}) {
     return SublessonsCompanion(
       id: id ?? this.id,
       lessonId: lessonId ?? this.lessonId,
@@ -755,6 +840,7 @@ class SublessonsCompanion extends UpdateCompanion<SublessonRow> {
       theoryContent: theoryContent ?? this.theoryContent,
       orderIndex: orderIndex ?? this.orderIndex,
       isUnlocked: isUnlocked ?? this.isUnlocked,
+      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 
@@ -785,6 +871,9 @@ class SublessonsCompanion extends UpdateCompanion<SublessonRow> {
     if (isUnlocked.present) {
       map['is_unlocked'] = Variable<bool>(isUnlocked.value);
     }
+    if (isCompleted.present) {
+      map['is_completed'] = Variable<bool>(isCompleted.value);
+    }
     return map;
   }
 
@@ -798,7 +887,8 @@ class SublessonsCompanion extends UpdateCompanion<SublessonRow> {
           ..write('type: $type, ')
           ..write('theoryContent: $theoryContent, ')
           ..write('orderIndex: $orderIndex, ')
-          ..write('isUnlocked: $isUnlocked')
+          ..write('isUnlocked: $isUnlocked, ')
+          ..write('isCompleted: $isCompleted')
           ..write(')'))
         .toString();
   }
@@ -1873,6 +1963,7 @@ typedef $$LessonsTableCreateCompanionBuilder = LessonsCompanion Function({
   Value<String?> description,
   required int orderIndex,
   Value<bool> isUnlocked,
+  Value<bool> isCompleted,
 });
 typedef $$LessonsTableUpdateCompanionBuilder = LessonsCompanion Function({
   Value<int> id,
@@ -1881,6 +1972,7 @@ typedef $$LessonsTableUpdateCompanionBuilder = LessonsCompanion Function({
   Value<String?> description,
   Value<int> orderIndex,
   Value<bool> isUnlocked,
+  Value<bool> isCompleted,
 });
 
 class $$LessonsTableTableManager extends RootTableManager<
@@ -1906,6 +1998,7 @@ class $$LessonsTableTableManager extends RootTableManager<
             Value<String?> description = const Value.absent(),
             Value<int> orderIndex = const Value.absent(),
             Value<bool> isUnlocked = const Value.absent(),
+            Value<bool> isCompleted = const Value.absent(),
           }) =>
               LessonsCompanion(
             id: id,
@@ -1914,6 +2007,7 @@ class $$LessonsTableTableManager extends RootTableManager<
             description: description,
             orderIndex: orderIndex,
             isUnlocked: isUnlocked,
+            isCompleted: isCompleted,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -1922,6 +2016,7 @@ class $$LessonsTableTableManager extends RootTableManager<
             Value<String?> description = const Value.absent(),
             required int orderIndex,
             Value<bool> isUnlocked = const Value.absent(),
+            Value<bool> isCompleted = const Value.absent(),
           }) =>
               LessonsCompanion.insert(
             id: id,
@@ -1930,6 +2025,7 @@ class $$LessonsTableTableManager extends RootTableManager<
             description: description,
             orderIndex: orderIndex,
             isUnlocked: isUnlocked,
+            isCompleted: isCompleted,
           ),
         ));
 }
@@ -1964,6 +2060,11 @@ class $$LessonsTableFilterComposer
 
   ColumnFilters<bool> get isUnlocked => $state.composableBuilder(
       column: $state.table.isUnlocked,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get isCompleted => $state.composableBuilder(
+      column: $state.table.isCompleted,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -2039,6 +2140,11 @@ class $$LessonsTableOrderingComposer
       column: $state.table.isUnlocked,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get isCompleted => $state.composableBuilder(
+      column: $state.table.isCompleted,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
 typedef $$SublessonsTableCreateCompanionBuilder = SublessonsCompanion Function({
@@ -2050,6 +2156,7 @@ typedef $$SublessonsTableCreateCompanionBuilder = SublessonsCompanion Function({
   Value<String?> theoryContent,
   required int orderIndex,
   Value<bool> isUnlocked,
+  Value<bool> isCompleted,
 });
 typedef $$SublessonsTableUpdateCompanionBuilder = SublessonsCompanion Function({
   Value<int> id,
@@ -2060,6 +2167,7 @@ typedef $$SublessonsTableUpdateCompanionBuilder = SublessonsCompanion Function({
   Value<String?> theoryContent,
   Value<int> orderIndex,
   Value<bool> isUnlocked,
+  Value<bool> isCompleted,
 });
 
 class $$SublessonsTableTableManager extends RootTableManager<
@@ -2087,6 +2195,7 @@ class $$SublessonsTableTableManager extends RootTableManager<
             Value<String?> theoryContent = const Value.absent(),
             Value<int> orderIndex = const Value.absent(),
             Value<bool> isUnlocked = const Value.absent(),
+            Value<bool> isCompleted = const Value.absent(),
           }) =>
               SublessonsCompanion(
             id: id,
@@ -2097,6 +2206,7 @@ class $$SublessonsTableTableManager extends RootTableManager<
             theoryContent: theoryContent,
             orderIndex: orderIndex,
             isUnlocked: isUnlocked,
+            isCompleted: isCompleted,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -2107,6 +2217,7 @@ class $$SublessonsTableTableManager extends RootTableManager<
             Value<String?> theoryContent = const Value.absent(),
             required int orderIndex,
             Value<bool> isUnlocked = const Value.absent(),
+            Value<bool> isCompleted = const Value.absent(),
           }) =>
               SublessonsCompanion.insert(
             id: id,
@@ -2117,6 +2228,7 @@ class $$SublessonsTableTableManager extends RootTableManager<
             theoryContent: theoryContent,
             orderIndex: orderIndex,
             isUnlocked: isUnlocked,
+            isCompleted: isCompleted,
           ),
         ));
 }
@@ -2156,6 +2268,11 @@ class $$SublessonsTableFilterComposer
 
   ColumnFilters<bool> get isUnlocked => $state.composableBuilder(
       column: $state.table.isUnlocked,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get isCompleted => $state.composableBuilder(
+      column: $state.table.isCompleted,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -2233,6 +2350,11 @@ class $$SublessonsTableOrderingComposer
 
   ColumnOrderings<bool> get isUnlocked => $state.composableBuilder(
       column: $state.table.isUnlocked,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get isCompleted => $state.composableBuilder(
+      column: $state.table.isCompleted,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

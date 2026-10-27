@@ -33,6 +33,10 @@ class LessonTheoryView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final rulesAsync = ref.watch(lessonGrammarRulesProvider(lessonId));
+    final lessonMapState = ref.watch(lessonMapControllerProvider);
+    final currentLesson =
+        lessonMapState.lessons.where((l) => l.id == lessonId).firstOrNull;
+    final isAlreadyCompleted = currentLesson?.isCompleted ?? false;
 
     return ResponsiveScaffold(
       appBar: AppBar(
@@ -51,13 +55,22 @@ class LessonTheoryView extends ConsumerWidget {
         ),
         child: SafeArea(
           top: false,
-          child: AppActionButton(
-            label: 'Entendido, completar lección',
-            icon: Icons.check_circle_rounded,
-            onPressed: () async {
-              await _completeAndUnlockNext(context, ref);
-            },
-          ),
+          child: isAlreadyCompleted
+              ? AppActionButton(
+                  label: 'Lección ya completada',
+                  icon: Icons.check_circle_outline_rounded,
+                  variant: AppButtonVariant.secondary,
+                  onPressed: () {
+                    context.router.maybePop();
+                  },
+                )
+              : AppActionButton(
+                  label: 'Entendido, completar lección',
+                  icon: Icons.check_circle_rounded,
+                  onPressed: () async {
+                    await _completeAndUnlockNext(context, ref);
+                  },
+                ),
         ),
       ),
       bodyBuilder: (context, info) {
@@ -120,6 +133,9 @@ class LessonTheoryView extends ConsumerWidget {
 
   Future<void> _completeAndUnlockNext(BuildContext context, WidgetRef ref) async {
     final lessonRepo = ref.read(lessonRepositoryProvider);
+    // Registrar lección como completada de forma permanente en SQLite
+    await lessonRepo.completeLesson(lessonId);
+
     final allLessons = await lessonRepo.getLessons();
 
     final currentIndex = allLessons.indexWhere((l) => l.id == lessonId);
@@ -129,6 +145,8 @@ class LessonTheoryView extends ConsumerWidget {
         await lessonRepo.unlockLesson(nextLesson.id);
       }
     }
+    // Refrescar mapa de lecciones para actualizar estado visual y candados
+    ref.read(lessonMapControllerProvider.notifier).loadLessons();
 
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(

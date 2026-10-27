@@ -112,21 +112,29 @@ class ExerciseSessionView extends ConsumerWidget {
     }
 
     if (sessionState.isLessonCompleted) {
+      final isPassed = sessionState.isLessonPassed;
+      final scorePct = sessionState.scorePercentage.toStringAsFixed(0);
+
       return ResponsiveScaffold(
         bodyBuilder: (context, info) => Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: info.verticalSpacing * 2),
+            padding: EdgeInsets.symmetric(
+              vertical: info.verticalSpacing * 2,
+              horizontal: info.horizontalPadding,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.emoji_events_rounded,
+                Icon(
+                  isPassed
+                      ? Icons.emoji_events_rounded
+                      : Icons.replay_circle_filled_rounded,
                   size: 88,
-                  color: AppColors.goldHighlight,
+                  color: isPassed ? AppColors.goldHighlight : AppColors.terracottaAccent,
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  '¡Lección Completada!',
+                  isPassed ? '¡Lección Superada!' : 'Casi lo logras',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: info.scaleFont(26),
@@ -136,19 +144,59 @@ class ExerciseSessionView extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Aciertos en la sesión: ${sessionState.correctAnswersCount} / ${sessionState.exercises.length}',
+                  'Aciertos obtenidos: ${sessionState.totalAcquiredCorrect} / ${sessionState.exercises.length} ($scorePct%)',
                   style: TextStyle(
                     fontSize: info.scaleFont(16),
                     color: AppColors.slateMuted,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: isPassed ? AppColors.successSurface : AppColors.errorSurface,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: isPassed
+                          ? AppColors.successGreen.withValues(alpha: 0.6)
+                          : AppColors.errorRed.withValues(alpha: 0.6),
+                      width: 1.2,
+                    ),
+                  ),
+                  child: Text(
+                    isPassed
+                        ? '¡Excelente trabajo! Has alcanzado el mínimo requerido (50%) y desbloqueado la siguiente lección.'
+                        : 'Se requiere al menos un 50% de aciertos para desbloquear la siguiente lección. ¡Repasa y vuelve a intentarlo!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: info.scaleFont(13.5),
+                      fontWeight: FontWeight.w600,
+                      color: isPassed ? AppColors.successGreen : AppColors.errorRed,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 28),
-                AppActionButton(
-                  label: 'Volver a las lecciones',
-                  icon: Icons.check_rounded,
-                  onPressed: () => context.router.maybePop(),
-                ),
+                if (isPassed) ...[
+                  AppActionButton(
+                    label: 'Volver a las lecciones',
+                    icon: Icons.check_rounded,
+                    onPressed: () => context.router.maybePop(),
+                  ),
+                ] else ...[
+                  AppActionButton(
+                    label: 'Reintentar lección',
+                    icon: Icons.refresh_rounded,
+                    onPressed: () => controller.retryLesson(),
+                  ),
+                  const SizedBox(height: 12),
+                  AppActionButton(
+                    label: 'Volver al mapa',
+                    icon: Icons.arrow_back_rounded,
+                    variant: AppButtonVariant.secondary,
+                    onPressed: () => context.router.maybePop(),
+                  ),
+                ],
               ],
             ),
           ),
@@ -178,8 +226,13 @@ class ExerciseSessionView extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ExerciseProgressHeader(
-              currentStep: sessionState.currentExerciseIndex,
-              totalSteps: sessionState.exercises.length,
+              currentStep: sessionState.isReviewMode
+                  ? sessionState.reviewCurrentIndex
+                  : sessionState.currentExerciseIndex,
+              totalSteps: sessionState.isReviewMode
+                  ? sessionState.failedExerciseIndices.length
+                  : sessionState.exercises.length,
+              isReviewMode: sessionState.isReviewMode,
               onClose: () => context.router.maybePop(),
             ),
             Expanded(

@@ -44,6 +44,7 @@ class SublessonEntity {
   final String? theoryContent;
   final int orderIndex;
   final bool isUnlocked;
+  final bool isCompleted;
 
   const SublessonEntity({
     required this.id,
@@ -54,6 +55,7 @@ class SublessonEntity {
     this.theoryContent,
     required this.orderIndex,
     required this.isUnlocked,
+    this.isCompleted = false,
   });
 
   SublessonEntity copyWith({
@@ -65,6 +67,7 @@ class SublessonEntity {
     String? theoryContent,
     int? orderIndex,
     bool? isUnlocked,
+    bool? isCompleted,
   }) {
     return SublessonEntity(
       id: id ?? this.id,
@@ -75,6 +78,7 @@ class SublessonEntity {
       theoryContent: theoryContent ?? this.theoryContent,
       orderIndex: orderIndex ?? this.orderIndex,
       isUnlocked: isUnlocked ?? this.isUnlocked,
+      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 }

@@ -61,14 +61,19 @@ class LessonCardWidget extends StatelessWidget {
     final String buttonLabel = switch (lessonType) {
       _ when !isUnlocked => 'Bloqueada',
       _ when sublessons.isNotEmpty => 'Explorar subtemas (${sublessons.length})',
-      LessonType.theory => lesson.id == 1 ? 'Ver introducción' : 'Estudiar lección',
-      LessonType.practice => 'Practicar (10 ejercicios)',
+      LessonType.theory => lesson.isCompleted
+          ? 'Repasar teoría'
+          : (lesson.id == 1 ? 'Ver introducción' : 'Estudiar lección'),
+      LessonType.practice => lesson.isCompleted
+          ? 'Volver a practicar'
+          : 'Practicar (10 ejercicios)',
       LessonType.comingSoon => 'Más lecciones próximamente',
     };
 
     final IconData buttonIcon = switch (lessonType) {
       _ when !isUnlocked => Icons.lock_outline,
       _ when sublessons.isNotEmpty => Icons.format_list_bulleted_rounded,
+      _ when lesson.isCompleted => Icons.refresh_rounded,
       LessonType.theory => Icons.auto_stories_rounded,
       LessonType.practice => Icons.play_arrow_rounded,
       LessonType.comingSoon => Icons.schedule_rounded,
@@ -129,6 +134,38 @@ class LessonCardWidget extends StatelessWidget {
                               ),
                             ),
                           ),
+                          if (lesson.isCompleted) ...[
+                            const SizedBox(width: 6),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: AppColors.successSurface,
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(
+                                  color: AppColors.successGreen.withValues(alpha: 0.4),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(
+                                    Icons.check_circle_rounded,
+                                    size: 11,
+                                    color: AppColors.successGreen,
+                                  ),
+                                  const SizedBox(width: 3),
+                                  Text(
+                                    'Completada',
+                                    style: TextStyle(
+                                      fontSize: info.scaleFont(10),
+                                      fontWeight: FontWeight.w800,
+                                      color: AppColors.successGreen,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ],
                       ),
                       const SizedBox(height: 2),
@@ -292,6 +329,14 @@ class _SublessonItemTile extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 6),
+            if (sublesson.isCompleted) ...[
+              const Icon(
+                Icons.check_circle_rounded,
+                size: 16,
+                color: AppColors.successGreen,
+              ),
+              const SizedBox(width: 4),
+            ],
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(

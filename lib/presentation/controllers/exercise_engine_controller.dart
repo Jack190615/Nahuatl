@@ -46,11 +46,26 @@ class ExerciseSessionState {
   /// Texto ingresado por el usuario en un [TextInputExercise].
   final String currentTextInput;
 
-  /// Conteo de aciertos acumulados en la sesión.
+  /// Conteo de aciertos acumulados en la sesión inicial.
   final int correctAnswersCount;
 
-  /// Indica si el usuario ha completado el bucle de los 10 ejercicios.
+  /// Indica si el usuario ha completado el bucle de los 10 ejercicios (incluyendo revisión).
   final bool isLessonCompleted;
+
+  /// Índices de los ejercicios en los que el usuario cometió algún error en la ronda inicial.
+  final List<int> failedExerciseIndices;
+
+  /// Indica si nos encontramos en la fase interactiva de repaso de errores al final de la lección.
+  final bool isReviewMode;
+
+  /// Índice dentro de la lista de errores [failedExerciseIndices].
+  final int reviewCurrentIndex;
+
+  /// Cantidad de errores corregidos exitosamente durante la fase de repaso.
+  final int correctedCount;
+
+  /// Indica si el usuario superó la lección alcanzando al menos el 50% de aciertos.
+  final bool isLessonPassed;
 
   const ExerciseSessionState({
     required this.lessonId,
@@ -66,6 +81,11 @@ class ExerciseSessionState {
     this.currentTextInput = '',
     this.correctAnswersCount = 0,
     this.isLessonCompleted = false,
+    this.failedExerciseIndices = const [],
+    this.isReviewMode = false,
+    this.reviewCurrentIndex = 0,
+    this.correctedCount = 0,
+    this.isLessonPassed = false,
   });
 
   /// Obtiene el ejercicio activo actual o `null` si aún está cargando / terminó.
@@ -81,9 +101,26 @@ class ExerciseSessionState {
   /// UI Defensiva: Indica si el ejercicio activo tiene un archivo de audio válido en `assets/audio/`.
   bool get currentExerciseHasAudio => currentExercise?.hasAudio ?? false;
 
-  /// Progreso de la lección de 0.0 a 1.0 (basado en los 10 ejercicios).
-  double get progress =>
-      exercises.isEmpty ? 0.0 : currentExerciseIndex / exercises.length;
+  /// Progreso de la lección de 0.0 a 1.0.
+  double get progress {
+    if (isReviewMode) {
+      return failedExerciseIndices.isEmpty
+          ? 1.0
+          : (reviewCurrentIndex / failedExerciseIndices.length).clamp(0.0, 1.0);
+    }
+    return exercises.isEmpty
+        ? 0.0
+        : (currentExerciseIndex / exercises.length).clamp(0.0, 1.0);
+  }
+
+  /// Total acumulado de respuestas correctas (iniciales + corregidas en repaso).
+  int get totalAcquiredCorrect =>
+      (correctAnswersCount + correctedCount).clamp(0, exercises.length);
+
+  /// Porcentaje de acierto obtenido en la sesión (0.0 a 100.0).
+  double get scorePercentage => exercises.isEmpty
+      ? 0.0
+      : ((totalAcquiredCorrect / exercises.length) * 100).clamp(0.0, 100.0);
 
   ExerciseSessionState copyWith({
     bool? isLoading,
@@ -101,6 +138,11 @@ class ExerciseSessionState {
     String? currentTextInput,
     int? correctAnswersCount,
     bool? isLessonCompleted,
+    List<int>? failedExerciseIndices,
+    bool? isReviewMode,
+    int? reviewCurrentIndex,
+    int? correctedCount,
+    bool? isLessonPassed,
   }) {
     return ExerciseSessionState(
       lessonId: lessonId,
@@ -120,6 +162,11 @@ class ExerciseSessionState {
       currentTextInput: currentTextInput ?? this.currentTextInput,
       correctAnswersCount: correctAnswersCount ?? this.correctAnswersCount,
       isLessonCompleted: isLessonCompleted ?? this.isLessonCompleted,
+      failedExerciseIndices: failedExerciseIndices ?? this.failedExerciseIndices,
+      isReviewMode: isReviewMode ?? this.isReviewMode,
+      reviewCurrentIndex: reviewCurrentIndex ?? this.reviewCurrentIndex,
+      correctedCount: correctedCount ?? this.correctedCount,
+      isLessonPassed: isLessonPassed ?? this.isLessonPassed,
     );
   }
 }
@@ -241,6 +288,14 @@ class ExerciseEngineController extends StateNotifier<ExerciseSessionState> {
         matchedIds: updatedMatches,
       );
 
+      final isReview = state.isReviewMode;
+      final updatedCorrect = !isReview && allPairsCompleted
+          ? state.correctAnswersCount + 1
+          : state.correctAnswersCount;
+      final updatedCorrected = isReview && allPairsCompleted
+          ? state.correctedCount + 1
+          : state.correctedCount;
+
       state = state.copyWith(
         matchedDictionaryIds: updatedMatches,
         clearSelectedNahuatl: true,
@@ -248,16 +303,21 @@ class ExerciseEngineController extends StateNotifier<ExerciseSessionState> {
         evaluationStatus: allPairsCompleted
             ? ExerciseEvaluationStatus.correct
             : ExerciseEvaluationStatus.inProgress,
-        correctAnswersCount: allPairsCompleted
-            ? state.correctAnswersCount + 1
-            : state.correctAnswersCount,
+        correctAnswersCount: updatedCorrect,
+        correctedCount: updatedCorrected,
       );
       return true;
     } else {
+      final updatedFailed = (!state.isReviewMode &&
+              !state.failedExerciseIndices.contains(state.currentExerciseIndex))
+          ? [...state.failedExerciseIndices, state.currentExerciseIndex]
+          : state.failedExerciseIndices;
+
       state = state.copyWith(
         clearSelectedNahuatl: true,
         clearSelectedSpanish: true,
         evaluationStatus: ExerciseEvaluationStatus.incorrect,
+        failedExerciseIndices: updatedFailed,
       );
       return false;
     }
@@ -301,13 +361,26 @@ class ExerciseEngineController extends StateNotifier<ExerciseSessionState> {
       userOrderedWords: reconstructedArray,
     );
 
+    final isReview = state.isReviewMode;
+    final updatedCorrect = !isReview && isSuccess
+        ? state.correctAnswersCount + 1
+        : state.correctAnswersCount;
+    final updatedCorrected = isReview && isSuccess
+        ? state.correctedCount + 1
+        : state.correctedCount;
+    final updatedFailed = (!isSuccess &&
+            !isReview &&
+            !state.failedExerciseIndices.contains(state.currentExerciseIndex))
+        ? [...state.failedExerciseIndices, state.currentExerciseIndex]
+        : state.failedExerciseIndices;
+
     state = state.copyWith(
       evaluationStatus: isSuccess
           ? ExerciseEvaluationStatus.correct
           : ExerciseEvaluationStatus.incorrect,
-      correctAnswersCount: isSuccess
-          ? state.correctAnswersCount + 1
-          : state.correctAnswersCount,
+      correctAnswersCount: updatedCorrect,
+      correctedCount: updatedCorrected,
+      failedExerciseIndices: updatedFailed,
     );
 
     return isSuccess;
@@ -339,45 +412,117 @@ class ExerciseEngineController extends StateNotifier<ExerciseSessionState> {
       rawUserInput: inputToEvaluate,
     );
 
+    final isReview = state.isReviewMode;
+    final updatedCorrect = !isReview && isSuccess
+        ? state.correctAnswersCount + 1
+        : state.correctAnswersCount;
+    final updatedCorrected = isReview && isSuccess
+        ? state.correctedCount + 1
+        : state.correctedCount;
+    final updatedFailed = (!isSuccess &&
+            !isReview &&
+            !state.failedExerciseIndices.contains(state.currentExerciseIndex))
+        ? [...state.failedExerciseIndices, state.currentExerciseIndex]
+        : state.failedExerciseIndices;
+
     state = state.copyWith(
       currentTextInput: inputToEvaluate,
       evaluationStatus: isSuccess
           ? ExerciseEvaluationStatus.correct
           : ExerciseEvaluationStatus.incorrect,
-      correctAnswersCount: isSuccess
-          ? state.correctAnswersCount + 1
-          : state.correctAnswersCount,
+      correctAnswersCount: updatedCorrect,
+      correctedCount: updatedCorrected,
+      failedExerciseIndices: updatedFailed,
     );
 
     return isSuccess;
   }
 
   // ===========================================================================
-  // AVANCE DEL BUCLE DE 10 EJERCICIOS Y DESBLOQUEO DE SIGUIENTE LECCIÓN
+  // AVANCE DEL BUCLE DE 10 EJERCICIOS, REPASO DE ERRORES Y CONDICIÓN DE 50%
   // ===========================================================================
 
   Future<void> nextExercise() async {
-    final nextIndex = state.currentExerciseIndex + 1;
+    if (!state.isReviewMode) {
+      final nextIndex = state.currentExerciseIndex + 1;
 
-    if (nextIndex >= state.exercises.length) {
-      // Desbloquea la siguiente lección al finalizar el bucle
+      if (nextIndex < state.exercises.length) {
+        state = state.copyWith(
+          currentExerciseIndex: nextIndex,
+          evaluationStatus: ExerciseEvaluationStatus.idle,
+          matchedDictionaryIds: const {},
+          clearSelectedNahuatl: true,
+          clearSelectedSpanish: true,
+          selectedWordChips: const [],
+          currentTextInput: '',
+        );
+        return;
+      }
+
+      // Fin de la ronda principal de la lección
+      // Si el usuario tuvo errores, iniciar ronda interactiva de corrección
+      if (state.failedExerciseIndices.isNotEmpty) {
+        final firstFailedIndex = state.failedExerciseIndices.first;
+        state = state.copyWith(
+          isReviewMode: true,
+          reviewCurrentIndex: 0,
+          currentExerciseIndex: firstFailedIndex,
+          evaluationStatus: ExerciseEvaluationStatus.idle,
+          matchedDictionaryIds: const {},
+          clearSelectedNahuatl: true,
+          clearSelectedSpanish: true,
+          selectedWordChips: const [],
+          currentTextInput: '',
+        );
+        return;
+      }
+
+      // No hubo ningún error (100% de aciertos directos)
+      await _finalizeSession();
+    } else {
+      // En fase interactiva de repaso de errores
+      final nextReview = state.reviewCurrentIndex + 1;
+
+      if (nextReview < state.failedExerciseIndices.length) {
+        final nextExerciseIdx = state.failedExerciseIndices[nextReview];
+        state = state.copyWith(
+          reviewCurrentIndex: nextReview,
+          currentExerciseIndex: nextExerciseIdx,
+          evaluationStatus: ExerciseEvaluationStatus.idle,
+          matchedDictionaryIds: const {},
+          clearSelectedNahuatl: true,
+          clearSelectedSpanish: true,
+          selectedWordChips: const [],
+          currentTextInput: '',
+        );
+        return;
+      }
+
+      // Concluyó la revisión de todos los ejercicios con error
+      await _finalizeSession();
+    }
+  }
+
+  Future<void> _finalizeSession() async {
+    final passed = state.scorePercentage >= 50.0;
+
+    if (passed) {
+      // Desbloquea la siguiente lección al alcanzar el mínimo de 50%
       await _unlockNextLessonIfAvailable();
-      state = state.copyWith(
-        isLessonCompleted: true,
-        evaluationStatus: ExerciseEvaluationStatus.correct,
-      );
-      return;
+      // Registra la lección como completada en SQLite
+      await _lessonRepository.completeLesson(state.lessonId);
     }
 
     state = state.copyWith(
-      currentExerciseIndex: nextIndex,
-      evaluationStatus: ExerciseEvaluationStatus.idle,
-      matchedDictionaryIds: const {},
-      clearSelectedNahuatl: true,
-      clearSelectedSpanish: true,
-      selectedWordChips: const [],
-      currentTextInput: '',
+      isLessonCompleted: true,
+      isLessonPassed: passed,
+      evaluationStatus: ExerciseEvaluationStatus.correct,
     );
+  }
+
+  Future<void> retryLesson() async {
+    state = ExerciseSessionState(lessonId: state.lessonId);
+    await loadLessonExercises();
   }
 
   Future<void> _unlockNextLessonIfAvailable() async {

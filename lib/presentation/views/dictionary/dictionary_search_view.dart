@@ -24,15 +24,11 @@ class DictionarySearchView extends ConsumerWidget {
           tooltip: 'Volver a Inicio',
           icon: const Icon(Icons.arrow_back_rounded),
           onPressed: () {
-            if (context.router.canPop()) {
+            try {
+              final tabsRouter = AutoTabsRouter.of(context, watch: false);
+              tabsRouter.setActiveIndex(0);
+            } catch (_) {
               context.router.maybePop();
-            } else {
-              try {
-                final tabsRouter = AutoTabsRouter.of(context, watch: false);
-                tabsRouter.setActiveIndex(0);
-              } catch (_) {
-                context.router.maybePop();
-              }
             }
           },
         ),

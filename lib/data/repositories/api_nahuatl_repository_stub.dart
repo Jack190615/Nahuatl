@@ -27,6 +27,10 @@ class ApiNahuatlRepository implements INahuatlRepository {
       throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
 
   @override
+  Future<void> completeLesson(int lessonId) =>
+      throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
+
+  @override
   Future<List<SublessonEntity>> getSublessonsByLesson(int lessonId) =>
       throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
 
@@ -36,6 +40,10 @@ class ApiNahuatlRepository implements INahuatlRepository {
 
   @override
   Future<void> unlockSublesson(int sublessonId) =>
+      throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
+
+  @override
+  Future<void> completeSublesson(int sublessonId) =>
       throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
 
   @override

@@ -21,6 +21,9 @@ class Lessons extends Table {
 
   BoolColumn get isUnlocked =>
       boolean().named('is_unlocked').withDefault(const Constant(false))();
+
+  BoolColumn get isCompleted =>
+      boolean().named('is_completed').withDefault(const Constant(false))();
 }
 
 /// Tabla de Sublecciones / Puntos del Libro (`sublessons`).
@@ -52,6 +55,9 @@ class Sublessons extends Table {
 
   BoolColumn get isUnlocked =>
       boolean().named('is_unlocked').withDefault(const Constant(false))();
+
+  BoolColumn get isCompleted =>
+      boolean().named('is_completed').withDefault(const Constant(false))();
 }
 
 /// Tabla de Reglas Gramaticales (`grammar_rules`).

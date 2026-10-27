@@ -17,6 +17,7 @@ class LessonEntity {
   final String? description;
   final int orderIndex;
   final bool isUnlocked;
+  final bool isCompleted;
 
   const LessonEntity({
     required this.id,
@@ -25,6 +26,7 @@ class LessonEntity {
     this.description,
     required this.orderIndex,
     required this.isUnlocked,
+    this.isCompleted = false,
   });
 
   LessonEntity copyWith({
@@ -34,6 +36,7 @@ class LessonEntity {
     String? description,
     int? orderIndex,
     bool? isUnlocked,
+    bool? isCompleted,
   }) {
     return LessonEntity(
       id: id ?? this.id,
@@ -42,6 +45,7 @@ class LessonEntity {
       description: description ?? this.description,
       orderIndex: orderIndex ?? this.orderIndex,
       isUnlocked: isUnlocked ?? this.isUnlocked,
+      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 }

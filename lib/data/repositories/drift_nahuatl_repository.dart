@@ -47,6 +47,13 @@ class DriftNahuatlRepository implements INahuatlRepository {
     );
   }
 
+  @override
+  Future<void> completeLesson(int lessonId) async {
+    await (_db.update(_db.lessons)..where((t) => t.id.equals(lessonId))).write(
+      const LessonsCompanion(isCompleted: Value(true)),
+    );
+  }
+
   // ---------------------------------------------------------------------------
   // SUBLECCIONES / PUNTOS DEL LIBRO
   // ---------------------------------------------------------------------------
@@ -71,6 +78,13 @@ class DriftNahuatlRepository implements INahuatlRepository {
   Future<void> unlockSublesson(int sublessonId) async {
     await (_db.update(_db.sublessons)..where((t) => t.id.equals(sublessonId))).write(
       const SublessonsCompanion(isUnlocked: Value(true)),
+    );
+  }
+
+  @override
+  Future<void> completeSublesson(int sublessonId) async {
+    await (_db.update(_db.sublessons)..where((t) => t.id.equals(sublessonId))).write(
+      const SublessonsCompanion(isCompleted: Value(true)),
     );
   }
 
@@ -204,6 +218,7 @@ class DriftNahuatlRepository implements INahuatlRepository {
       description: row.description,
       orderIndex: row.orderIndex,
       isUnlocked: row.isUnlocked,
+      isCompleted: row.isCompleted,
     );
   }
 
@@ -217,6 +232,7 @@ class DriftNahuatlRepository implements INahuatlRepository {
       theoryContent: row.theoryContent,
       orderIndex: row.orderIndex,
       isUnlocked: row.isUnlocked,
+      isCompleted: row.isCompleted,
     );
   }
 

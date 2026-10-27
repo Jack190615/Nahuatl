@@ -10,6 +10,7 @@ abstract interface class ILessonRepository {
   Future<List<LessonEntity>> getLessons();
   Future<LessonEntity?> getLessonById(int lessonId);
   Future<void> unlockLesson(int lessonId);
+  Future<void> completeLesson(int lessonId);
 }
 
 /// Principio de Segregación de Interfaces (ISP - SOLID):
@@ -18,6 +19,7 @@ abstract interface class ISublessonRepository {
   Future<List<SublessonEntity>> getSublessonsByLesson(int lessonId);
   Future<SublessonEntity?> getSublessonById(int sublessonId);
   Future<void> unlockSublesson(int sublessonId);
+  Future<void> completeSublesson(int sublessonId);
   Future<List<DictionaryEntryEntity>> getVocabularyBySublesson(int sublessonId);
   Future<List<PhraseEntity>> getPhrasesBySublesson(int sublessonId);
 }

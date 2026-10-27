@@ -19,7 +19,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? impl.openConnection());
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -34,6 +34,10 @@ class AppDatabase extends _$AppDatabase {
             await m.addColumn(lessons, lessons.description);
             await m.addColumn(dictionary, dictionary.sublessonId);
             await m.addColumn(phrases, phrases.sublessonId);
+          }
+          if (from < 3) {
+            await m.addColumn(lessons, lessons.isCompleted);
+            await m.addColumn(sublessons, sublessons.isCompleted);
           }
         },
         beforeOpen: (details) async {

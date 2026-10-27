@@ -59,6 +59,23 @@ class DatabaseSeederService {
   /// Ideal para desarrollo cuando se actualizan los archivos CSV/JSON.
   Future<bool> forceReseed() async {
     return _db.transaction(() async {
+      // Preservar estado de avance del usuario (lecciones/sublecciones completadas o desbloqueadas)
+      final existingLessons = await _db.select(_db.lessons).get();
+      final completedLessonIds =
+          existingLessons.where((l) => l.isCompleted).map((l) => l.id).toSet();
+      final unlockedLessonIds =
+          existingLessons.where((l) => l.isUnlocked).map((l) => l.id).toSet();
+
+      final existingSublessons = await _db.select(_db.sublessons).get();
+      final completedSublessonIds = existingSublessons
+          .where((s) => s.isCompleted)
+          .map((s) => s.id)
+          .toSet();
+      final unlockedSublessonIds = existingSublessons
+          .where((s) => s.isUnlocked)
+          .map((s) => s.id)
+          .toSet();
+
       await _db.delete(_db.phrases).go();
       await _db.delete(_db.dictionary).go();
       await _db.delete(_db.grammarRules).go();
@@ -66,11 +83,23 @@ class DatabaseSeederService {
       await _db.delete(_db.lessons).go();
 
       final payload = await _loadSeedPayloads();
-      return _insertPayload(payload);
+      return _insertPayload(
+        payload,
+        preserveCompletedLessons: completedLessonIds,
+        preserveUnlockedLessons: unlockedLessonIds,
+        preserveCompletedSublessons: completedSublessonIds,
+        preserveUnlockedSublessons: unlockedSublessonIds,
+      );
     });
   }
 
-  Future<bool> _insertPayload(Map<String, List<dynamic>> payload) async {
+  Future<bool> _insertPayload(
+    Map<String, List<dynamic>> payload, {
+    Set<int> preserveCompletedLessons = const {},
+    Set<int> preserveUnlockedLessons = const {},
+    Set<int> preserveCompletedSublessons = const {},
+    Set<int> preserveUnlockedSublessons = const {},
+  }) async {
     final lessonsJson = payload['lessons'] ?? const [];
     final sublessonsJson = payload['sublessons'] ?? const [];
     final grammarRulesJson = payload['grammar_rules'] ?? const [];
@@ -80,27 +109,47 @@ class DatabaseSeederService {
     // Mapear JSON a Companions de Drift
     final lessonCompanions = lessonsJson.map((item) {
       final map = item as Map<String, dynamic>;
+      final id = map['id'] as int?;
+      final isUnlockedJson = (map['is_unlocked'] as bool?) ?? false;
+      final isCompletedJson = (map['is_completed'] as bool?) ?? false;
+
+      final isUnlocked =
+          (id != null && preserveUnlockedLessons.contains(id)) || isUnlockedJson;
+      final isCompleted =
+          (id != null && preserveCompletedLessons.contains(id)) || isCompletedJson;
+
       return LessonsCompanion.insert(
-        id: map['id'] != null ? Value(map['id'] as int) : const Value.absent(),
+        id: id != null ? Value(id) : const Value.absent(),
         romanNumber: Value(map['roman_number'] as String?),
         title: map['title'] as String,
         description: Value(map['description'] as String?),
         orderIndex: map['order_index'] as int,
-        isUnlocked: Value((map['is_unlocked'] as bool?) ?? false),
+        isUnlocked: Value(isUnlocked),
+        isCompleted: Value(isCompleted),
       );
     }).toList();
 
     final sublessonCompanions = sublessonsJson.map((item) {
       final map = item as Map<String, dynamic>;
+      final id = map['id'] as int?;
+      final isUnlockedJson = (map['is_unlocked'] as bool?) ?? false;
+      final isCompletedJson = (map['is_completed'] as bool?) ?? false;
+
+      final isUnlocked =
+          (id != null && preserveUnlockedSublessons.contains(id)) || isUnlockedJson;
+      final isCompleted =
+          (id != null && preserveCompletedSublessons.contains(id)) || isCompletedJson;
+
       return SublessonsCompanion.insert(
-        id: map['id'] != null ? Value(map['id'] as int) : const Value.absent(),
+        id: id != null ? Value(id) : const Value.absent(),
         lessonId: map['lesson_id'] as int,
         pointNumber: (map['point_number'] ?? map['numero_punto'] ?? '1').toString(),
         title: (map['title'] ?? map['titulo'] ?? '') as String,
         type: (map['type'] ?? map['tipo'] ?? 'teoria') as String,
         theoryContent: Value(map['theory_content'] as String?),
         orderIndex: (map['order_index'] as int?) ?? ((map['id'] as int?) ?? 1),
-        isUnlocked: Value((map['is_unlocked'] as bool?) ?? false),
+        isUnlocked: Value(isUnlocked),
+        isCompleted: Value(isCompleted),
       );
     }).toList();
 
