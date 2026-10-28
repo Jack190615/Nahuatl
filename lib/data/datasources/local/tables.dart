@@ -133,3 +133,28 @@ class Phrases extends Table {
   /// Ruta relativa del asset de audio (ej. `assets/audio/cualli_tonalli.mp3`). Nullable para UI Defensiva.
   TextColumn get audioPath => text().named('audio_path').nullable()();
 }
+
+/// Tabla de Preguntas de Comprensión de Lectura (`reading_questions`).
+@DataClassName('ReadingQuestionRow')
+class ReadingQuestions extends Table {
+  @override
+  String get tableName => 'reading_questions';
+
+  IntColumn get id => integer().autoIncrement()();
+
+  IntColumn get sublessonId => integer()
+      .named('sublesson_id')
+      .references(Sublessons, #id, onDelete: KeyAction.cascade)();
+
+  IntColumn get questionNumber =>
+      integer().named('question_number').nullable()();
+
+  TextColumn get questionNahuatl => text().named('question_nahuatl')();
+
+  TextColumn get correctAnswer => text().named('correct_answer')();
+
+  TextColumn get questionTranslationSpanish =>
+      text().named('question_translation_spanish').nullable()();
+
+  TextColumn get audioPath => text().named('audio_path').nullable()();
+}

@@ -78,6 +78,7 @@ final generateLessonExercisesUseCaseProvider =
   return GenerateLessonExercisesUseCase(
     dictionaryRepository: ref.watch(dictionaryRepositoryProvider),
     phraseRepository: ref.watch(phraseRepositoryProvider),
+    sublessonRepository: ref.watch(sublessonRepositoryProvider),
   );
 });
 

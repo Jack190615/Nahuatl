@@ -13,13 +13,14 @@ part 'app_database.g.dart';
     GrammarRules,
     Dictionary,
     Phrases,
+    ReadingQuestions,
   ],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? impl.openConnection());
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -38,6 +39,9 @@ class AppDatabase extends _$AppDatabase {
           if (from < 3) {
             await m.addColumn(lessons, lessons.isCompleted);
             await m.addColumn(sublessons, sublessons.isCompleted);
+          }
+          if (from < 4) {
+            await m.createTable(readingQuestions);
           }
         },
         beforeOpen: (details) async {

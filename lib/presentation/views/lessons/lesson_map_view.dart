@@ -243,7 +243,8 @@ class LessonMapView extends ConsumerWidget {
     required WidgetRef ref,
     required SublessonEntity sublesson,
   }) async {
-    if (sublesson.type == SublessonType.theory) {
+    if (sublesson.type == SublessonType.theory ||
+        sublesson.type == SublessonType.reading) {
       await context.router.push(
         LessonTheoryRoute(
           lessonId: sublesson.lessonId,

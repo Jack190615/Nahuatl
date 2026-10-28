@@ -22,6 +22,7 @@ class DatabaseSeederService {
   static const String grammarRulesJsonPath = 'assets/data/grammar_rules.json';
   static const String dictionaryJsonPath = 'assets/data/dictionary.json';
   static const String phrasesJsonPath = 'assets/data/phrases.json';
+  static const String readingQuestionsJsonPath = 'assets/data/reading_questions.json';
 
   final AppDatabase _db;
   final AssetBundle _assetBundle;
@@ -41,8 +42,10 @@ class DatabaseSeederService {
       final payload = await _loadSeedPayloads();
       final seedSublessonsCount = (payload['sublessons'] ?? const []).length;
       final seedPhrasesCount = (payload['phrases'] ?? const []).length;
+      final seedReadingQuestionsCount =
+          (payload['reading_questions'] ?? const []).length;
 
-      // 1. Verificar registros existentes en la tabla `lessons`, `sublessons` y `phrases`
+      // 1. Verificar registros existentes en la tabla `lessons`, `sublessons`, `phrases` y `reading_questions`
       final countExpression = _db.lessons.id.count();
       final currentLessonCount = await (_db.selectOnly(_db.lessons)..addColumns([countExpression]))
           .map((row) => row.read(countExpression) ?? 0)
@@ -58,9 +61,15 @@ class DatabaseSeederService {
           .map((row) => row.read(phraseCountExpr) ?? 0)
           .getSingle();
 
+      final rqCountExpr = _db.readingQuestions.id.count();
+      final currentRqCount = await (_db.selectOnly(_db.readingQuestions)..addColumns([rqCountExpr]))
+          .map((row) => row.read(rqCountExpr) ?? 0)
+          .getSingle();
+
       if (currentLessonCount > 0 &&
           currentSublessonCount == seedSublessonsCount &&
-          currentPhraseCount == seedPhrasesCount) {
+          currentPhraseCount == seedPhrasesCount &&
+          currentRqCount == seedReadingQuestionsCount) {
         // Reparar frases con lesson_id huérfano si la base de datos existía previamente
         final orphanPhrases = await (_db.select(_db.phrases)..where((t) => t.lessonId.isNull())).get();
         if (orphanPhrases.isNotEmpty) {
@@ -95,6 +104,7 @@ class DatabaseSeederService {
             .map((s) => s.id)
             .toSet();
 
+        await _db.delete(_db.readingQuestions).go();
         await _db.delete(_db.phrases).go();
         await _db.delete(_db.dictionary).go();
         await _db.delete(_db.grammarRules).go();
@@ -247,6 +257,21 @@ class DatabaseSeederService {
       );
     }).toList();
 
+    final readingQuestionsJson = payload['reading_questions'] ?? const [];
+    final readingQuestionCompanions = readingQuestionsJson.map((item) {
+      final map = item as Map<String, dynamic>;
+      return ReadingQuestionsCompanion.insert(
+        id: map['id'] != null ? Value(map['id'] as int) : const Value.absent(),
+        sublessonId: map['sublesson_id'] as int,
+        questionNumber: Value(map['question_number'] as int?),
+        questionNahuatl: map['question_nahuatl'] as String,
+        correctAnswer: map['correct_answer'] as String,
+        questionTranslationSpanish:
+            Value(map['question_translation_spanish'] as String?),
+        audioPath: Value(map['audio_path'] as String?),
+      );
+    }).toList();
+
     // Ejecutar Batch Insert dentro de la transacción activa
     await _db.batch((batch) {
       batch.insertAll(
@@ -274,6 +299,11 @@ class DatabaseSeederService {
         phraseCompanions,
         mode: InsertMode.insertOrReplace,
       );
+      batch.insertAll(
+        _db.readingQuestions,
+        readingQuestionCompanions,
+        mode: InsertMode.insertOrReplace,
+      );
     });
 
     return true;
@@ -294,12 +324,19 @@ class DatabaseSeederService {
         sublessonsList = json.decode(sublessonsRaw) as List<dynamic>;
       } catch (_) {}
 
+      List<dynamic> readingQuestionsList = const [];
+      try {
+        final rqRaw = await _assetBundle.loadString(readingQuestionsJsonPath);
+        readingQuestionsList = json.decode(rqRaw) as List<dynamic>;
+      } catch (_) {}
+
       return {
         'lessons': json.decode(lessonsRaw) as List<dynamic>,
         'sublessons': sublessonsList,
         'grammar_rules': json.decode(grammarRaw) as List<dynamic>,
         'dictionary': json.decode(dictionaryRaw) as List<dynamic>,
         'phrases': json.decode(phrasesRaw) as List<dynamic>,
+        'reading_questions': readingQuestionsList,
       };
     } catch (_) {
       final unifiedJsonString =
@@ -313,6 +350,8 @@ class DatabaseSeederService {
             (decoded['grammar_rules'] as List<dynamic>?) ?? const [],
         'dictionary': (decoded['dictionary'] as List<dynamic>?) ?? const [],
         'phrases': (decoded['phrases'] as List<dynamic>?) ?? const [],
+        'reading_questions':
+            (decoded['reading_questions'] as List<dynamic>?) ?? const [],
       };
     }
   }

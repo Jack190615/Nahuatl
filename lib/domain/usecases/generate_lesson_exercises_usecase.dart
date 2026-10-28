@@ -3,6 +3,7 @@ import 'dart:math';
 import '../entities/dictionary_entry.dart';
 import '../entities/exercise.dart';
 import '../entities/phrase.dart';
+import '../entities/sublesson.dart';
 import '../repositories/i_nahuatl_repository.dart';
 
 /// Principio de Inversión de Dependencias (DIP) y Responsabilidad Única (SRP):
@@ -21,14 +22,17 @@ class GenerateLessonExercisesUseCase implements IGenerateLessonExercisesUseCase 
 
   final IDictionaryRepository _dictionaryRepository;
   final IPhraseRepository _phraseRepository;
+  final ISublessonRepository? _sublessonRepository;
   final Random _random;
 
   GenerateLessonExercisesUseCase({
     required IDictionaryRepository dictionaryRepository,
     required IPhraseRepository phraseRepository,
+    ISublessonRepository? sublessonRepository,
     Random? random,
   })  : _dictionaryRepository = dictionaryRepository,
         _phraseRepository = phraseRepository,
+        _sublessonRepository = sublessonRepository,
         _random = random ?? Random();
 
   @override
@@ -37,6 +41,47 @@ class GenerateLessonExercisesUseCase implements IGenerateLessonExercisesUseCase 
     int? sublessonId,
     int totalExercises = 10,
   }) async {
+    // 0. Si es una sublección con preguntas de comprensión de lectura registradas
+    if (sublessonId != null && _sublessonRepository != null) {
+      final readingQuestions =
+          await _sublessonRepository.getReadingQuestionsBySublesson(sublessonId);
+      if (readingQuestions.isNotEmpty) {
+        String? readingPassage;
+        final sublessons =
+            await _sublessonRepository.getSublessonsByLesson(lessonId);
+        final currentIdx = sublessons.indexWhere((s) => s.id == sublessonId);
+        if (currentIdx > 0) {
+          for (int j = currentIdx - 1; j >= 0; j--) {
+            if (sublessons[j].type == SublessonType.reading ||
+                (sublessons[j].theoryContent != null &&
+                    sublessons[j].theoryContent!.trim().isNotEmpty)) {
+              readingPassage = sublessons[j].theoryContent;
+              break;
+            }
+          }
+        }
+
+        final List<Exercise> exercises = [];
+        for (int i = 0; i < readingQuestions.length; i++) {
+          final q = readingQuestions[i];
+          exercises.add(
+            TextInputExercise(
+              exerciseId: 'rq_${sublessonId}_${q.id}',
+              phraseId: q.id,
+              direction: TranslationDirection.spanishToNahuatl,
+              promptSentence: q.questionNahuatl,
+              expectedAnswer: q.correctAnswer,
+              allowPaste: false,
+              readingPassage: readingPassage,
+              secondaryPrompt: q.questionTranslationSpanish,
+              audioPath: q.audioPath,
+            ),
+          );
+        }
+        return exercises;
+      }
+    }
+
     List<PhraseEntity> phrases;
     List<DictionaryEntryEntity> lessonVocab;
 

@@ -6,6 +6,7 @@ import '../../domain/entities/dictionary_entry.dart';
 import '../../domain/entities/grammar_rule.dart';
 import '../../domain/entities/lesson.dart';
 import '../../domain/entities/phrase.dart';
+import '../../domain/entities/reading_question.dart';
 import '../../domain/entities/sublesson.dart';
 import '../../domain/repositories/i_nahuatl_repository.dart';
 import '../datasources/local/app_database.dart';
@@ -115,6 +116,27 @@ class DriftNahuatlRepository implements INahuatlRepository {
       ..where((t) => t.sublessonId.equals(sublessonId));
     final rows = await query.get();
     return rows.map(_mapPhraseRowToEntity).toList(growable: false);
+  }
+
+  @override
+  Future<List<ReadingQuestionEntity>> getReadingQuestionsBySublesson(int sublessonId) async {
+    final query = _db.select(_db.readingQuestions)
+      ..where((t) => t.sublessonId.equals(sublessonId))
+      ..orderBy([(t) => OrderingTerm.asc(t.questionNumber)]);
+    final rows = await query.get();
+    return rows
+        .map(
+          (r) => ReadingQuestionEntity(
+            id: r.id,
+            sublessonId: r.sublessonId,
+            questionNumber: r.questionNumber,
+            questionNahuatl: r.questionNahuatl,
+            correctAnswer: r.correctAnswer,
+            questionTranslationSpanish: r.questionTranslationSpanish,
+            audioPath: r.audioPath,
+          ),
+        )
+        .toList(growable: false);
   }
 
   @override

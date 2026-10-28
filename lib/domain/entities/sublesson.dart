@@ -7,7 +7,13 @@ enum SublessonType {
   vocabulary,
 
   /// Ejercicios interactivos con oraciones completas (Word Bank, Text Input, traducción).
-  phrases;
+  phrases,
+
+  /// Lectura continua de textos en náhuatl clásico con traducción o análisis.
+  reading,
+
+  /// Preguntas de comprensión de lectura escritas con anti-pegado.
+  readingComprehension;
 
   static SublessonType fromString(String? raw) {
     if (raw == null) return SublessonType.theory;
@@ -17,6 +23,16 @@ enum SublessonType {
     }
     if (lower == 'frases' || lower == 'oraciones' || lower == 'practica' || lower == 'phrases') {
       return SublessonType.phrases;
+    }
+    if (lower == 'lectura' || lower == 'reading' || lower == 'texto') {
+      return SublessonType.reading;
+    }
+    if (lower == 'preguntas_lectura' ||
+        lower == 'comprension' ||
+        lower == 'contestar' ||
+        lower == 'preguntas' ||
+        lower == 'reading_comprehension') {
+      return SublessonType.readingComprehension;
     }
     return SublessonType.theory;
   }
@@ -29,6 +45,10 @@ enum SublessonType {
         return 'vocabulario';
       case SublessonType.phrases:
         return 'frases';
+      case SublessonType.reading:
+        return 'lectura';
+      case SublessonType.readingComprehension:
+        return 'preguntas_lectura';
     }
   }
 }

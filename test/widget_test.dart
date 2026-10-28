@@ -11,6 +11,7 @@ import 'package:nahuatl_clasico_app/domain/entities/exercise.dart';
 import 'package:nahuatl_clasico_app/domain/entities/grammar_rule.dart';
 import 'package:nahuatl_clasico_app/domain/entities/lesson.dart';
 import 'package:nahuatl_clasico_app/domain/entities/phrase.dart';
+import 'package:nahuatl_clasico_app/domain/entities/reading_question.dart';
 import 'package:nahuatl_clasico_app/domain/entities/sublesson.dart';
 import 'package:nahuatl_clasico_app/domain/evaluators/exercise_evaluators.dart';
 import 'package:nahuatl_clasico_app/domain/repositories/i_nahuatl_repository.dart';
@@ -22,6 +23,7 @@ import 'package:nahuatl_clasico_app/presentation/views/exercise/exercise_session
 import 'package:nahuatl_clasico_app/presentation/views/lessons/lesson_theory_view.dart';
 import 'package:nahuatl_clasico_app/presentation/views/welcome/welcome_view.dart';
 import 'package:nahuatl_clasico_app/presentation/widgets/common/defensive_audio_button.dart';
+import 'package:nahuatl_clasico_app/presentation/widgets/exercise/text_input_exercise_widget.dart';
 import 'package:nahuatl_clasico_app/presentation/widgets/lesson/lesson_card_widget.dart';
 
 /// Repositorio en memoria (Fake) que implementa [INahuatlRepository] para pruebas unitarias deterministas
@@ -122,8 +124,33 @@ class FakeNahuatlRepository implements INahuatlRepository {
   }
 
   @override
-  Future<List<SublessonEntity>> getSublessonsByLesson(int lessonId) async =>
-      const [];
+  Future<List<SublessonEntity>> getSublessonsByLesson(int lessonId) async {
+    if (lessonId == 5) {
+      return const [
+        SublessonEntity(
+          id: 96,
+          lessonId: 5,
+          pointNumber: '96',
+          title: 'Xuana',
+          type: SublessonType.reading,
+          theoryContent: 'Yehhuatl in Xuana. Xuana quipia ce calli cualli.',
+          orderIndex: 1,
+          isUnlocked: true,
+        ),
+        SublessonEntity(
+          id: 97,
+          lessonId: 5,
+          pointNumber: '97',
+          title: 'Contestar',
+          type: SublessonType.readingComprehension,
+          theoryContent: null,
+          orderIndex: 2,
+          isUnlocked: true,
+        ),
+      ];
+    }
+    return const [];
+  }
 
   @override
   Future<SublessonEntity?> getSublessonById(int sublessonId) async {
@@ -149,6 +176,28 @@ class FakeNahuatlRepository implements INahuatlRepository {
         orderIndex: 2,
         isUnlocked: true,
       );
+    } else if (sublessonId == 96) {
+      return const SublessonEntity(
+        id: 96,
+        lessonId: 5,
+        pointNumber: '96',
+        title: 'Xuana',
+        type: SublessonType.reading,
+        theoryContent: 'Yehhuatl in Xuana. Xuana quipia ce calli cualli.',
+        orderIndex: 1,
+        isUnlocked: true,
+      );
+    } else if (sublessonId == 97) {
+      return const SublessonEntity(
+        id: 97,
+        lessonId: 5,
+        pointNumber: '97',
+        title: 'Contestar',
+        type: SublessonType.readingComprehension,
+        theoryContent: null,
+        orderIndex: 2,
+        isUnlocked: true,
+      );
     }
     return null;
   }
@@ -170,6 +219,23 @@ class FakeNahuatlRepository implements INahuatlRepository {
   @override
   Future<List<PhraseEntity>> getPhrasesBySublesson(int sublessonId) async =>
       _phrases.where((p) => p.sublessonId == sublessonId).toList();
+
+  @override
+  Future<List<ReadingQuestionEntity>> getReadingQuestionsBySublesson(int sublessonId) async {
+    if (sublessonId == 97) {
+      return const [
+        ReadingQuestionEntity(
+          id: 1,
+          sublessonId: 97,
+          questionNumber: 1,
+          questionNahuatl: '¿Quen motoca in cihuatl?',
+          correctAnswer: 'Xuana',
+          questionTranslationSpanish: '¿Cómo se llama la mujer?',
+        ),
+      ];
+    }
+    return const [];
+  }
 
   @override
   Future<List<GrammarRuleEntity>> getGrammarRulesByLesson(int lessonId) async =>
@@ -770,6 +836,83 @@ void main() {
       expect(exercises, isNotEmpty);
       expect(exercises.length, equals(6));
       expect(exercises.any((e) => e is WordBankExercise), isTrue);
+    });
+  });
+
+  group('14. Lecturas y Preguntas de Comprensión (Anti-Pegado)', () {
+    test('SublessonType reconoce lectura y comprensión correctamente', () {
+      expect(SublessonType.fromString('lectura'), equals(SublessonType.reading));
+      expect(SublessonType.fromString('preguntas_lectura'), equals(SublessonType.readingComprehension));
+      expect(SublessonType.fromString('comprension'), equals(SublessonType.readingComprehension));
+    });
+
+    test('GenerateLessonExercisesUseCase genera preguntas de lectura con anti-pegado y texto asociado', () async {
+      final repo = FakeNahuatlRepository();
+      final useCase = GenerateLessonExercisesUseCase(
+        phraseRepository: repo,
+        dictionaryRepository: repo,
+        sublessonRepository: repo,
+      );
+
+      final exercises = await useCase.execute(
+        lessonId: 5,
+        sublessonId: 97,
+      );
+
+      expect(exercises, isNotEmpty);
+      final exercise = exercises.first as TextInputExercise;
+      expect(exercise.allowPaste, isFalse);
+      expect(exercise.promptSentence, equals('¿Quen motoca in cihuatl?'));
+      expect(exercise.expectedAnswer, equals('Xuana'));
+      expect(exercise.secondaryPrompt, equals('¿Cómo se llama la mujer?'));
+      expect(exercise.readingPassage, contains('Yehhuatl in Xuana'));
+    });
+
+    testWidgets('TextInputExerciseWidget muestra aviso anti-pegado y botón Ver lectura', (tester) async {
+      final fakeAudio = FakeAudioService();
+      const exercise = TextInputExercise(
+        exerciseId: 'rq_test',
+        phraseId: 1,
+        direction: TranslationDirection.spanishToNahuatl,
+        promptSentence: '¿Quen motoca in cihuatl?',
+        expectedAnswer: 'Xuana',
+        allowPaste: false,
+        readingPassage: 'Yehhuatl in Xuana. Quipia ce calli.',
+        secondaryPrompt: '¿Cómo se llama la mujer?',
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            audioServiceProvider.overrideWithValue(fakeAudio),
+          ],
+          child: MaterialApp(
+            home: Scaffold(
+              body: SingleChildScrollView(
+                child: TextInputExerciseWidget(
+                  exercise: exercise,
+                  currentInput: '',
+                  onChanged: (_) {},
+                  onSubmitted: () {},
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('Responde la pregunta en náhuatl'), findsOneWidget);
+      expect(find.text('¿Quen motoca in cihuatl?'), findsOneWidget);
+      expect(find.text('¿Cómo se llama la mujer?'), findsOneWidget);
+      expect(find.text('Escritura manual requerida (pegado deshabilitado)'), findsOneWidget);
+      expect(find.text('Ver lectura'), findsOneWidget);
+
+      // Abre el modal de lectura
+      await tester.tap(find.text('Ver lectura'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Texto de Lectura'), findsOneWidget);
+      expect(find.textContaining('Yehhuatl in Xuana'), findsOneWidget);
     });
   });
 }

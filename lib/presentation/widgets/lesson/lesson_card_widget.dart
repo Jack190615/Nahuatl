@@ -295,6 +295,16 @@ class _SublessonItemTile extends StatelessWidget {
           AppColors.jadePrimary,
           'Práctica',
         ),
+      SublessonType.reading => (
+          Icons.menu_book_rounded,
+          AppColors.jadeDark,
+          'Lectura',
+        ),
+      SublessonType.readingComprehension => (
+          Icons.quiz_rounded,
+          AppColors.terracottaAccent,
+          'Comprensión',
+        ),
     };
 
     return InkWell(

@@ -93,13 +93,22 @@ enum TranslationDirection {
   spanishToNahuatl,
 }
 
-/// 3. Ejercicio de Traducción Libre (Text Input):
-/// Evalúa el input del usuario contra la traducción esperada tras pasar por el normalizador estricto.
+/// 3. Ejercicio de Traducción Libre / Comprensión Escrita (Text Input):
+/// Evalúa el input del usuario contra la traducción o respuesta esperada tras pasar por el normalizador estricto.
 class TextInputExercise extends Exercise {
   final int phraseId;
   final TranslationDirection direction;
   final String promptSentence;
   final String expectedAnswer;
+
+  /// Si es `false`, deshabilita pegar texto (fuerza la práctica de la escritura manual).
+  final bool allowPaste;
+
+  /// Texto de lectura asociado si es un ejercicio de comprensión.
+  final String? readingPassage;
+
+  /// Traducción o pista contextual secundaria (ej. traducción de la pregunta al español).
+  final String? secondaryPrompt;
 
   const TextInputExercise({
     required super.exerciseId,
@@ -107,6 +116,9 @@ class TextInputExercise extends Exercise {
     required this.direction,
     required this.promptSentence,
     required this.expectedAnswer,
+    this.allowPaste = true,
+    this.readingPassage,
+    this.secondaryPrompt,
     super.audioPath,
   }) : super(type: ExerciseType.textInput);
 }

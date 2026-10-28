@@ -181,6 +181,7 @@ class LessonTheoryView extends ConsumerWidget {
                   _TheoryHeaderCard(
                     lessonId: lessonId,
                     lessonTitle: lessonTitle,
+                    isReading: sublessonAsync?.value?.type == SublessonType.reading,
                     info: info,
                   ),
                   SizedBox(height: info.verticalSpacing),
@@ -260,17 +261,19 @@ class LessonTheoryView extends ConsumerWidget {
 class _TheoryHeaderCard extends StatelessWidget {
   final int lessonId;
   final String lessonTitle;
+  final bool isReading;
   final ResponsiveInfo info;
 
   const _TheoryHeaderCard({
     required this.lessonId,
     required this.lessonTitle,
+    this.isReading = false,
     required this.info,
   });
 
   @override
   Widget build(BuildContext context) {
-    final isIntro = lessonId == 1;
+    final isIntro = lessonId == 1 && !isReading;
 
     return Container(
       width: double.infinity,
@@ -290,7 +293,11 @@ class _TheoryHeaderCard extends StatelessWidget {
               border: Border.all(color: AppColors.jadePrimary, width: 1.5),
             ),
             child: Icon(
-              isIntro ? Icons.lightbulb_rounded : Icons.auto_stories_rounded,
+              isReading
+                  ? Icons.menu_book_rounded
+                  : (isIntro
+                      ? Icons.lightbulb_rounded
+                      : Icons.auto_stories_rounded),
               color: AppColors.jadePrimary,
               size: 26,
             ),
@@ -301,7 +308,11 @@ class _TheoryHeaderCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  isIntro ? 'LECCIÓN INTRODUCTORIA' : 'TEORÍA Y REGLAS CLÁSICAS',
+                  isReading
+                      ? 'LECTURA EN NÁHUATL'
+                      : (isIntro
+                          ? 'LECCIÓN INTRODUCTORIA'
+                          : 'TEORÍA Y REGLAS CLÁSICAS'),
                   style: TextStyle(
                     fontSize: info.scaleFont(11.5),
                     fontWeight: FontWeight.w800,

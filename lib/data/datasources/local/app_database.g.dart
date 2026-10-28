@@ -1893,6 +1893,425 @@ class PhrasesCompanion extends UpdateCompanion<PhraseRow> {
   }
 }
 
+class $ReadingQuestionsTable extends ReadingQuestions
+    with TableInfo<$ReadingQuestionsTable, ReadingQuestionRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ReadingQuestionsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _sublessonIdMeta =
+      const VerificationMeta('sublessonId');
+  @override
+  late final GeneratedColumn<int> sublessonId = GeneratedColumn<int>(
+      'sublesson_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES sublessons (id) ON DELETE CASCADE'));
+  static const VerificationMeta _questionNumberMeta =
+      const VerificationMeta('questionNumber');
+  @override
+  late final GeneratedColumn<int> questionNumber = GeneratedColumn<int>(
+      'question_number', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _questionNahuatlMeta =
+      const VerificationMeta('questionNahuatl');
+  @override
+  late final GeneratedColumn<String> questionNahuatl = GeneratedColumn<String>(
+      'question_nahuatl', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _correctAnswerMeta =
+      const VerificationMeta('correctAnswer');
+  @override
+  late final GeneratedColumn<String> correctAnswer = GeneratedColumn<String>(
+      'correct_answer', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _questionTranslationSpanishMeta =
+      const VerificationMeta('questionTranslationSpanish');
+  @override
+  late final GeneratedColumn<String> questionTranslationSpanish =
+      GeneratedColumn<String>('question_translation_spanish', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _audioPathMeta =
+      const VerificationMeta('audioPath');
+  @override
+  late final GeneratedColumn<String> audioPath = GeneratedColumn<String>(
+      'audio_path', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        sublessonId,
+        questionNumber,
+        questionNahuatl,
+        correctAnswer,
+        questionTranslationSpanish,
+        audioPath
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'reading_questions';
+  @override
+  VerificationContext validateIntegrity(Insertable<ReadingQuestionRow> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('sublesson_id')) {
+      context.handle(
+          _sublessonIdMeta,
+          sublessonId.isAcceptableOrUnknown(
+              data['sublesson_id']!, _sublessonIdMeta));
+    } else if (isInserting) {
+      context.missing(_sublessonIdMeta);
+    }
+    if (data.containsKey('question_number')) {
+      context.handle(
+          _questionNumberMeta,
+          questionNumber.isAcceptableOrUnknown(
+              data['question_number']!, _questionNumberMeta));
+    }
+    if (data.containsKey('question_nahuatl')) {
+      context.handle(
+          _questionNahuatlMeta,
+          questionNahuatl.isAcceptableOrUnknown(
+              data['question_nahuatl']!, _questionNahuatlMeta));
+    } else if (isInserting) {
+      context.missing(_questionNahuatlMeta);
+    }
+    if (data.containsKey('correct_answer')) {
+      context.handle(
+          _correctAnswerMeta,
+          correctAnswer.isAcceptableOrUnknown(
+              data['correct_answer']!, _correctAnswerMeta));
+    } else if (isInserting) {
+      context.missing(_correctAnswerMeta);
+    }
+    if (data.containsKey('question_translation_spanish')) {
+      context.handle(
+          _questionTranslationSpanishMeta,
+          questionTranslationSpanish.isAcceptableOrUnknown(
+              data['question_translation_spanish']!,
+              _questionTranslationSpanishMeta));
+    }
+    if (data.containsKey('audio_path')) {
+      context.handle(_audioPathMeta,
+          audioPath.isAcceptableOrUnknown(data['audio_path']!, _audioPathMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ReadingQuestionRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ReadingQuestionRow(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      sublessonId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}sublesson_id'])!,
+      questionNumber: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}question_number']),
+      questionNahuatl: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}question_nahuatl'])!,
+      correctAnswer: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}correct_answer'])!,
+      questionTranslationSpanish: attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}question_translation_spanish']),
+      audioPath: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}audio_path']),
+    );
+  }
+
+  @override
+  $ReadingQuestionsTable createAlias(String alias) {
+    return $ReadingQuestionsTable(attachedDatabase, alias);
+  }
+}
+
+class ReadingQuestionRow extends DataClass
+    implements Insertable<ReadingQuestionRow> {
+  final int id;
+  final int sublessonId;
+  final int? questionNumber;
+  final String questionNahuatl;
+  final String correctAnswer;
+  final String? questionTranslationSpanish;
+  final String? audioPath;
+  const ReadingQuestionRow(
+      {required this.id,
+      required this.sublessonId,
+      this.questionNumber,
+      required this.questionNahuatl,
+      required this.correctAnswer,
+      this.questionTranslationSpanish,
+      this.audioPath});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['sublesson_id'] = Variable<int>(sublessonId);
+    if (!nullToAbsent || questionNumber != null) {
+      map['question_number'] = Variable<int>(questionNumber);
+    }
+    map['question_nahuatl'] = Variable<String>(questionNahuatl);
+    map['correct_answer'] = Variable<String>(correctAnswer);
+    if (!nullToAbsent || questionTranslationSpanish != null) {
+      map['question_translation_spanish'] =
+          Variable<String>(questionTranslationSpanish);
+    }
+    if (!nullToAbsent || audioPath != null) {
+      map['audio_path'] = Variable<String>(audioPath);
+    }
+    return map;
+  }
+
+  ReadingQuestionsCompanion toCompanion(bool nullToAbsent) {
+    return ReadingQuestionsCompanion(
+      id: Value(id),
+      sublessonId: Value(sublessonId),
+      questionNumber: questionNumber == null && nullToAbsent
+          ? const Value.absent()
+          : Value(questionNumber),
+      questionNahuatl: Value(questionNahuatl),
+      correctAnswer: Value(correctAnswer),
+      questionTranslationSpanish:
+          questionTranslationSpanish == null && nullToAbsent
+              ? const Value.absent()
+              : Value(questionTranslationSpanish),
+      audioPath: audioPath == null && nullToAbsent
+          ? const Value.absent()
+          : Value(audioPath),
+    );
+  }
+
+  factory ReadingQuestionRow.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ReadingQuestionRow(
+      id: serializer.fromJson<int>(json['id']),
+      sublessonId: serializer.fromJson<int>(json['sublessonId']),
+      questionNumber: serializer.fromJson<int?>(json['questionNumber']),
+      questionNahuatl: serializer.fromJson<String>(json['questionNahuatl']),
+      correctAnswer: serializer.fromJson<String>(json['correctAnswer']),
+      questionTranslationSpanish:
+          serializer.fromJson<String?>(json['questionTranslationSpanish']),
+      audioPath: serializer.fromJson<String?>(json['audioPath']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'sublessonId': serializer.toJson<int>(sublessonId),
+      'questionNumber': serializer.toJson<int?>(questionNumber),
+      'questionNahuatl': serializer.toJson<String>(questionNahuatl),
+      'correctAnswer': serializer.toJson<String>(correctAnswer),
+      'questionTranslationSpanish':
+          serializer.toJson<String?>(questionTranslationSpanish),
+      'audioPath': serializer.toJson<String?>(audioPath),
+    };
+  }
+
+  ReadingQuestionRow copyWith(
+          {int? id,
+          int? sublessonId,
+          Value<int?> questionNumber = const Value.absent(),
+          String? questionNahuatl,
+          String? correctAnswer,
+          Value<String?> questionTranslationSpanish = const Value.absent(),
+          Value<String?> audioPath = const Value.absent()}) =>
+      ReadingQuestionRow(
+        id: id ?? this.id,
+        sublessonId: sublessonId ?? this.sublessonId,
+        questionNumber:
+            questionNumber.present ? questionNumber.value : this.questionNumber,
+        questionNahuatl: questionNahuatl ?? this.questionNahuatl,
+        correctAnswer: correctAnswer ?? this.correctAnswer,
+        questionTranslationSpanish: questionTranslationSpanish.present
+            ? questionTranslationSpanish.value
+            : this.questionTranslationSpanish,
+        audioPath: audioPath.present ? audioPath.value : this.audioPath,
+      );
+  ReadingQuestionRow copyWithCompanion(ReadingQuestionsCompanion data) {
+    return ReadingQuestionRow(
+      id: data.id.present ? data.id.value : this.id,
+      sublessonId:
+          data.sublessonId.present ? data.sublessonId.value : this.sublessonId,
+      questionNumber: data.questionNumber.present
+          ? data.questionNumber.value
+          : this.questionNumber,
+      questionNahuatl: data.questionNahuatl.present
+          ? data.questionNahuatl.value
+          : this.questionNahuatl,
+      correctAnswer: data.correctAnswer.present
+          ? data.correctAnswer.value
+          : this.correctAnswer,
+      questionTranslationSpanish: data.questionTranslationSpanish.present
+          ? data.questionTranslationSpanish.value
+          : this.questionTranslationSpanish,
+      audioPath: data.audioPath.present ? data.audioPath.value : this.audioPath,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ReadingQuestionRow(')
+          ..write('id: $id, ')
+          ..write('sublessonId: $sublessonId, ')
+          ..write('questionNumber: $questionNumber, ')
+          ..write('questionNahuatl: $questionNahuatl, ')
+          ..write('correctAnswer: $correctAnswer, ')
+          ..write('questionTranslationSpanish: $questionTranslationSpanish, ')
+          ..write('audioPath: $audioPath')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, sublessonId, questionNumber,
+      questionNahuatl, correctAnswer, questionTranslationSpanish, audioPath);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ReadingQuestionRow &&
+          other.id == this.id &&
+          other.sublessonId == this.sublessonId &&
+          other.questionNumber == this.questionNumber &&
+          other.questionNahuatl == this.questionNahuatl &&
+          other.correctAnswer == this.correctAnswer &&
+          other.questionTranslationSpanish == this.questionTranslationSpanish &&
+          other.audioPath == this.audioPath);
+}
+
+class ReadingQuestionsCompanion extends UpdateCompanion<ReadingQuestionRow> {
+  final Value<int> id;
+  final Value<int> sublessonId;
+  final Value<int?> questionNumber;
+  final Value<String> questionNahuatl;
+  final Value<String> correctAnswer;
+  final Value<String?> questionTranslationSpanish;
+  final Value<String?> audioPath;
+  const ReadingQuestionsCompanion({
+    this.id = const Value.absent(),
+    this.sublessonId = const Value.absent(),
+    this.questionNumber = const Value.absent(),
+    this.questionNahuatl = const Value.absent(),
+    this.correctAnswer = const Value.absent(),
+    this.questionTranslationSpanish = const Value.absent(),
+    this.audioPath = const Value.absent(),
+  });
+  ReadingQuestionsCompanion.insert({
+    this.id = const Value.absent(),
+    required int sublessonId,
+    this.questionNumber = const Value.absent(),
+    required String questionNahuatl,
+    required String correctAnswer,
+    this.questionTranslationSpanish = const Value.absent(),
+    this.audioPath = const Value.absent(),
+  })  : sublessonId = Value(sublessonId),
+        questionNahuatl = Value(questionNahuatl),
+        correctAnswer = Value(correctAnswer);
+  static Insertable<ReadingQuestionRow> custom({
+    Expression<int>? id,
+    Expression<int>? sublessonId,
+    Expression<int>? questionNumber,
+    Expression<String>? questionNahuatl,
+    Expression<String>? correctAnswer,
+    Expression<String>? questionTranslationSpanish,
+    Expression<String>? audioPath,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (sublessonId != null) 'sublesson_id': sublessonId,
+      if (questionNumber != null) 'question_number': questionNumber,
+      if (questionNahuatl != null) 'question_nahuatl': questionNahuatl,
+      if (correctAnswer != null) 'correct_answer': correctAnswer,
+      if (questionTranslationSpanish != null)
+        'question_translation_spanish': questionTranslationSpanish,
+      if (audioPath != null) 'audio_path': audioPath,
+    });
+  }
+
+  ReadingQuestionsCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? sublessonId,
+      Value<int?>? questionNumber,
+      Value<String>? questionNahuatl,
+      Value<String>? correctAnswer,
+      Value<String?>? questionTranslationSpanish,
+      Value<String?>? audioPath}) {
+    return ReadingQuestionsCompanion(
+      id: id ?? this.id,
+      sublessonId: sublessonId ?? this.sublessonId,
+      questionNumber: questionNumber ?? this.questionNumber,
+      questionNahuatl: questionNahuatl ?? this.questionNahuatl,
+      correctAnswer: correctAnswer ?? this.correctAnswer,
+      questionTranslationSpanish:
+          questionTranslationSpanish ?? this.questionTranslationSpanish,
+      audioPath: audioPath ?? this.audioPath,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (sublessonId.present) {
+      map['sublesson_id'] = Variable<int>(sublessonId.value);
+    }
+    if (questionNumber.present) {
+      map['question_number'] = Variable<int>(questionNumber.value);
+    }
+    if (questionNahuatl.present) {
+      map['question_nahuatl'] = Variable<String>(questionNahuatl.value);
+    }
+    if (correctAnswer.present) {
+      map['correct_answer'] = Variable<String>(correctAnswer.value);
+    }
+    if (questionTranslationSpanish.present) {
+      map['question_translation_spanish'] =
+          Variable<String>(questionTranslationSpanish.value);
+    }
+    if (audioPath.present) {
+      map['audio_path'] = Variable<String>(audioPath.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ReadingQuestionsCompanion(')
+          ..write('id: $id, ')
+          ..write('sublessonId: $sublessonId, ')
+          ..write('questionNumber: $questionNumber, ')
+          ..write('questionNahuatl: $questionNahuatl, ')
+          ..write('correctAnswer: $correctAnswer, ')
+          ..write('questionTranslationSpanish: $questionTranslationSpanish, ')
+          ..write('audioPath: $audioPath')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -1901,12 +2320,20 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $GrammarRulesTable grammarRules = $GrammarRulesTable(this);
   late final $DictionaryTable dictionary = $DictionaryTable(this);
   late final $PhrasesTable phrases = $PhrasesTable(this);
+  late final $ReadingQuestionsTable readingQuestions =
+      $ReadingQuestionsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [lessons, sublessons, grammarRules, dictionary, phrases];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+        lessons,
+        sublessons,
+        grammarRules,
+        dictionary,
+        phrases,
+        readingQuestions
+      ];
   @override
   StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules(
         [
@@ -1950,6 +2377,13 @@ abstract class _$AppDatabase extends GeneratedDatabase {
                 limitUpdateKind: UpdateKind.delete),
             result: [
               TableUpdate('phrases', kind: UpdateKind.update),
+            ],
+          ),
+          WritePropagation(
+            on: TableUpdateQuery.onTableName('sublessons',
+                limitUpdateKind: UpdateKind.delete),
+            result: [
+              TableUpdate('reading_questions', kind: UpdateKind.delete),
             ],
           ),
         ],
@@ -2311,6 +2745,20 @@ class $$SublessonsTableFilterComposer
         builder: (joinBuilder, parentComposers) => $$PhrasesTableFilterComposer(
             ComposerState(
                 $state.db, $state.db.phrases, joinBuilder, parentComposers)));
+    return f(composer);
+  }
+
+  ComposableFilter readingQuestionsRefs(
+      ComposableFilter Function($$ReadingQuestionsTableFilterComposer f) f) {
+    final $$ReadingQuestionsTableFilterComposer composer =
+        $state.composerBuilder(
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $state.db.readingQuestions,
+            getReferencedColumn: (t) => t.sublessonId,
+            builder: (joinBuilder, parentComposers) =>
+                $$ReadingQuestionsTableFilterComposer(ComposerState($state.db,
+                    $state.db.readingQuestions, joinBuilder, parentComposers)));
     return f(composer);
   }
 }
@@ -2832,6 +3280,177 @@ class $$PhrasesTableOrderingComposer
   }
 }
 
+typedef $$ReadingQuestionsTableCreateCompanionBuilder
+    = ReadingQuestionsCompanion Function({
+  Value<int> id,
+  required int sublessonId,
+  Value<int?> questionNumber,
+  required String questionNahuatl,
+  required String correctAnswer,
+  Value<String?> questionTranslationSpanish,
+  Value<String?> audioPath,
+});
+typedef $$ReadingQuestionsTableUpdateCompanionBuilder
+    = ReadingQuestionsCompanion Function({
+  Value<int> id,
+  Value<int> sublessonId,
+  Value<int?> questionNumber,
+  Value<String> questionNahuatl,
+  Value<String> correctAnswer,
+  Value<String?> questionTranslationSpanish,
+  Value<String?> audioPath,
+});
+
+class $$ReadingQuestionsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $ReadingQuestionsTable,
+    ReadingQuestionRow,
+    $$ReadingQuestionsTableFilterComposer,
+    $$ReadingQuestionsTableOrderingComposer,
+    $$ReadingQuestionsTableCreateCompanionBuilder,
+    $$ReadingQuestionsTableUpdateCompanionBuilder> {
+  $$ReadingQuestionsTableTableManager(
+      _$AppDatabase db, $ReadingQuestionsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$ReadingQuestionsTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$ReadingQuestionsTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<int> sublessonId = const Value.absent(),
+            Value<int?> questionNumber = const Value.absent(),
+            Value<String> questionNahuatl = const Value.absent(),
+            Value<String> correctAnswer = const Value.absent(),
+            Value<String?> questionTranslationSpanish = const Value.absent(),
+            Value<String?> audioPath = const Value.absent(),
+          }) =>
+              ReadingQuestionsCompanion(
+            id: id,
+            sublessonId: sublessonId,
+            questionNumber: questionNumber,
+            questionNahuatl: questionNahuatl,
+            correctAnswer: correctAnswer,
+            questionTranslationSpanish: questionTranslationSpanish,
+            audioPath: audioPath,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required int sublessonId,
+            Value<int?> questionNumber = const Value.absent(),
+            required String questionNahuatl,
+            required String correctAnswer,
+            Value<String?> questionTranslationSpanish = const Value.absent(),
+            Value<String?> audioPath = const Value.absent(),
+          }) =>
+              ReadingQuestionsCompanion.insert(
+            id: id,
+            sublessonId: sublessonId,
+            questionNumber: questionNumber,
+            questionNahuatl: questionNahuatl,
+            correctAnswer: correctAnswer,
+            questionTranslationSpanish: questionTranslationSpanish,
+            audioPath: audioPath,
+          ),
+        ));
+}
+
+class $$ReadingQuestionsTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $ReadingQuestionsTable> {
+  $$ReadingQuestionsTableFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get questionNumber => $state.composableBuilder(
+      column: $state.table.questionNumber,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get questionNahuatl => $state.composableBuilder(
+      column: $state.table.questionNahuatl,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get correctAnswer => $state.composableBuilder(
+      column: $state.table.correctAnswer,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get questionTranslationSpanish =>
+      $state.composableBuilder(
+          column: $state.table.questionTranslationSpanish,
+          builder: (column, joinBuilders) =>
+              ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get audioPath => $state.composableBuilder(
+      column: $state.table.audioPath,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  $$SublessonsTableFilterComposer get sublessonId {
+    final $$SublessonsTableFilterComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.sublessonId,
+        referencedTable: $state.db.sublessons,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder, parentComposers) =>
+            $$SublessonsTableFilterComposer(ComposerState($state.db,
+                $state.db.sublessons, joinBuilder, parentComposers)));
+    return composer;
+  }
+}
+
+class $$ReadingQuestionsTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $ReadingQuestionsTable> {
+  $$ReadingQuestionsTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get questionNumber => $state.composableBuilder(
+      column: $state.table.questionNumber,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get questionNahuatl => $state.composableBuilder(
+      column: $state.table.questionNahuatl,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get correctAnswer => $state.composableBuilder(
+      column: $state.table.correctAnswer,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get questionTranslationSpanish =>
+      $state.composableBuilder(
+          column: $state.table.questionTranslationSpanish,
+          builder: (column, joinBuilders) =>
+              ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get audioPath => $state.composableBuilder(
+      column: $state.table.audioPath,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  $$SublessonsTableOrderingComposer get sublessonId {
+    final $$SublessonsTableOrderingComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.sublessonId,
+        referencedTable: $state.db.sublessons,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder, parentComposers) =>
+            $$SublessonsTableOrderingComposer(ComposerState($state.db,
+                $state.db.sublessons, joinBuilder, parentComposers)));
+    return composer;
+  }
+}
+
 class $AppDatabaseManager {
   final _$AppDatabase _db;
   $AppDatabaseManager(this._db);
@@ -2845,4 +3464,6 @@ class $AppDatabaseManager {
       $$DictionaryTableTableManager(_db, _db.dictionary);
   $$PhrasesTableTableManager get phrases =>
       $$PhrasesTableTableManager(_db, _db.phrases);
+  $$ReadingQuestionsTableTableManager get readingQuestions =>
+      $$ReadingQuestionsTableTableManager(_db, _db.readingQuestions);
 }

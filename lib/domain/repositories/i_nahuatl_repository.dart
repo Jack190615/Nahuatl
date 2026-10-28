@@ -2,6 +2,7 @@ import '../entities/dictionary_entry.dart';
 import '../entities/grammar_rule.dart';
 import '../entities/lesson.dart';
 import '../entities/phrase.dart';
+import '../entities/reading_question.dart';
 import '../entities/sublesson.dart';
 
 /// Principio de Segregación de Interfaces (ISP - SOLID):
@@ -22,6 +23,7 @@ abstract interface class ISublessonRepository {
   Future<void> completeSublesson(int sublessonId);
   Future<List<DictionaryEntryEntity>> getVocabularyBySublesson(int sublessonId);
   Future<List<PhraseEntity>> getPhrasesBySublesson(int sublessonId);
+  Future<List<ReadingQuestionEntity>> getReadingQuestionsBySublesson(int sublessonId);
 }
 
 /// Principio de Segregación de Interfaces (ISP - SOLID):

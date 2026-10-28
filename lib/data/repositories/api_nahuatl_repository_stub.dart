@@ -2,6 +2,7 @@ import '../../domain/entities/dictionary_entry.dart';
 import '../../domain/entities/grammar_rule.dart';
 import '../../domain/entities/lesson.dart';
 import '../../domain/entities/phrase.dart';
+import '../../domain/entities/reading_question.dart';
 import '../../domain/entities/sublesson.dart';
 import '../../domain/repositories/i_nahuatl_repository.dart';
 
@@ -56,6 +57,10 @@ class ApiNahuatlRepository implements INahuatlRepository {
 
   @override
   Future<List<PhraseEntity>> getPhrasesBySublesson(int sublessonId) =>
+      throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
+
+  @override
+  Future<List<ReadingQuestionEntity>> getReadingQuestionsBySublesson(int sublessonId) =>
       throw UnimplementedError('Pendiente de integración con API remota ($baseUrl)');
 
   @override
