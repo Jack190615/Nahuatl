@@ -38,14 +38,29 @@ class DatabaseSeederService {
   /// Retorna `true` si se ejecutó el seeding por primera vez, o `false` si ya existían datos.
   Future<bool> seedIfNeeded() async {
     return _db.transaction(() async {
-      // 1. Verificar si ya existen registros en la tabla `lessons`
+      final payload = await _loadSeedPayloads();
+      final seedSublessonsCount = (payload['sublessons'] ?? const []).length;
+      final seedPhrasesCount = (payload['phrases'] ?? const []).length;
+
+      // 1. Verificar registros existentes en la tabla `lessons`, `sublessons` y `phrases`
       final countExpression = _db.lessons.id.count();
-      final query = _db.selectOnly(_db.lessons)..addColumns([countExpression]);
-      final currentCount = await query
+      final currentLessonCount = await (_db.selectOnly(_db.lessons)..addColumns([countExpression]))
           .map((row) => row.read(countExpression) ?? 0)
           .getSingle();
 
-      if (currentCount > 0) {
+      final sublessonCountExpr = _db.sublessons.id.count();
+      final currentSublessonCount = await (_db.selectOnly(_db.sublessons)..addColumns([sublessonCountExpr]))
+          .map((row) => row.read(sublessonCountExpr) ?? 0)
+          .getSingle();
+
+      final phraseCountExpr = _db.phrases.id.count();
+      final currentPhraseCount = await (_db.selectOnly(_db.phrases)..addColumns([phraseCountExpr]))
+          .map((row) => row.read(phraseCountExpr) ?? 0)
+          .getSingle();
+
+      if (currentLessonCount > 0 &&
+          currentSublessonCount == seedSublessonsCount &&
+          currentPhraseCount == seedPhrasesCount) {
         // Reparar frases con lesson_id huérfano si la base de datos existía previamente
         final orphanPhrases = await (_db.select(_db.phrases)..where((t) => t.lessonId.isNull())).get();
         if (orphanPhrases.isNotEmpty) {
@@ -58,11 +73,44 @@ class DatabaseSeederService {
             }
           }
         }
-        return false; // La base de datos ya fue inicializada previamente
+        return false; // La base de datos ya está al día
       }
 
-      // 2. Cargar los payloads JSON desde `assets/data/`
-      final payload = await _loadSeedPayloads();
+      if (currentLessonCount > 0) {
+        // Los datos del seed cambiaron (nuevas sublecciones, frases o correcciones).
+        // Resembrar preservando el progreso del usuario (completadas / desbloqueadas).
+        final existingLessons = await _db.select(_db.lessons).get();
+        final completedLessonIds =
+            existingLessons.where((l) => l.isCompleted).map((l) => l.id).toSet();
+        final unlockedLessonIds =
+            existingLessons.where((l) => l.isUnlocked).map((l) => l.id).toSet();
+
+        final existingSublessons = await _db.select(_db.sublessons).get();
+        final completedSublessonIds = existingSublessons
+            .where((s) => s.isCompleted)
+            .map((s) => s.id)
+            .toSet();
+        final unlockedSublessonIds = existingSublessons
+            .where((s) => s.isUnlocked)
+            .map((s) => s.id)
+            .toSet();
+
+        await _db.delete(_db.phrases).go();
+        await _db.delete(_db.dictionary).go();
+        await _db.delete(_db.grammarRules).go();
+        await _db.delete(_db.sublessons).go();
+        await _db.delete(_db.lessons).go();
+
+        return _insertPayload(
+          payload,
+          preserveCompletedLessons: completedLessonIds,
+          preserveUnlockedLessons: unlockedLessonIds,
+          preserveCompletedSublessons: completedSublessonIds,
+          preserveUnlockedSublessons: unlockedSublessonIds,
+        );
+      }
+
+      // 2. Primera instalación: Cargar los payloads JSON desde `assets/data/`
       return _insertPayload(payload);
     });
   }

@@ -107,6 +107,71 @@ class LessonTheoryView extends ConsumerWidget {
             final hasSpecificTheory =
                 specificTheory != null && specificTheory.isNotEmpty;
 
+            final List<Widget> contentCards = [];
+
+            if (sublessonId != null) {
+              // 1. Cuando se visualiza una sublección o punto específico del libro
+              if (hasSpecificTheory) {
+                contentCards.add(
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 14.0),
+                    child: _GrammarSectionCard(
+                      explanationText: specificTheory,
+                      info: info,
+                    ),
+                  ),
+                );
+              } else if (rules.isNotEmpty) {
+                // Fallback a reglas si la sublección no definió teoría propia
+                for (final rule in rules) {
+                  contentCards.add(
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 14.0),
+                      child: _GrammarSectionCard(
+                        explanationText: rule.explanationText,
+                        info: info,
+                      ),
+                    ),
+                  );
+                }
+              }
+            } else {
+              // 2. Cuando se visualiza la teoría general de la lección completa
+              if (rules.isNotEmpty) {
+                for (final rule in rules) {
+                  contentCards.add(
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 14.0),
+                      child: _GrammarSectionCard(
+                        explanationText: rule.explanationText,
+                        info: info,
+                      ),
+                    ),
+                  );
+                }
+              }
+            }
+
+            if (contentCards.isEmpty) {
+              contentCards.add(
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.cardSurface,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: AppColors.borderOutline),
+                  ),
+                  child: Text(
+                    'Esta lección introductoria te prepara para los siguientes temas del curso.',
+                    style: TextStyle(
+                      fontSize: info.scaleFont(15),
+                      color: AppColors.slateMuted,
+                    ),
+                  ),
+                ),
+              );
+            }
+
             return SingleChildScrollView(
               physics: MobilePlatformConfig.adaptiveScrollPhysics,
               padding: EdgeInsets.symmetric(vertical: info.verticalSpacing),
@@ -119,40 +184,7 @@ class LessonTheoryView extends ConsumerWidget {
                     info: info,
                   ),
                   SizedBox(height: info.verticalSpacing),
-                  if (hasSpecificTheory)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 14.0),
-                      child: _GrammarSectionCard(
-                        explanationText: specificTheory,
-                        info: info,
-                      ),
-                    ),
-                  if (rules.isEmpty && !hasSpecificTheory)
-                    Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: AppColors.cardSurface,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: AppColors.borderOutline),
-                      ),
-                      child: Text(
-                        'Esta lección introductoria te prepara para los siguientes temas del curso.',
-                        style: TextStyle(
-                          fontSize: info.scaleFont(15),
-                          color: AppColors.slateMuted,
-                        ),
-                      ),
-                    )
-                  else
-                    ...rules.map(
-                      (rule) => Padding(
-                        padding: const EdgeInsets.only(bottom: 14.0),
-                        child: _GrammarSectionCard(
-                          explanationText: rule.explanationText,
-                          info: info,
-                        ),
-                      ),
-                    ),
+                  ...contentCards,
                   const SizedBox(height: 24),
                 ],
               ),

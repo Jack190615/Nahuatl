@@ -126,7 +126,32 @@ class FakeNahuatlRepository implements INahuatlRepository {
       const [];
 
   @override
-  Future<SublessonEntity?> getSublessonById(int sublessonId) async => null;
+  Future<SublessonEntity?> getSublessonById(int sublessonId) async {
+    if (sublessonId == 1) {
+      return const SublessonEntity(
+        id: 1,
+        lessonId: 1,
+        pointNumber: '1',
+        title: 'Inducción',
+        type: SublessonType.theory,
+        theoryContent: 'Texto exclusivo de inducción',
+        orderIndex: 1,
+        isUnlocked: true,
+      );
+    } else if (sublessonId == 2) {
+      return const SublessonEntity(
+        id: 2,
+        lessonId: 1,
+        pointNumber: '2-3',
+        title: 'Ortografía y pronunciación',
+        type: SublessonType.theory,
+        theoryContent: 'Texto exclusivo de ortografía',
+        orderIndex: 2,
+        isUnlocked: true,
+      );
+    }
+    return null;
+  }
 
   @override
   Future<void> unlockSublesson(int sublessonId) async {}
@@ -491,6 +516,33 @@ void main() {
       // Verificar que la lección 2 fue desbloqueada
       final lesson2 = await fakeRepo.getLessonById(2);
       expect(lesson2?.isUnlocked, isTrue);
+    });
+
+    testWidgets('Muestra únicamente la teoría de la sublección sin duplicar ni añadir reglas generales', (tester) async {
+      final fakeRepo = FakeNahuatlRepository();
+
+      // Punto 1: Inducción
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            nahuatlRepositoryProvider.overrideWithValue(fakeRepo),
+          ],
+          child: const MaterialApp(
+            home: LessonTheoryView(
+              lessonId: 1,
+              sublessonId: 1,
+              lessonTitle: 'Punto 1: Inducción',
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Debe mostrar el texto específico de inducción una sola vez
+      expect(find.text('Texto exclusivo de inducción'), findsOneWidget);
+      // NO debe mostrar la regla general de la lección ni el texto de otro punto
+      expect(find.text('Sufijo absolutivo -tl, -tli, -li.'), findsNothing);
+      expect(find.text('Texto exclusivo de ortografía'), findsNothing);
     });
   });
 

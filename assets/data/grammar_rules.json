@@ -1,17 +1,1 @@
-[
-  {
-    "id": 1,
-    "lesson_id": 1,
-    "explanation_text": "En los últimos 450 años se han elaborado varios sistemas para la transcripción de la lengua mexicana o nahuatl por medio del alfabeto europeo. El más conocido fue el de los misioneros franciscanos que legaron a México en la primera mitad del siglo XVI. Podemos llamarlo el \"tradicional\". Hoy, en México y Centroamérica, los toponímicos, nombres de personajes y elementos culturales, se escriben con una ortografía basada en la tradicional: Chapultepec, Cuauhtémoc, Quetzalcóatl, cacahuate, teponaztli, etc.\n\nEn 1940 el Consejo de Lenguas Indígenas del Instituto Nacional Indigenista de México elaboró y aprobó un alfabeto fonético. Es un sistema práctico, útil y exacto, pero necesita de signos que no se encuentran en las máquinas de escribir comunes y corrientes, y que no existen en la mayoría de las imprentas. Algunas variaciones de este sistema fonético han sido utilizadas por lingüistas profesionales en nuestros tiempos. Por razones tipográficas se usará el alfabeto tradicional en estas lecciones. Para estos apuntes se utilizarán los 18 sonidos usados comúnmente en la mayoría de los dialectos del Altiplano."
-  },
-  {
-    "id": 2,
-    "lesson_id": 2,
-    "explanation_text": "El acento aparece en la penúltima sílaba. Los siguientes ejemplos y las palabras que aparecen en la lección que sigue llevarán acento escrito, aunque de ahí en adelante no se utilizará.\nLas siguientes comparaciones con el español son aproximadas:\na) La a se pronuncia como la a en padre: ámatl, átl, cálli.\nb) La e es como el mismo fonema en hemos: mécatl, tétl, mémeh.\nc) La i se pronuncia como en niño: pílli, tianquíztli. En algunos dialectos existe un sonido parecido a la i en el inglés wish.\nd) La o es la misma que se encuentra en hombre: cólli, óme, tecólotl. En algunos dialectos hay la tendencia de pronunciarla como la u,o existe la u como sonido aparte, lo cual a veces ha creado dos ortografias para ciertas palabras como Tetzcoco o Tetzcuco.\ne) El sonido de la s se escribe con la ortografía tradicional: za, ce, ci, zo, zu. Se pronuncia como la s en solo: cíhtli, tianquíztli, mázatl. (Escritura fonética: s.)\nf) El sonido de la se escribe con la ortografia tradicional: ca, que, qui, co, cu. Cálli, ocuíllin, tianquíztli, quéman. (Escritura fonética: k.)\ng) La ch se pronuncia como en tachamos: míchin, tóchtli, chiquíhuitl. (Escritura fonética: č.)\nb) El sonido de la se escribe hua, hue, hui, huo: huállauh, huéhca, huél, cíhuatl. (Escritura fonética: w.)\ni) La h se utilizará en estas lecciones para indicar un sonido parecido a la j en paja: táhtli, cíhtli, amámeh. Varía algo de dialecto en dialecto y es un simple saltillo en algunos casos. En otros se utilizan tanto la b como el saltillo.(Escritura fonética: h) \nj) Laly la ll se pronuncian como en alabado: cálli, élotl.\nk) La m se pronuncia como en español: ámo, ómpa.\n1) La n se pronuncia como en español: nántdi.\nm) La t se pronuncia como en español: cáteh.\nn) La p se pronuncia como en español: ípan.\no) La tl es un sonido independiente, parecido pero no idéntico a la tl en Atlántico: tlácatl, pétlatl.\np) La ts es un sonido independiente y se escribe con tz: itzcuíntli, atzíntli. (Escritura fonéticа: ¢.)\nq) La x se pronuncia como la sh inglesa (shell) o como la ch francesa (chalet): xálli, amóxtli. (Escritura fonética: š.)\nr) La y se pronuncia como la y de yeso: yéyi."
-  },
-  {
-    "id": 3,
-    "lesson_id": 3,
-    "explanation_text": "Puede tener una de las siguientes terminaciones: -tl, -tli, -li o -in."
-  }
-]
+[]
